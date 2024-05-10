@@ -1,11 +1,13 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Event, ipcMain } from "electron";
 import path from "path";
 
 if (require("electron-squirrel-startup"))
     app.quit();
 
+let mainWindow: BrowserWindow | null = null;
+
 const createWindow = () => {
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 800,
         height: 800,
         frame: false,
@@ -24,16 +26,30 @@ const createWindow = () => {
     }
 };
 
+//==============
+// main events 
+//==============
+
 app.on("ready", createWindow);
 
-app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-        app.quit();
-    }
+app.on("window-all-closed", (event: Event) => {
+    event.preventDefault();
 });
 
 app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
+});
+
+//===============
+// ipc messages 
+//===============
+
+ipcMain.on("minimize", () => {
+    mainWindow?.minimize();
+});
+
+ipcMain.on("close", () => {
+    mainWindow?.close();
 });
