@@ -1,8 +1,11 @@
 {
   "name": "currently",
-  "productName": "currently",
+  "productName": "Currently",
   "version": "1.0.0",
-  "description": "currently",
+  "description": "Currently",
+  "repository": {
+    "url": "https://github.com/M-oons/currently"
+  },
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",

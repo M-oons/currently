@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
+import AppInfo from "../AppInfo";
 import { getIcon } from "../utils/assetLoader";
 
 if (require("electron-squirrel-startup"))
@@ -13,9 +14,15 @@ const createTray = (): void => {
 
     const menu = Menu.buildFromTemplate([
         {
-            label: "Currently",
-            type: "normal",
-            enabled: false
+            label: AppInfo.name,
+            type: "submenu",
+            submenu: [
+                {
+                    label: AppInfo.version,
+                    type: "normal",
+                    enabled: false,
+                },
+            ],
         },
         { type: "separator" },
         {
@@ -25,7 +32,6 @@ const createTray = (): void => {
                 showWindow();
             },
         },
-        { type: "separator" },
         {
             label: "Quit",
             type: "normal",
@@ -36,7 +42,7 @@ const createTray = (): void => {
     ]);
 
     tray = new Tray(icon);
-    tray.setToolTip("Currently");
+    tray.setToolTip(AppInfo.name);
     tray.setContextMenu(menu);
 
     tray.on("double-click", () => {
@@ -94,10 +100,10 @@ app.on("activate", () => {
 // ipc messages 
 //===============
 
-ipcMain.on("minimize", () => {
-    mainWindow?.minimize();
-});
-
 ipcMain.on("close", () => {
     mainWindow?.close();
+});
+
+ipcMain.on("minimize", () => {
+    mainWindow?.minimize();
 });
