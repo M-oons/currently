@@ -1,10 +1,48 @@
-import { app, BrowserWindow, Event, ipcMain } from "electron";
+import { app, BrowserWindow, Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
+import { getIcon } from "../utils/assetLoader";
 
 if (require("electron-squirrel-startup"))
     app.quit();
 
+let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
+
+const createTray = (): void => {
+    const icon = getIcon("icon");
+
+    const menu = Menu.buildFromTemplate([
+        {
+            label: "Currently",
+            type: "normal",
+            enabled: false
+        },
+        { type: "separator" },
+        {
+            label: "Show",
+            type: "normal",
+            click: () => {
+                showWindow();
+            },
+        },
+        { type: "separator" },
+        {
+            label: "Quit",
+            type: "normal",
+            click: () => {
+                app.quit();
+            },
+        },
+    ]);
+
+    tray = new Tray(icon);
+    tray.setToolTip("Currently");
+    tray.setContextMenu(menu);
+
+    tray.on("double-click", () => {
+        showWindow();
+    });
+};
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
@@ -26,20 +64,30 @@ const createWindow = () => {
     }
 };
 
+const showWindow = (): void => {
+    if (!mainWindow || BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
+        return;
+    }
+
+    mainWindow.show();
+};
+
 //==============
 // main events 
 //==============
 
-app.on("ready", createWindow);
+app.on("ready", () => {
+    createTray();
+    createWindow();
+});
 
 app.on("window-all-closed", (event: Event) => {
     event.preventDefault();
 });
 
 app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
-    }
+    showWindow();
 });
 
 //===============
