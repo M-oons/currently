@@ -1,6 +1,7 @@
 import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("api", {
+    close: () => ipcRenderer.send("close"),
     minimize: () => ipcRenderer.send("minimize"),
-    close: () => ipcRenderer.send("close")
+    help: () => ipcRenderer.send("help"),
 });

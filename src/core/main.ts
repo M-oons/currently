@@ -2,6 +2,7 @@ import { app, BrowserWindow, Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import AppInfo from "../AppInfo";
 import { getIcon } from "../utils/assetLoader";
+import { openURL } from "../utils/navigation";
 
 if (require("electron-squirrel-startup"))
     app.quit();
@@ -106,4 +107,8 @@ ipcMain.on("close", () => {
 
 ipcMain.on("minimize", () => {
     mainWindow?.minimize();
+});
+
+ipcMain.on("help", () => {
+    openURL(AppInfo.url);
 });

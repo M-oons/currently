@@ -24,8 +24,9 @@ declare global {
     // context bridge API
     interface Window {
         api: {
-            minimize: () => void;
             close: () => void;
+            minimize: () => void;
+            help: () => void;
         };
     }
 }
