@@ -59,6 +59,7 @@ const createWindow = () => {
         titleBarStyle: "customButtonsOnHover",
         maximizable: false,
         resizable: false,
+        icon: getIcon("icon"),
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
         },
