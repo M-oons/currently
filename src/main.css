@@ -2,10 +2,39 @@
     --border-width: 4px;
 }
 
+@font-face {
+    font-family: "gg sans";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/gg-sans-regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: "gg sans";
+    font-style: normal;
+    font-weight: 500;
+    src: url("/fonts/gg-sans-medium.woff") format("woff");
+}
+
+@font-face {
+    font-family: "gg sans";
+    font-style: normal;
+    font-weight: 600;
+    src: url("/fonts/gg-sans-semibold.woff") format("woff");
+}
+
+@font-face {
+    font-family: "gg sans";
+    font-style: normal;
+    font-weight: 700;
+    src: url("/fonts/gg-sans-bold.woff") format("woff");
+}
+
 *,
 *::before,
 *::after {
     box-sizing: inherit;
+    font-family: "gg sans";
 }
 
 html {
@@ -15,7 +44,6 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     width: 100%;
     height: 100%;
     margin: 0;
