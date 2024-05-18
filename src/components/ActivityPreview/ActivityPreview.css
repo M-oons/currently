@@ -128,6 +128,48 @@
     line-height: 18px;
 }
 
+#activity-timebar {
+    margin-top: 12px;
+}
+
+#activity-timebar-bar {
+    height: 4px;
+    margin-bottom: 4px;
+    border-radius: 2px;
+    background-color: #080808;
+}
+
+#activity-timebar-bar-inner {
+    min-width: 4px;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    background-color: white;
+}
+
+#activity-timebar-time {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+#activity-timebar-time-current {
+    flex: 1 1 auto;
+}
+
+#activity-timebar-time-max {
+    flex: 0 1 auto;
+}
+
+.activity-timebar-time-number {
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+}
+
 #activity-buttons {
     display: flex;
     flex-direction: column;
