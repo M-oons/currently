@@ -1,0 +1,73 @@
+#activity-asset-large {
+    position: relative;
+}
+
+#activity-asset-large:hover #activity-asset-large-tooltip {
+    opacity: 1;
+    scale: 1;
+}
+
+#activity-asset-large-image {
+    width: 60px;
+    height: 60px;
+    display: block;
+    border-radius: 8px;
+    object-fit: cover;
+    -webkit-user-drag: none;
+}
+
+#activity-asset-small {
+    position: relative;
+}
+
+#activity-asset-small:hover #activity-asset-small-tooltip {
+    opacity: 1;
+    scale: 1;
+}
+
+#activity-asset-small-image {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    outline: 2px solid var(--background-color);
+    border-radius: 50%;
+    -webkit-user-drag: none;
+}
+
+#activity-asset-large-tooltip {
+    top: -38px;
+    left: 1px;
+}
+
+#activity-asset-small-tooltip {
+    top: -54px;
+    left: 25px;
+}
+
+.activity-asset-tooltip {
+    position: absolute;
+    opacity: 0;
+    scale: 0.97;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 4px 12px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    transition: 0.011s opacity linear, 0.01s scale linear;
+    pointer-events: none;
+}
+
+.activity-asset-tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -4.4px;
+    border-top: 5px solid black;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}

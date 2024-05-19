@@ -1,0 +1,24 @@
+#activity-title {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+#activity-details {
+    color: white;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#activity-state {
+    color: white;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#activity-timestamp {
+    color: white;
+    font-size: 14px;
+    line-height: 18px;
+}
