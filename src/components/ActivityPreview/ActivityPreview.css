@@ -1,12 +1,12 @@
 :root {
-    --background-color: black;
+    --activity-preview-background-color: black;
 }
 
 #activity-preview {
     width: max-content;
     height: max-content;
     padding: 12px;
-    background-color: var(--background-color);
+    background-color: var(--activity-preview-background-color);
     border-radius: 8px;
     user-select: none;
 }

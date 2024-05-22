@@ -31,7 +31,7 @@
     position: absolute;
     bottom: -4px;
     right: -4px;
-    outline: 2px solid var(--background-color);
+    outline: 2px solid var(--activity-preview-background-color);
     border-radius: 50%;
     -webkit-user-drag: none;
 }

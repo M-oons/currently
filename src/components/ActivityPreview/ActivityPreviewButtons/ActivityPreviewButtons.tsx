@@ -1,6 +1,12 @@
 import "./ActivityPreviewButtons.css";
+import ActivityButton from "../../../activity/ActivityButton";
 
-function ActivityPreviewButtons() {
+type ActivityPreviewButtonsProps = {
+    button1: ActivityButton | null,
+    button2: ActivityButton | null,
+};
+
+function ActivityPreviewButtons(props: ActivityPreviewButtonsProps) {
     return (
         <>
             <button type="button" className="activity-button"><span>Button 1</span></button>

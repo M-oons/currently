@@ -1,6 +1,12 @@
 import "./ActivityPreviewAssets.css";
+import ActivityImage from "../../../activity/ActivityImage";
 
-function ActivityPreviewAssets() {
+type ActivityPreviewAssetsProps = {
+    imageLarge: ActivityImage | null,
+    imageSmall: ActivityImage | null,
+};
+
+function ActivityPreviewAssets(props: ActivityPreviewAssetsProps) {
     return (
         <>
             <div id="activity-asset-large">

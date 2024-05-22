@@ -1,6 +1,13 @@
 import "./ActivityPreviewProgressBar.css";
+import ActivityTimestampEnd from "../../../activity/ActivityTimestampEnd";
+import ActivityTimestampStart from "../../../activity/ActivityTimestampStart";
 
-function ActivityPreviewProgressBar() {
+type ActivityPreviewProgressBarProps = {
+    timestampStart: ActivityTimestampStart | null,
+    timestampEnd: ActivityTimestampEnd | null,
+};
+
+function ActivityPreviewProgressBar(props: ActivityPreviewProgressBarProps) {
     return (
         <>
             <div id="activity-progress-bar-outer">
