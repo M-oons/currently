@@ -53,12 +53,14 @@ const createTray = (): void => {
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 800,
+        width: 450,
+        height: 360,
         frame: false,
+        transparent: true,
         titleBarStyle: "customButtonsOnHover",
         maximizable: false,
         resizable: false,
+        show: false,
         icon: getIcon("icon"),
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
@@ -70,6 +72,10 @@ const createWindow = () => {
     } else {
         mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
     }
+
+    mainWindow.once("ready-to-show", () => {
+        mainWindow?.show();
+    });
 };
 
 const showWindow = (): void => {

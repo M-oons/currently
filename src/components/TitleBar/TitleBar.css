@@ -1,13 +1,10 @@
 :root {
-    --title-bar-height: 60px;
+    --title-bar-height: 30px;
 }
 
 #title-bar {
     width: 100%;
     height: var(--title-bar-height);
-    position: absolute;
-    top: 0;
-    left: 0;
     display: flex;
 }
 
@@ -33,6 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 8px;
     color: white;
     font-size: 15px;
     user-select: none;
@@ -40,5 +38,5 @@
 }
 
 .title-bar-button:hover {
-    background-color: #707bf1;
+    background-color: #080808;
 }

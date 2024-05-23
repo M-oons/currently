@@ -34,15 +34,14 @@ function App() {
     };
 
     return (
-        <>
+        <div id="main">
             <TitleBar />
-
-            <div id="main">
+            <div id="container">
                 <ActivityPreview
                     activity={activity}
                 />
             </div>
-        </>
+        </div>
     );
 }
 
