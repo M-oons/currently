@@ -13,7 +13,7 @@ function ActivityPreview(props: ActivityPreviewProps) {
     const activity = props.activity;
 
     return (
-        <div id="activity-preview" style={{ scale: "1.3" }}>
+        <div id="activity-preview">
             <div id="activity-main">
                 <div id="activity-assets">
                     <ActivityPreviewAssets

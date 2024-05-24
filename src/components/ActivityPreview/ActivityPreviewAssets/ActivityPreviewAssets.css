@@ -66,7 +66,7 @@
 .activity-asset-tooltip::after {
     content: "";
     position: absolute;
-    bottom: -4.4px;
+    bottom: -5px;
     border-top: 5px solid black;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
