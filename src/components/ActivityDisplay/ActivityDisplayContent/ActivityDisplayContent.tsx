@@ -1,10 +1,10 @@
-import "./ActivityPreviewContent.css";
+import "./ActivityDisplayContent.css";
 import ActivityDetails from "../../../activity/ActivityDetails";
 import ActivityState from "../../../activity/ActivityState";
 import ActivityTimestampEnd from "../../../activity/ActivityTimestampEnd";
 import ActivityTimestampStart from "../../../activity/ActivityTimestampStart";
 
-type ActivityPreviewContentProps = {
+type ActivityDisplayContentProps = {
     title: string,
     details: ActivityDetails | null,
     state: ActivityState | null,
@@ -12,7 +12,7 @@ type ActivityPreviewContentProps = {
     timestampEnd: ActivityTimestampEnd | null,
 };
 
-function ActivityPreviewContent(props: ActivityPreviewContentProps) {
+function ActivityDisplayContent(props: ActivityDisplayContentProps) {
     return (
         <>
             <div id="activity-title"><span>Title</span></div>
@@ -23,4 +23,4 @@ function ActivityPreviewContent(props: ActivityPreviewContentProps) {
     );
 }
 
-export default ActivityPreviewContent;
+export default ActivityDisplayContent;

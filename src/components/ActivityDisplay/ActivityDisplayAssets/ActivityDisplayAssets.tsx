@@ -1,12 +1,12 @@
-import "./ActivityPreviewAssets.css";
+import "./ActivityDisplayAssets.css";
 import ActivityImage from "../../../activity/ActivityImage";
 
-type ActivityPreviewAssetsProps = {
+type ActivityDisplayAssetsProps = {
     imageLarge: ActivityImage | null,
     imageSmall: ActivityImage | null,
 };
 
-function ActivityPreviewAssets(props: ActivityPreviewAssetsProps) {
+function ActivityDisplayAssets(props: ActivityDisplayAssetsProps) {
     return (
         <>
             <div id="activity-asset-large">
@@ -21,4 +21,4 @@ function ActivityPreviewAssets(props: ActivityPreviewAssetsProps) {
     );
 }
 
-export default ActivityPreviewAssets;
+export default ActivityDisplayAssets;

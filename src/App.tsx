@@ -1,6 +1,6 @@
 import "./App.css";
 import Activity from "./activity/Activity";
-import ActivityPreview from "./components/ActivityPreview/ActivityPreview";
+import ActivityDisplay from "./components/ActivityDisplay/ActivityDisplay";
 import TitleBar from "./components/TitleBar/TitleBar";
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
         <div id="main">
             <TitleBar />
             <div id="container">
-                <ActivityPreview
+                <ActivityDisplay
                     activity={activity}
                 />
             </div>

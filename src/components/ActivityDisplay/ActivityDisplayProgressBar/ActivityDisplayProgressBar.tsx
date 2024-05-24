@@ -1,13 +1,13 @@
-import "./ActivityPreviewProgressBar.css";
+import "./ActivityDisplayProgressBar.css";
 import ActivityTimestampEnd from "../../../activity/ActivityTimestampEnd";
 import ActivityTimestampStart from "../../../activity/ActivityTimestampStart";
 
-type ActivityPreviewProgressBarProps = {
+type ActivityDisplayProgressBarProps = {
     timestampStart: ActivityTimestampStart | null,
     timestampEnd: ActivityTimestampEnd | null,
 };
 
-function ActivityPreviewProgressBar(props: ActivityPreviewProgressBarProps) {
+function ActivityDisplayProgressBar(props: ActivityDisplayProgressBarProps) {
     return (
         <>
             <div id="activity-progress-bar-outer">
@@ -21,4 +21,4 @@ function ActivityPreviewProgressBar(props: ActivityPreviewProgressBarProps) {
     );
 }
 
-export default ActivityPreviewProgressBar;
+export default ActivityDisplayProgressBar;

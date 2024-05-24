@@ -1,28 +1,28 @@
-import "./ActivityPreview.css";
+import "./ActivityDisplay.css";
 import Activity from "../../activity/Activity";
-import ActivityPreviewAssets from "./ActivityPreviewAssets/ActivityPreviewAssets";
-import ActivityPreviewButtons from "./ActivityPreviewButtons/ActivityPreviewButtons";
-import ActivityPreviewContent from "./ActivityPreviewContent/ActivityPreviewContent";
-import ActivityPreviewProgressBar from "./ActivityPreviewProgressBar/ActivityPreviewProgressBar";
+import ActivityDisplayAssets from "./ActivityDisplayAssets/ActivityDisplayAssets";
+import ActivityDisplayButtons from "./ActivityDisplayButtons/ActivityDisplayButtons";
+import ActivityDisplayContent from "./ActivityDisplayContent/ActivityDisplayContent";
+import ActivityDisplayProgressBar from "./ActivityDisplayProgressBar/ActivityDisplayProgressBar";
 
-type ActivityPreviewProps = {
+type ActivityDisplayProps = {
     activity: Activity,
 };
 
-function ActivityPreview(props: ActivityPreviewProps) {
+function ActivityDisplay(props: ActivityDisplayProps) {
     const activity = props.activity;
 
     return (
-        <div id="activity-preview">
+        <div id="activity-display">
             <div id="activity-main">
                 <div id="activity-assets">
-                    <ActivityPreviewAssets
+                    <ActivityDisplayAssets
                         imageSmall={activity.imageSmall}
                         imageLarge={activity.imageLarge}
                     />
                 </div>
                 <div id="activity-content">
-                    <ActivityPreviewContent
+                    <ActivityDisplayContent
                         title={activity.name}
                         details={activity.details}
                         state={activity.state}
@@ -32,13 +32,13 @@ function ActivityPreview(props: ActivityPreviewProps) {
                 </div>
             </div>
             <div id="activity-progress-bar">
-                <ActivityPreviewProgressBar
+                <ActivityDisplayProgressBar
                     timestampStart={activity.timestampStart}
                     timestampEnd={activity.timestampEnd}
                 />
             </div>
             <div id="activity-buttons">
-                <ActivityPreviewButtons
+                <ActivityDisplayButtons
                     button1={activity.button1}
                     button2={activity.button2}
                 />
@@ -47,4 +47,4 @@ function ActivityPreview(props: ActivityPreviewProps) {
     );
 }
 
-export default ActivityPreview;
+export default ActivityDisplay;
