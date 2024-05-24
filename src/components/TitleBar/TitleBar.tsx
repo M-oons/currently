@@ -5,9 +5,10 @@ function TitleBar() {
         <div id="title-bar">
             <div id="title-bar-banner"></div>
             <div id="title-bar-buttons">
-                <div className="title-bar-button" onClick={window.api.close}>⨉</div>
-                <div className="title-bar-button" onClick={window.api.minimize}>─</div>
-                <div className="title-bar-button" onClick={window.api.help}>?</div>
+                <div id="title-bar-button-close" className="title-bar-button" onClick={window.api.close}>⨉</div>
+                <div id="title-bar-button-minimize" className="title-bar-button" onClick={window.api.minimize}>─</div>
+                <div id="title-bar-button-help" className="title-bar-button" onClick={window.api.help}>?</div>
+                <div id="title-bar-button-label"></div>
             </div>
         </div>
     );

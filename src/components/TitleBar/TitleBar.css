@@ -39,6 +39,34 @@
     -webkit-app-region: nodrag;
 }
 
+#title-bar-button-close:hover~#title-bar-button-label::before {
+    content: "Close";
+}
+
+#title-bar-button-minimize:hover~#title-bar-button-label::before {
+    content: "Minimize";
+}
+
+#title-bar-button-help:hover~#title-bar-button-label::before {
+    content: "Help";
+}
+
 .title-bar-button:hover {
+    background-color: #080808;
+}
+
+.title-bar-button:hover~#title-bar-button-label {
+    display: flex;
+}
+
+#title-bar-button-label {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-style: italic;
+    color: white;
     background-color: #080808;
 }
