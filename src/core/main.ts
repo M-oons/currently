@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Event, ipcMain, Menu, Tray } from "electron";
+import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import AppInfo from "../AppInfo";
 import { getIcon } from "../utils/assetLoader";

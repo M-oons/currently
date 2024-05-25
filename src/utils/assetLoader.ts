@@ -1,4 +1,4 @@
-import { NativeImage, nativeImage } from "electron";
+import { type NativeImage, nativeImage } from "electron";
 import path from "path";
 
 const cachedImages = new Map<string, NativeImage>();

@@ -1,8 +1,8 @@
+import type ActivityDetails from "../../../activity/types/ActivityDetails";
+import type ActivityState from "../../../activity/types/ActivityState";
+import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestampEnd";
+import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
 import "./ActivityDisplayContent.css";
-import ActivityDetails from "../../../activity/ActivityDetails";
-import ActivityState from "../../../activity/ActivityState";
-import ActivityTimestampEnd from "../../../activity/ActivityTimestampEnd";
-import ActivityTimestampStart from "../../../activity/ActivityTimestampStart";
 
 type ActivityDisplayContentProps = {
     title: string,

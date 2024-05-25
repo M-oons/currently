@@ -1,5 +1,5 @@
-import ActivityValidationError from "./validation/ActivityValidationError";
-import ActivityValidationResult from "./validation/ActivityValidationResult";
+import type ActivityValidationError from "./validation/ActivityValidationError";
+import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
 
 const IMAGE_KEY_LENGTH_MIN = 1;
 const IMAGE_KEY_LENGTH_MAX = 16;
@@ -19,7 +19,7 @@ export const validateImage = (image: ActivityImage): ActivityValidationResult =>
     if (image.text && (image.text.length < IMAGE_TEXT_LENGTH_MIN || image.text.length > IMAGE_TEXT_LENGTH_MAX))
         errors.push({ property: "text", error: `Length must be between ${IMAGE_TEXT_LENGTH_MIN} and ${IMAGE_TEXT_LENGTH_MAX} characters` });
 
-    return ActivityValidationResult.from(errors);
+    return createValidationResult(errors);
 }
 
 export default ActivityImage;

@@ -1,7 +1,7 @@
-import "./App.css";
-import Activity from "./activity/Activity";
+import type Activity from "./activity/types/Activity";
 import ActivityDisplay from "./components/ActivityDisplay/ActivityDisplay";
 import TitleBar from "./components/TitleBar/TitleBar";
+import "./App.css";
 
 function App() {
     const activity: Activity = {

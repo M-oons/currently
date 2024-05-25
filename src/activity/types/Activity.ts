@@ -1,12 +1,12 @@
-import ActivityButton from "./ActivityButton";
-import ActivityCount from "./ActivityCount";
-import ActivityDetails from "./ActivityDetails";
-import ActivityTimestampEnd from "./ActivityTimestampEnd";
-import ActivityImage from "./ActivityImage";
-import ActivityTimestampStart from "./ActivityTimestampStart";
-import ActivityState from "./ActivityState";
+import type ActivityButton from "./ActivityButton";
+import type ActivityCount from "./ActivityCount";
+import type ActivityDetails from "./ActivityDetails";
+import type ActivityTimestampEnd from "./ActivityTimestampEnd";
+import type ActivityImage from "./ActivityImage";
+import type ActivityTimestampStart from "./ActivityTimestampStart";
+import type ActivityState from "./ActivityState";
 
-type Activity = {
+export type Activity = {
     name: string,
     applicationId: string,
     details: ActivityDetails | null,

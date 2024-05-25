@@ -1,5 +1,5 @@
+import type ActivityButton from "../../../activity/types/ActivityButton";
 import "./ActivityDisplayButtons.css";
-import ActivityButton from "../../../activity/ActivityButton";
 
 type ActivityDisplayButtonsProps = {
     button1: ActivityButton | null,

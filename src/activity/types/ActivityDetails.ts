@@ -1,5 +1,5 @@
-import ActivityValidationError from "./validation/ActivityValidationError";
-import ActivityValidationResult from "./validation/ActivityValidationResult";
+import type ActivityValidationError from "./validation/ActivityValidationError";
+import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
 
 const DETAILS_LENGTH_MIN = 2;
 const DETAILS_LENGTH_MAX = 128;
@@ -12,7 +12,7 @@ export const validateDetails = (details: ActivityDetails): ActivityValidationRes
     if (details.length < DETAILS_LENGTH_MIN || details.length > DETAILS_LENGTH_MAX)
         errors.push({ error: `Length must be between ${DETAILS_LENGTH_MIN} and ${DETAILS_LENGTH_MAX} characters` });
 
-    return ActivityValidationResult.from(errors);
+    return createValidationResult(errors);
 }
 
 export default ActivityDetails;

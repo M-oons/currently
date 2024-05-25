@@ -1,5 +1,5 @@
-import ActivityValidationError from "./validation/ActivityValidationError";
-import ActivityValidationResult from "./validation/ActivityValidationResult";
+import type ActivityValidationError from "./validation/ActivityValidationError";
+import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
 
 const COUNT_CURRENT_MIN = 1;
 const COUNT_MAX_MIN = 1;
@@ -17,7 +17,7 @@ export const validateCount = (count: ActivityCount): ActivityValidationResult =>
     if (count.max < COUNT_MAX_MIN)
         errors.push({ property: "max", error: `Value must be greater than ${COUNT_MAX_MIN}` });
 
-    return ActivityValidationResult.from(errors);
+    return createValidationResult(errors);
 }
 
 export default ActivityCount;

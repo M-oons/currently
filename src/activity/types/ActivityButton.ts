@@ -1,6 +1,6 @@
-import ActivityValidationError from "./validation/ActivityValidationError";
-import ActivityValidationResult from "./validation/ActivityValidationResult";
-import { isValidUrl } from "../utils/validation";
+import type ActivityValidationError from "./validation/ActivityValidationError";
+import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
+import { isValidUrl } from "../../utils/validation";
 
 const BUTTON_TEXT_LENGTH_MIN = 2;
 const BUTTON_TEXT_LENGTH_MAX = 32;
@@ -18,7 +18,7 @@ export const validateButton = (button: ActivityButton): ActivityValidationResult
     if (!isValidUrl(button.url))
         errors.push({ property: "url", error: "Invalid URL" });
 
-    return ActivityValidationResult.from(errors);
+    return createValidationResult(errors);
 }
 
 export default ActivityButton;

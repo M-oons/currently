@@ -1,5 +1,5 @@
+import type ActivityImage from "../../../activity/types/ActivityImage"
 import "./ActivityDisplayAssets.css";
-import ActivityImage from "../../../activity/ActivityImage";
 
 type ActivityDisplayAssetsProps = {
     imageLarge: ActivityImage | null,

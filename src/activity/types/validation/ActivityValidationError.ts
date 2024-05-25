@@ -1,4 +1,4 @@
-type ActivityValidationError = {
+export type ActivityValidationError = {
     property?: string,
     error: string,
 };

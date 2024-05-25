@@ -1,9 +1,9 @@
-import "./ActivityDisplay.css";
-import Activity from "../../activity/Activity";
+import type Activity from "../../activity/types/Activity";
 import ActivityDisplayAssets from "./ActivityDisplayAssets/ActivityDisplayAssets";
 import ActivityDisplayButtons from "./ActivityDisplayButtons/ActivityDisplayButtons";
 import ActivityDisplayContent from "./ActivityDisplayContent/ActivityDisplayContent";
 import ActivityDisplayProgressBar from "./ActivityDisplayProgressBar/ActivityDisplayProgressBar";
+import "./ActivityDisplay.css";
 
 type ActivityDisplayProps = {
     activity: Activity,

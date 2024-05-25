@@ -1,6 +1,6 @@
+import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestampEnd";
+import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
 import "./ActivityDisplayProgressBar.css";
-import ActivityTimestampEnd from "../../../activity/ActivityTimestampEnd";
-import ActivityTimestampStart from "../../../activity/ActivityTimestampStart";
 
 type ActivityDisplayProgressBarProps = {
     timestampStart: ActivityTimestampStart | null,
