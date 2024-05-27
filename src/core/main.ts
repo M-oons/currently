@@ -1,6 +1,9 @@
 import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import AppInfo from "../AppInfo";
+import type Activity from "../activity/types/Activity";
+import { clearActivity, setActivity } from "../activity/activityHandler";
+import { getActivity } from "../activity/activityLoader";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
 
@@ -118,4 +121,13 @@ ipcMain.on("minimize", () => {
 
 ipcMain.on("help", () => {
     openURL(AppInfo.url);
+});
+
+ipcMain.handle("start-activity", async (): Promise<boolean> => {
+    const activity: Activity = getActivity();
+    return await setActivity(activity);
+});
+
+ipcMain.handle("stop-activity", async (): Promise<boolean> => {
+    return await clearActivity();
 });

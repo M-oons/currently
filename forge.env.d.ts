@@ -1,3 +1,5 @@
+import Activity from "src/activity/types/Activity";
+
 export { }; // Make this a module
 
 declare global {
@@ -27,6 +29,8 @@ declare global {
             close: () => void;
             minimize: () => void;
             help: () => void;
+            startActivity: () => Promise<boolean>;
+            stopActivity: () => Promise<boolean>;
         };
     }
 }
