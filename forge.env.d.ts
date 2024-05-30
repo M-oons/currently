@@ -42,3 +42,9 @@ declare module "vite" {
         forgeConfigSelf: VitePluginConfig[K][number];
     }
 }
+
+declare module "react" {
+    interface CSSProperties {
+        "--scale"?: number;
+    }
+}
