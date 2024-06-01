@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import Switch from "../Switch/Switch";
 import "./TitleBar.css";
 
 function TitleBar() {
@@ -14,18 +15,23 @@ function TitleBar() {
         setActive(isActive);
     };
 
+    const toggleActivity = useCallback(async (value: boolean) => {
+        if (value)
+            await startActivity();
+        else
+            await stopActivity();
+    }, []);
+
     return (
         <div id="title-bar">
             <div id="title-bar-banner"></div>
-            <div id="title-bar-buttons">
+            <div id="title-bar-controls">
                 <div id="title-bar-button-close" className="title-bar-button" onClick={window.api.close}>⨉</div>
                 <div id="title-bar-button-minimize" className="title-bar-button" onClick={window.api.minimize}>─</div>
                 <div id="title-bar-button-help" className="title-bar-button" onClick={window.api.help}>?</div>
-                {active
-                    ? <div id="title-bar-button-stop" className="title-bar-button" onClick={stopActivity}>⬤</div>
-                    : <div id="title-bar-button-start" className="title-bar-button" onClick={startActivity}>⬤</div>
-                }
-                <div id="title-bar-button-label"></div>
+                <div id="title-bar-switch-activity">
+                    <Switch value={active} onChange={toggleActivity} />
+                </div>
             </div>
         </div>
     );

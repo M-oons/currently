@@ -18,7 +18,7 @@
     -webkit-app-region: drag;
 }
 
-#title-bar-buttons {
+#title-bar-controls {
     height: 100%;
     display: flex;
     flex-direction: row-reverse;
@@ -39,50 +39,14 @@
     -webkit-app-region: nodrag;
 }
 
-#title-bar-button-start {
-    color: #ff0000;
-}
-
-#title-bar-button-stop {
-    color: #00ff00;
-}
-
-#title-bar-button-close:hover~#title-bar-button-label::before {
-    content: "Close";
-}
-
-#title-bar-button-minimize:hover~#title-bar-button-label::before {
-    content: "Minimize";
-}
-
-#title-bar-button-help:hover~#title-bar-button-label::before {
-    content: "Help";
-}
-
-#title-bar-button-start:hover~#title-bar-button-label::before {
-    content: "Start activity";
-}
-
-#title-bar-button-stop:hover~#title-bar-button-label::before {
-    content: "Stop activity";
-}
-
 .title-bar-button:hover {
     background-color: #080808;
 }
 
-.title-bar-button:hover~#title-bar-button-label {
+#title-bar-switch-activity {
+    width: 40px;
+    height: var(--title-bar-height);
     display: flex;
-}
-
-#title-bar-button-label {
-    display: none;
     align-items: center;
     justify-content: center;
-    margin-right: 10px;
-    padding: 2px 6px;
-    font-size: 10px;
-    font-style: italic;
-    color: white;
-    background-color: #080808;
 }
