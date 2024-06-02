@@ -20,4 +20,18 @@ export type Activity = {
     button2: ActivityButton | null,
 };
 
+export const defaultActivity: Activity = {
+    applicationId: "",
+    name: "",
+    details: null,
+    state: null,
+    count: null,
+    imageLarge: null,
+    imageSmall: null,
+    timestampStart: null,
+    timestampEnd: null,
+    button1: null,
+    button2: null,
+};
+
 export default Activity;

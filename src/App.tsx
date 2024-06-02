@@ -1,11 +1,19 @@
-import type Activity from "./activity/types/Activity";
-import { getActivity } from "./activity/activityLoader";
+import { useEffect, useState } from "react";
+import { type Activity, defaultActivity } from "./activity/types/Activity";
 import ActivityDisplay from "./components/ActivityDisplay/ActivityDisplay";
 import TitleBar from "./components/TitleBar/TitleBar";
 import "./App.css";
 
 function App() {
-    const activity: Activity = getActivity();
+    const [activity, setActivity] = useState<Activity>(defaultActivity);
+
+    useEffect(() => {
+        const getActivity = async (): Promise<void> => {
+            const activity: Activity = await window.api.getActivity();
+            setActivity(activity);
+        };
+        getActivity();
+    }, []);
 
     return (
         <div id="main">

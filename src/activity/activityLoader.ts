@@ -1,6 +1,6 @@
 import type Activity from "./types/Activity";
 
-export const getActivity = (): Activity => {
+export const loadActivity = (): Activity | null => {
     return {
         name: "Title",
         applicationId: "123",
@@ -15,7 +15,7 @@ export const getActivity = (): Activity => {
             text: "Large",
         },
         imageSmall: {
-            key: "large",
+            key: "small",
             text: "Small",
         },
         timestampStart: Date.now(),

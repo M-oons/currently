@@ -2,8 +2,7 @@ import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import AppInfo from "../AppInfo";
 import type Activity from "../activity/types/Activity";
-import { clearActivity, setActivity } from "../activity/activityHandler";
-import { getActivity } from "../activity/activityLoader";
+import { clearActivity, getActivity, setActivity } from "../activity/activityHandler";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
 
@@ -121,6 +120,10 @@ ipcMain.on("minimize", () => {
 
 ipcMain.on("help", () => {
     openURL(AppInfo.url);
+});
+
+ipcMain.handle("get-activity", (): Activity => {
+    return getActivity();
 });
 
 ipcMain.handle("start-activity", async (): Promise<boolean> => {

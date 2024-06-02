@@ -1,4 +1,4 @@
-import Activity from "src/activity/types/Activity";
+import Activity from "./src/activity/types/Activity";
 
 export { }; // Make this a module
 
@@ -29,6 +29,7 @@ declare global {
             close: () => void;
             minimize: () => void;
             help: () => void;
+            getActivity: () => Promise<Activity>;
             startActivity: () => Promise<boolean>;
             stopActivity: () => Promise<boolean>;
         };
