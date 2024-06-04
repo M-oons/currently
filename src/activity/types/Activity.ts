@@ -1,10 +1,10 @@
 import type ActivityButton from "./ActivityButton";
 import type ActivityCount from "./ActivityCount";
 import type ActivityDetails from "./ActivityDetails";
-import type ActivityTimestampEnd from "./ActivityTimestampEnd";
 import type ActivityImage from "./ActivityImage";
-import type ActivityTimestampStart from "./ActivityTimestampStart";
 import type ActivityState from "./ActivityState";
+import type ActivityTimestampEnd from "./ActivityTimestampEnd";
+import type ActivityTimestampStart from "./ActivityTimestampStart";
 
 export type Activity = {
     name: string,

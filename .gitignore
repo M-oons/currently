@@ -94,3 +94,6 @@ out/
 # Personal
 .notes
 .todo
+
+# Currently
+activity.json
