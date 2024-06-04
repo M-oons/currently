@@ -7,7 +7,7 @@ type SwitchProps = {
     onChange: (value: boolean) => void,
 };
 
-function Switch(props: SwitchProps) {
+const Switch = (props: SwitchProps) => {
     const [state, setState] = useState<boolean>(props.value);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +22,6 @@ function Switch(props: SwitchProps) {
             <input className="switch-input" type="checkbox" checked={state} onChange={onChange} />
         </div>
     );
-}
+};
 
 export default Switch;

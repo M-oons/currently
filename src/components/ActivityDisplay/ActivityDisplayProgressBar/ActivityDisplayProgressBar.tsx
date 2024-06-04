@@ -7,7 +7,7 @@ type ActivityDisplayProgressBarProps = {
     timestampEnd: ActivityTimestampEnd | null,
 };
 
-function ActivityDisplayProgressBar(props: ActivityDisplayProgressBarProps) {
+const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
     return (
         <>
             <div id="activity-progress-bar-outer">
@@ -19,6 +19,6 @@ function ActivityDisplayProgressBar(props: ActivityDisplayProgressBarProps) {
             </div>
         </>
     );
-}
+};
 
 export default ActivityDisplayProgressBar;

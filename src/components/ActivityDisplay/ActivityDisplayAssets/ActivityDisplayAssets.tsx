@@ -6,7 +6,7 @@ type ActivityDisplayAssetsProps = {
     imageSmall: ActivityImage | null,
 };
 
-function ActivityDisplayAssets(props: ActivityDisplayAssetsProps) {
+const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
     return (
         <>
             <div id="activity-asset-large">
@@ -19,6 +19,6 @@ function ActivityDisplayAssets(props: ActivityDisplayAssetsProps) {
             </div>
         </>
     );
-}
+};
 
 export default ActivityDisplayAssets;

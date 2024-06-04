@@ -4,7 +4,7 @@ import ActivityDisplay from "./components/ActivityDisplay/ActivityDisplay";
 import TitleBar from "./components/TitleBar/TitleBar";
 import "./App.css";
 
-function App() {
+const App = () => {
     const [activity, setActivity] = useState<Activity>(defaultActivity);
 
     useEffect(() => {
@@ -25,6 +25,6 @@ function App() {
             </div>
         </div>
     );
-}
+};
 
 export default App;

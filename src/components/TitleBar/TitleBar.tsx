@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import Switch from "../Switch/Switch";
 import "./TitleBar.css";
 
-function TitleBar() {
+const TitleBar = () => {
     const [active, setActive] = useState<boolean>(false);
 
     const startActivity = async () => {
@@ -35,6 +35,6 @@ function TitleBar() {
             </div>
         </div>
     );
-}
+};
 
 export default TitleBar;

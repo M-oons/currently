@@ -12,7 +12,7 @@ type ActivityDisplayContentProps = {
     timestampEnd: ActivityTimestampEnd | null,
 };
 
-function ActivityDisplayContent(props: ActivityDisplayContentProps) {
+const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     return (
         <>
             <div id="activity-title"><span>Title</span></div>
@@ -21,6 +21,6 @@ function ActivityDisplayContent(props: ActivityDisplayContentProps) {
             <div id="activity-timestamp"><span>00:00:01 left</span></div>
         </>
     );
-}
+};
 
 export default ActivityDisplayContent;

@@ -9,7 +9,7 @@ type ActivityDisplayProps = {
     activity: Activity,
 };
 
-function ActivityDisplay(props: ActivityDisplayProps) {
+const ActivityDisplay = (props: ActivityDisplayProps) => {
     const activity = props.activity;
 
     return (
@@ -45,6 +45,6 @@ function ActivityDisplay(props: ActivityDisplayProps) {
             </div>
         </div>
     );
-}
+};
 
 export default ActivityDisplay;
