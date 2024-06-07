@@ -17,6 +17,7 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
             <div id="activity-main">
                 <div id="activity-assets">
                     <ActivityDisplayAssets
+                        applicationId={activity.applicationId}
                         imageSmall={activity.imageSmall}
                         imageLarge={activity.imageLarge}
                     />
@@ -26,6 +27,7 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
                         title={activity.name}
                         details={activity.details}
                         state={activity.state}
+                        count={activity.count}
                         timestampStart={activity.timestampStart}
                         timestampEnd={activity.timestampEnd}
                     />

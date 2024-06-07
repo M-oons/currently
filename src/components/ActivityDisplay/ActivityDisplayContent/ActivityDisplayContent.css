@@ -22,3 +22,9 @@
     font-size: 14px;
     line-height: 18px;
 }
+
+.activity-content-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

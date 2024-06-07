@@ -18,7 +18,7 @@
 }
 
 #activity-content {
-    width: 100%;
+    width: 214px; /* 284px main - 60px assets - 10px margin */
     height: 100%;
     margin-left: 10px;
 }
