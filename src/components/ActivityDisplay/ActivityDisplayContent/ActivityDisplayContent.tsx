@@ -28,13 +28,13 @@ type ActivityDisplayContentState = {
 
 const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     const [state, setState] = useState<ActivityDisplayContentState>({
-        title: "",
-        details: null,
-        showDetails: false,
-        state: null,
-        showState: false,
-        timestamp: null,
-        showTimestamp: false,
+        title: "Title",
+        details: "Details",
+        showDetails: true,
+        state: "State (0 of 0)",
+        showState: true,
+        timestamp: "00:00 left",
+        showTimestamp: true,
     });
 
     useEffect(() => {
