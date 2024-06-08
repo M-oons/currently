@@ -38,20 +38,24 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     });
 
     useEffect(() => {
-        const title = props.title;
-        const [details, showDetails] = displayDetails(props.details);
-        const [state, showState] = displayState(props.state, props.count);
-        const [timestamp, showTimestamp] = displayTimestamp(props.timestampStart, props.timestampEnd);
+        const interval = setInterval(() => {
+            const title = props.title;
+            const [details, showDetails] = displayDetails(props.details);
+            const [state, showState] = displayState(props.state, props.count);
+            const [timestamp, showTimestamp] = displayTimestamp(props.timestampStart, props.timestampEnd);
 
-        setState({
-            title,
-            details,
-            showDetails,
-            state,
-            showState,
-            timestamp,
-            showTimestamp,
-        });
+            setState({
+                title,
+                details,
+                showDetails,
+                state,
+                showState,
+                timestamp,
+                showTimestamp,
+            });
+        }, 1000);
+
+        return () => clearInterval(interval);
     }, [
         props.title,
         props.details,
@@ -60,7 +64,6 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         props.timestampStart,
         props.timestampEnd,
     ]);
-
 
     return (
         <>

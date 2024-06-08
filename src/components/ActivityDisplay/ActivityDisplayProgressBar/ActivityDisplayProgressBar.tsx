@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestampEnd";
 import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
-import { clamp } from "../../../utils/math";
+import { clamp, roundToFixed } from "../../../utils/math";
 import { formatTimestamp } from "../../../utils/time";
 import "./ActivityDisplayProgressBar.css";
 
@@ -26,19 +26,23 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
     });
 
     useEffect(() => {
-        const [
-            progress,
-            timeCurrent,
-            timeMax,
-            showProgressBar,
-        ] = displayProgressBar(props.timestampStart, props.timestampEnd);
+        const interval = setInterval(() => {
+            const [
+                progress,
+                timeCurrent,
+                timeMax,
+                showProgressBar,
+            ] = displayProgressBar(props.timestampStart, props.timestampEnd);
 
-        setState({
-            progress,
-            timeCurrent,
-            timeMax,
-            showProgressBar,
-        });
+            setState({
+                progress,
+                timeCurrent,
+                timeMax,
+                showProgressBar,
+            });
+        }, 500);
+
+        return () => clearInterval(interval);
     }, [
         props.timestampStart,
         props.timestampEnd,
@@ -71,7 +75,8 @@ const displayProgressBar = (timestampStart: ActivityTimestampStart | null, times
         const current = clamp(now - start, 0, total);
         timeCurrent = formatTimestamp(current);
         timeMax = formatTimestamp(total);
-        progress = clamp(Math.round((current / total) * 100), 0, 100);
+        progress = roundToFixed((current / total) * 100, 1);
+        progress = clamp(progress, 0, 100);
     }
     return [progress, timeCurrent, timeMax, showProgressBar];
 };
