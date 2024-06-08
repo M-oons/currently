@@ -14,8 +14,8 @@ export const getActivity = (): Activity => {
 };
 
 export const setActivity = async (activity: Activity): Promise<boolean> => {
-    if (client === null || activity.applicationId !== currentActivity?.applicationId)
-        await createClient(activity.applicationId);
+    if (client === null || activity.clientId !== currentActivity?.clientId)
+        await createClient(activity.clientId);
 
     const presence: Presence = buildPresence(activity);
 

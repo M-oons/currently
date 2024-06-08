@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import type ActivityImage from "../../../activity/types/ActivityImage"
-import { getApplicationAssetUrl, getApplicationAssets } from "../../../activity/applicationFetcher";
+import { getApplicationAssetUrl, getApplicationAssets } from "../../../application/applicationFetcher";
 import "./ActivityDisplayAssets.css";
 
 type ActivityDisplayAssetsProps = {
-    applicationId: string,
+    clientId: string,
     imageLarge: ActivityImage | null,
     imageSmall: ActivityImage | null,
 };
@@ -49,8 +49,8 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
                 showImageSmallTooltip
             ] = displayImages(props.imageLarge, props.imageSmall);
 
-            const imageLargeSrc: string = await getImageSource(props.applicationId, imageLarge);
-            const imageSmallSrc: string = await getImageSource(props.applicationId, imageSmall);
+            const imageLargeSrc = await getImageSource(props.clientId, imageLarge);
+            const imageSmallSrc = await getImageSource(props.clientId, imageSmall);
 
             setState({
                 imageLarge,
@@ -67,7 +67,7 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
         };
         getState();
     }, [
-        props.applicationId,
+        props.clientId,
         props.imageLarge,
         props.imageSmall
     ]);

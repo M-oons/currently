@@ -8,7 +8,8 @@ import type ActivityTimestampStart from "./ActivityTimestampStart";
 
 export type Activity = {
     name: string,
-    applicationId: string,
+    clientId: string,
+    clientSecret: string,
     details: ActivityDetails | null,
     state: ActivityState | null,
     count: ActivityCount | null,
@@ -21,7 +22,8 @@ export type Activity = {
 };
 
 export const defaultActivity: Activity = {
-    applicationId: "",
+    clientId: "",
+    clientSecret: "",
     name: "",
     details: null,
     state: null,

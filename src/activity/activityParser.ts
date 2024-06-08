@@ -12,7 +12,8 @@ export const parseActivity = (json: string): Activity | null => {
         const parsedActivity = JSON.parse(json) as Activity;
         return {
             name: parseName(parsedActivity.name),
-            applicationId: parseApplicationId(parsedActivity.applicationId),
+            clientId: parseClientId(parsedActivity.clientId),
+            clientSecret: parseClientSecret(parsedActivity.clientSecret),
             details: parseDetails(parsedActivity.details),
             state: parseState(parsedActivity.state),
             count: parseCount(parsedActivity.count),
@@ -37,9 +38,15 @@ const parseName = (name?: string): string => {
         : "";
 };
 
-const parseApplicationId = (applicationId?: string): string => {
-    return typeof applicationId === "string"
-        ? applicationId
+const parseClientId = (clientId?: string): string => {
+    return typeof clientId === "string"
+        ? clientId
+        : "";
+};
+
+const parseClientSecret = (clientSecret?: string): string => {
+    return typeof clientSecret === "string"
+        ? clientSecret
         : "";
 };
 

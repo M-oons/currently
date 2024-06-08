@@ -9,3 +9,7 @@ contextBridge.exposeInMainWorld("api", {
     startActivity: (): Promise<boolean> => ipcRenderer.invoke("start-activity"),
     stopActivity: (): Promise<boolean> => ipcRenderer.invoke("stop-activity"),
 });
+
+contextBridge.exposeInMainWorld("utils", {
+    toBase64: (data: string): string => Buffer.from(data).toString("base64"),
+});

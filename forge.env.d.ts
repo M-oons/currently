@@ -33,6 +33,9 @@ declare global {
             startActivity: () => Promise<boolean>;
             stopActivity: () => Promise<boolean>;
         };
+        utils: {
+            toBase64: (data: string) => string;
+        };
     }
 }
 

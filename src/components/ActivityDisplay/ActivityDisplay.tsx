@@ -17,14 +17,15 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
             <div id="activity-main">
                 <div id="activity-assets">
                     <ActivityDisplayAssets
-                        applicationId={activity.applicationId}
+                        clientId={activity.clientId}
                         imageSmall={activity.imageSmall}
                         imageLarge={activity.imageLarge}
                     />
                 </div>
                 <div id="activity-content">
                     <ActivityDisplayContent
-                        title={activity.name}
+                        clientId={activity.clientId}
+                        clientSecret={activity.clientSecret}
                         details={activity.details}
                         state={activity.state}
                         count={activity.count}

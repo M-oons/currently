@@ -40,7 +40,7 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
                 timeMax,
                 showProgressBar,
             });
-        }, 500);
+        }, 1000);
 
         return () => clearInterval(interval);
     }, [
@@ -73,8 +73,8 @@ const displayProgressBar = (timestampStart: ActivityTimestampStart | null, times
         const start = typeof timestampStart === "boolean" ? now : timestampStart;
         const total = Math.max(0, timestampEnd - start);
         const current = clamp(now - start, 0, total);
-        timeCurrent = formatTimestamp(current);
-        timeMax = formatTimestamp(total);
+        timeCurrent = formatTimestamp(current, false);
+        timeMax = formatTimestamp(total, false);
         progress = roundToFixed((current / total) * 100, 1);
         progress = clamp(progress, 0, 100);
     }

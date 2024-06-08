@@ -4,11 +4,13 @@ import type ActivityDetails from "../../../activity/types/ActivityDetails";
 import type ActivityState from "../../../activity/types/ActivityState";
 import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestampEnd";
 import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
+import { getApplication } from "../../../application/applicationFetcher";
 import { formatTimestamp } from "../../../utils/time";
 import "./ActivityDisplayContent.css";
 
 type ActivityDisplayContentProps = {
-    title: string,
+    clientId: string,
+    clientSecret: string,
     details: ActivityDetails | null,
     state: ActivityState | null,
     count: ActivityCount | null,
@@ -17,7 +19,7 @@ type ActivityDisplayContentProps = {
 };
 
 type ActivityDisplayContentState = {
-    title: string,
+    name: string,
     details: string | null,
     showDetails: boolean,
     state: string | null,
@@ -28,7 +30,7 @@ type ActivityDisplayContentState = {
 
 const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     const [state, setState] = useState<ActivityDisplayContentState>({
-        title: "Title",
+        name: "Name",
         details: "Details",
         showDetails: true,
         state: "State (0 of 0)",
@@ -38,26 +40,43 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     });
 
     useEffect(() => {
+        if (props.clientId === "" || props.clientSecret === "")
+            return;
+
+        const fetchApplication = async () => {
+            const application = await getApplication(props.clientId, props.clientSecret);
+            const name = application.name;
+
+            setState($state => ({
+                ...$state,
+                name,
+            }));
+        };
+        fetchApplication();
+    }, [
+        props.clientId,
+        props.clientSecret,
+    ]);
+
+    useEffect(() => {
         const interval = setInterval(() => {
-            const title = props.title;
             const [details, showDetails] = displayDetails(props.details);
             const [state, showState] = displayState(props.state, props.count);
             const [timestamp, showTimestamp] = displayTimestamp(props.timestampStart, props.timestampEnd);
 
-            setState({
-                title,
+            setState($state => ({
+                ...$state,
                 details,
                 showDetails,
                 state,
                 showState,
                 timestamp,
                 showTimestamp,
-            });
+            }));
         }, 1000);
 
         return () => clearInterval(interval);
     }, [
-        props.title,
         props.details,
         props.state,
         props.count,
@@ -67,7 +86,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
 
     return (
         <>
-            <div id="activity-title" className="activity-content-text">{state.title}</div>
+            <div id="activity-title" className="activity-content-text">{state.name}</div>
             {state.showDetails && <div id="activity-details" className="activity-content-text">{state.details}</div>}
             {state.showState && <div id="activity-state" className="activity-content-text">{state.state}</div>}
             {state.showTimestamp && <div id="activity-timestamp" className="activity-content-text">{state.timestamp}</div>}
@@ -90,12 +109,12 @@ const displayTimestamp = (timestampStart: ActivityTimestampStart | null, timesta
     const now = Date.now();
     let timestampNumber = 0;
     let timestampText: string | null = null;
-    if (timestampStart !== null && timestampEnd === null) { // elapsed
+    if (timestampStart !== null && timestampEnd === null) {
         const start = typeof timestampStart === "boolean" ? now : timestampStart;
         timestampNumber = now - start;
         timestampText = "elapsed";
     }
-    else if (timestampEnd !== null) { // left
+    else if (timestampEnd !== null) {
         timestampNumber = timestampEnd - now;
         timestampText = "left";
     }
