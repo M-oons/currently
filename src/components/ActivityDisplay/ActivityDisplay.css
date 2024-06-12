@@ -26,12 +26,3 @@
 #activity-progress-bar {
     margin-top: 12px;
 }
-
-#activity-buttons {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: flex-start;
-    margin-top: 12px;
-}
