@@ -1,0 +1,63 @@
+#activity-controls {
+    padding: 12px;
+}
+
+#activity-controls>button {
+    height: 32px;
+    min-height: 32px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 2px 16px;
+    user-select: none;
+    background-color: var(--grey);
+    color: #f6f6f6;
+}
+
+#activity-controls>button:hover {
+    cursor: pointer;
+    background-color: var(--grey-hover);
+}
+
+#activity-controls>button:not(:first-child) {
+    margin-top: 8px;
+}
+
+#activity-control-start {
+    background-color: var(--green) !important;
+}
+
+#activity-control-start:hover {
+    background-color: var(--green-hover) !important;
+}
+
+#activity-control-stop {
+    background-color: var(--red) !important;
+}
+
+#activity-control-stop:hover {
+    background-color: var(--red-hover) !important;
+}
+
+#activity-control-edit {
+    background-color: var(--blurple) !important;
+}
+
+#activity-control-edit:hover {
+    background-color: var(--blurple-hover) !important;
+}
+
+#activity-control-done {
+    background-color: var(--blurple) !important;
+}
+
+#activity-control-done:hover {
+    background-color: var(--blurple-hover) !important;
+}

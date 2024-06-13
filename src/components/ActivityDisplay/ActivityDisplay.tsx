@@ -6,6 +6,7 @@ import "./ActivityDisplay.css";
 
 type ActivityDisplayProps = {
     activity: Activity,
+    edit: boolean,
 };
 
 const ActivityDisplay = (props: ActivityDisplayProps) => {

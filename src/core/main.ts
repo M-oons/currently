@@ -55,7 +55,7 @@ const createTray = (): void => {
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
-        width: 330,
+        width: 328,
         height: 254,
         frame: false,
         transparent: true,

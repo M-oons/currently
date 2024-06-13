@@ -11,15 +11,15 @@
 }
 
 .switch:hover.switch-on {
-    background-color: #059e4d;
+    background-color: var(--green-hover);
 }
 
 .switch:hover.switch-off {
-    background-color: #4d4d4d;
+    background-color: var(--grey-hover);
 }
 
 .switch-on {
-    background-color: #05af55;
+    background-color: var(--green);
 }
 
 .switch-on>.switch-thumb {
@@ -27,7 +27,7 @@
 }
 
 .switch-off {
-    background-color: #555555;
+    background-color: var(--grey);
 }
 
 .switch-off>.switch-thumb {

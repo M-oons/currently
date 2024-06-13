@@ -1,5 +1,13 @@
 :root {
     --background-color: #1a1a1a;
+    --blurple: #5865f2;
+    --blurple-hover: #4752c4;
+    --green: #05af55;
+    --green-hover: #059e4d;
+    --red: #da373c;
+    --red-hover: #a12828;
+    --grey: #555555;
+    --grey-hover: #4d4d4d;
 }
 
 #main {
@@ -12,11 +20,11 @@
     border-radius: 8px;
 }
 
-#container {
+#activity-display-container {
     width: max-content;
     height: max-content;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2px 12px 12px 12px;
+    padding: 2px 12px;
 }
