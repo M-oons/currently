@@ -41,7 +41,9 @@ const App = () => {
 
     return (
         <div id="main">
-            <TitleBar />
+            <TitleBar
+                active={active}    
+            />
             <div id="activity-display-container">
                 <ActivityDisplay
                     activity={activity}

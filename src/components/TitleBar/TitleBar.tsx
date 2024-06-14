@@ -1,8 +1,13 @@
 import "./TitleBar.css";
 
-const TitleBar = () => {
+type TitleBarProps = {
+    active: boolean,
+};
+
+const TitleBar = (props: TitleBarProps) => {
     return (
         <div id="title-bar">
+            <div id="title-bar-status" className={props.active ? "title-bar-status-on" : "title-bar-status-off"}>•</div>
             <div id="title-bar-banner"></div>
             <div id="title-bar-controls">
                 <div id="title-bar-button-close" className="title-bar-button" onClick={window.api.close}>⨉</div>
