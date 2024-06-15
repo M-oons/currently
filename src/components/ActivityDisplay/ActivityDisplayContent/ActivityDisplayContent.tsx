@@ -5,6 +5,7 @@ import type ActivityState from "../../../activity/types/ActivityState";
 import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestampEnd";
 import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
 import { getApplication } from "../../../application/applicationFetcher";
+import useInterval from "../../../hooks/useInterval";
 import { formatTimestamp } from "../../../utils/time";
 import "./ActivityDisplayContent.css";
 
@@ -58,24 +59,20 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         props.clientSecret,
     ]);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const [details, showDetails] = displayDetails(props.details);
-            const [state, showState] = displayState(props.state, props.count);
-            const [timestamp, showTimestamp] = displayTimestamp(props.timestampStart, props.timestampEnd);
+    useInterval(1000, () => {
+        const [details, showDetails] = displayDetails(props.details);
+        const [state, showState] = displayState(props.state, props.count);
+        const [timestamp, showTimestamp] = displayTimestamp(props.timestampStart, props.timestampEnd);
 
-            setState($state => ({
-                ...$state,
-                details,
-                showDetails,
-                state,
-                showState,
-                timestamp,
-                showTimestamp,
-            }));
-        }, 1000);
-
-        return () => clearInterval(interval);
+        setState($state => ({
+            ...$state,
+            details,
+            showDetails,
+            state,
+            showState,
+            timestamp,
+            showTimestamp,
+        }));
     }, [
         props.details,
         props.state,

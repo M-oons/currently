@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestampEnd";
 import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
+import useInterval from "../../../hooks/useInterval";
 import { clamp, roundToFixed } from "../../../utils/math";
 import { formatTimestamp } from "../../../utils/time";
 import "./ActivityDisplayProgressBar.css";
@@ -25,24 +26,20 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
         showProgressBar: true,
     });
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const [
-                progress,
-                timeCurrent,
-                timeMax,
-                showProgressBar,
-            ] = displayProgressBar(props.timestampStart, props.timestampEnd);
+    useInterval(1000, () => {
+        const [
+            progress,
+            timeCurrent,
+            timeMax,
+            showProgressBar,
+        ] = displayProgressBar(props.timestampStart, props.timestampEnd);
 
-            setState({
-                progress,
-                timeCurrent,
-                timeMax,
-                showProgressBar,
-            });
-        }, 1000);
-
-        return () => clearInterval(interval);
+        setState({
+            progress,
+            timeCurrent,
+            timeMax,
+            showProgressBar,
+        });
     }, [
         props.timestampStart,
         props.timestampEnd,
