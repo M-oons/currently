@@ -82,6 +82,7 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
             }
             {state.showImageSmall &&
                 <div id="activity-asset-small">
+                    <div id="activity-asset-small-bg"></div>
                     <img id="activity-asset-small-image" src={state.imageSmallSrc}></img>
                     {state.showImageSmallTooltip && <span id="activity-asset-small-tooltip" className="activity-asset-tooltip">{state.imageSmallTooltip}</span>}
                 </div>
