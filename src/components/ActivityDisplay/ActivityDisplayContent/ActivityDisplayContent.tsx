@@ -7,6 +7,7 @@ import type ActivityTimestampStart from "../../../activity/types/ActivityTimesta
 import { getApplication } from "../../../application/applicationFetcher";
 import useInterval from "../../../hooks/useInterval";
 import { formatTimestamp } from "../../../utils/time";
+import type ActivityDisplayComponentProps from "../types/ActivityDisplayComponentProps";
 import "./ActivityDisplayContent.css";
 
 type ActivityDisplayContentProps = {
@@ -17,7 +18,7 @@ type ActivityDisplayContentProps = {
     count: ActivityCount | null,
     timestampStart: ActivityTimestampStart | null,
     timestampEnd: ActivityTimestampEnd | null,
-};
+} & ActivityDisplayComponentProps;
 
 type ActivityDisplayContentState = {
     name: string,
@@ -83,10 +84,21 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
 
     return (
         <>
-            <div id="activity-title" className="activity-content-text">{state.name}</div>
-            {state.showDetails && <div id="activity-details" className="activity-content-text">{state.details}</div>}
-            {state.showState && <div id="activity-state" className="activity-content-text">{state.state}</div>}
-            {state.showTimestamp && <div id="activity-timestamp" className="activity-content-text">{state.timestamp}</div>}
+            {props.edit
+                ? <div id="activity-title" className="activity-content-text edit">{state.name}</div>
+                : <div id="activity-title" className="activity-content-text">{state.name}</div>
+            }
+            {props.edit
+                ? <div id="activity-details" className="activity-content-text edit">{state.details}</div>
+                : state.showDetails && <div id="activity-details" className="activity-content-text">{state.details}</div>
+            }
+            {props.edit
+                ? <div id="activity-state" className="activity-content-text edit">{state.state}</div>
+                : state.showState && <div id="activity-state" className="activity-content-text">{state.state}</div>
+            }
+            {props.edit
+                ? <div id="activity-timestamp" className="activity-content-text edit">{state.timestamp}</div>
+                : state.showTimestamp && <div id="activity-timestamp" className="activity-content-text">{state.timestamp}</div>}
         </>
     );
 };

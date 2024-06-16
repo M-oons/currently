@@ -1,23 +1,15 @@
 #activity-title {
+    position: relative;
     color: white;
     font-size: 14px;
     font-weight: 600;
     line-height: 18px;
 }
 
-#activity-details {
-    color: white;
-    font-size: 14px;
-    line-height: 18px;
-}
-
-#activity-state {
-    color: white;
-    font-size: 14px;
-    line-height: 18px;
-}
-
+#activity-details,
+#activity-state,
 #activity-timestamp {
+    position: relative;
     color: white;
     font-size: 14px;
     line-height: 18px;
@@ -27,4 +19,36 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+#activity-title.edit:hover,
+#activity-details.edit:hover,
+#activity-state.edit:hover,
+#activity-timestamp.edit:hover {
+    border-radius: 4px;
+    background-color: var(--blurple);
+    cursor: pointer;
+    margin-left: -4px;
+    padding: 0 20px 0 4px;
+}
+
+#activity-title.edit::after,
+#activity-details.edit::after,
+#activity-state.edit::after,
+#activity-timestamp.edit::after {
+    content: "✎";
+    position: absolute;
+    right: 3px;
+    color: white;
+    transform: scale(-1, 1);
+    opacity: 0;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#activity-title.edit:hover::after,
+#activity-details.edit:hover::after,
+#activity-state.edit:hover::after,
+#activity-timestamp.edit:hover::after {
+    opacity: 1;
 }

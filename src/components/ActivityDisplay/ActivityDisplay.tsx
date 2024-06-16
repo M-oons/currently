@@ -13,7 +13,7 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
     const activity = props.activity;
 
     return (
-        <div id="activity-display">
+        <div id="activity-display" className={props.edit ? "edit" : undefined}>
             <div id="activity-main">
                 <div id="activity-assets">
                     <ActivityDisplayAssets
@@ -31,6 +31,7 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
                         count={activity.count}
                         timestampStart={activity.timestampStart}
                         timestampEnd={activity.timestampEnd}
+                        edit={props.edit}
                     />
                 </div>
             </div>
