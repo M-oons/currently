@@ -1,13 +1,11 @@
 #activity-display {
-    width: max-content;
-    height: max-content;
+    width: 100%;
     background-color: var(--background-color);
     user-select: none;
 }
 
 #activity-main {
-    width: 284px;
-    height: 72px;
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -18,11 +16,11 @@
 }
 
 #activity-content {
-    width: 214px; /* 284px main - 60px assets - 10px margin */
-    height: 100%;
+    width: 100%;
     margin-left: 10px;
 }
 
 #activity-progress-bar {
-    width: 284px;
+    width: 100%;
+    margin-top: 12px;
 }

@@ -1,22 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
-import { type Activity, defaultActivity } from "./activity/types/Activity";
-import ActivityControls from "./components/ActivityControls/ActivityControls";
-import ActivityDisplay from "./components/ActivityDisplay/ActivityDisplay";
+import { useCallback, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TitleBar from "./components/TitleBar/TitleBar";
+import Home from "./pages/Home/Home";
 import "./App.css";
 
 const App = () => {
-    const [activity, setActivity] = useState<Activity>(defaultActivity);
     const [active, setActive] = useState<boolean>(false);
-    const [edit, setEdit] = useState<boolean>(false);
-
-    useEffect(() => {
-        const getActivity = async () => {
-            const activity: Activity = await window.api.getActivity();
-            setActivity(activity);
-        };
-        getActivity();
-    }, []);
 
     const startActivity = async () => {
         const isActive = await window.api.startActivity();
@@ -35,25 +24,25 @@ const App = () => {
             await stopActivity();
     }, []);
 
-    const toggleEdit = useCallback(() => {
-        setEdit(state => !state);
-    }, []);
-
     return (
-        <div id="main">
+        <div id="app">
             <TitleBar
-                active={active}    
+                active={active}
             />
-            <div id="activity-display-container">
-                <ActivityDisplay
-                    activity={activity}
-                    edit={edit}
-                />
+            <div id="main">
+                <BrowserRouter>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <Home
+                                    onActivityToggle={toggleActivity}
+                                />
+                            }
+                        />
+                    </Routes>
+                </BrowserRouter>
             </div>
-            <ActivityControls
-                onActivityToggle={toggleActivity}
-                onEditToggle={toggleEdit}
-            />
         </div>
     );
 };

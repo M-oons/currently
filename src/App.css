@@ -10,8 +10,8 @@
     --grey-hover: #4d4d4d;
 }
 
-#main {
-    width: max-content;
+#app {
+    width: 308px;
     height: max-content;
     display: flex;
     flex-direction: column;
@@ -20,11 +20,8 @@
     border-radius: 8px;
 }
 
-#activity-display-container {
-    width: max-content;
-    height: max-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 12px 0 12px;
+#main {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
 }
