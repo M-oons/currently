@@ -1,24 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { type Activity, defaultActivity } from "../../activity/types/Activity";
+import { useCallback, useState } from "react";
 import ActivityControls from "../../components/ActivityControls/ActivityControls";
 import ActivityDisplay from "../../components/ActivityDisplay/ActivityDisplay";
+import useActivity from "../../hooks/useActivity";
 import Page from "../Page";
 
-type HomeProps = {
-    onActivityToggle: (value: boolean) => void,
-};
-
-const Home = (props: HomeProps) => {
-    const [activity, setActivity] = useState<Activity>(defaultActivity);
+const Home = () => {
+    const { activity } = useActivity();
     const [edit, setEdit] = useState<boolean>(false);
-
-    useEffect(() => {
-        const getActivity = async () => {
-            const activity: Activity = await window.api.getActivity();
-            setActivity(activity);
-        };
-        getActivity();
-    }, []);
 
     const toggleEdit = useCallback(() => {
         setEdit(state => !state);
@@ -31,7 +19,6 @@ const Home = (props: HomeProps) => {
                 edit={edit}
             />
             <ActivityControls
-                onActivityToggle={props.onActivityToggle}
                 onEditToggle={toggleEdit}
             />
         </Page>

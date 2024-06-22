@@ -1,24 +1,14 @@
 import { useState } from "react";
+import useActivity from "../../hooks/useActivity";
 import "./ActivityControls.css";
 
 type ActivityControlsProps = {
-    onActivityToggle: (value: boolean) => void,
     onEditToggle: (value: boolean) => void,
 };
 
 const ActivityControls = (props: ActivityControlsProps) => {
-    const [active, setActive] = useState<boolean>(false);
+    const { startActivity, stopActivity, active } = useActivity();
     const [edit, setEdit] = useState<boolean>(false);
-
-    const startActivity = () => {
-        setActive(true);
-        props.onActivityToggle(true);
-    };
-
-    const stopActivity = () => {
-        setActive(false);
-        props.onActivityToggle(false);
-    };
 
     const startEdit = () => {
         setEdit(true);
