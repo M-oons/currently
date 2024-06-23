@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useActivity from "../../hooks/useActivity";
+import Button from "../Button/Button";
 import "./ActivityControls.css";
 
 type ActivityControlsProps = {
@@ -24,13 +25,13 @@ const ActivityControls = (props: ActivityControlsProps) => {
         <div id="activity-controls">
             {!edit &&
                 (active
-                    ? <button id="activity-control-stop" type="button" tabIndex={-1} onClick={stopActivity}>Stop</button>
-                    : <button id="activity-control-start" type="button" tabIndex={-1} onClick={startActivity}>Start</button>
+                    ? <Button id="activity-control-stop" onClick={stopActivity}>Stop</Button>
+                    : <Button id="activity-control-start" onClick={startActivity}>Start</Button>
                 )
             }
             {edit
-                ? <button id="activity-control-done" type="button" tabIndex={-1} onClick={stopEdit}>Done</button>
-                : <button id="activity-control-edit" type="button" tabIndex={-1} onClick={startEdit}>Edit</button>
+                ? <Button id="activity-control-done" onClick={stopEdit}>Done</Button>
+                : <Button id="activity-control-edit" onClick={startEdit}>Edit</Button>
             }
         </div>
     );
