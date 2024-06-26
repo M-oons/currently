@@ -1,0 +1,23 @@
+#edit-form .edit-item {
+    width: 100%;
+}
+
+#edit-form .edit-item:not(:first-child) {
+    margin-top: 8px;
+}
+
+#edit-controls {
+    margin-top: 12px;
+}
+
+#edit-controls>button {
+    width: 100%;
+}
+
+#edit-done {
+    background-color: var(--blurple) !important;
+}
+
+#edit-done:hover {
+    background-color: var(--blurple-hover) !important;
+}
