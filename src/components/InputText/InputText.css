@@ -1,0 +1,54 @@
+.input-text {
+    height: 32px;
+    position: relative;
+}
+
+.input-text>input[type="text"] {
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px;
+    background-color: var(--dark-grey);
+    color: white;
+}
+
+.input-text>input[type="text"]:focus {
+    outline: 2px solid white;
+}
+
+.input-text>input[type="text"]::placeholder {
+    color: var(--light-grey);
+    font-style: italic;
+}
+
+.input-text>input[type="text"]::selection {
+    color: white;
+    background-color: var(--blurple);
+}
+
+.input-counter {
+    width: 32px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    user-select: none;
+}
+
+.input-counter-valid {
+    color: white;
+}
+
+.input-counter-invalid {
+    color: var(--red);
+}
