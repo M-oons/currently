@@ -28,7 +28,7 @@ const ActivityControls = (props: ActivityControlsProps) => {
             }
             {props.edit
                 ? <Button id="activity-control-done" onClick={stopEdit}>Done</Button>
-                : <Button id="activity-control-edit" onClick={startEdit}>Edit</Button>
+                : <Button id="activity-control-edit" onClick={startEdit}><span>✎</span></Button>
             }
         </div>
     );

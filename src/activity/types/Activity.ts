@@ -1,3 +1,4 @@
+import type ActivityButton from "./ActivityButton";
 import type ActivityCount from "./ActivityCount";
 import type ActivityDetails from "./ActivityDetails";
 import type ActivityImage from "./ActivityImage";
@@ -16,6 +17,8 @@ export type Activity = {
     imageSmall: ActivityImage | null,
     timestampStart: ActivityTimestampStart | null,
     timestampEnd: ActivityTimestampEnd | null,
+    button1: ActivityButton | null,
+    button2: ActivityButton | null,
 };
 
 export const defaultActivity: Activity = {
@@ -29,6 +32,8 @@ export const defaultActivity: Activity = {
     imageSmall: null,
     timestampStart: null,
     timestampEnd: null,
+    button1: null,
+    button2: null,
 };
 
 export default Activity;

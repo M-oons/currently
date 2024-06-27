@@ -1,5 +1,6 @@
 import type Activity from "../../activity/types/Activity";
 import ActivityDisplayAssets from "./ActivityDisplayAssets/ActivityDisplayAssets";
+import ActivityDisplayButtons from "./ActivityDisplayButtons/ActivityDisplayButtons";
 import ActivityDisplayContent from "./ActivityDisplayContent/ActivityDisplayContent";
 import ActivityDisplayProgressBar from "./ActivityDisplayProgressBar/ActivityDisplayProgressBar";
 import "./ActivityDisplay.css";
@@ -39,6 +40,12 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
                 <ActivityDisplayProgressBar
                     timestampStart={activity.timestampStart}
                     timestampEnd={activity.timestampEnd}
+                />
+            </div>
+            <div id="activity-buttons">
+                <ActivityDisplayButtons
+                    button1={activity.button1}
+                    button2={activity.button2}
                 />
             </div>
         </div>

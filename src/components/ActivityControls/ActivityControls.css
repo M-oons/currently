@@ -1,16 +1,11 @@
 #activity-controls {
-    margin-top: 12px;
-}
-
-#activity-controls button {
-    width: 100%;
-}
-
-#activity-controls>button:not(:first-child) {
-    margin-top: 8px;
+    display: flex;
+    margin-bottom: 12px;
 }
 
 #activity-control-start {
+    width: 85%;
+    margin-right: 4px;
     background-color: var(--green) !important;
 }
 
@@ -19,6 +14,8 @@
 }
 
 #activity-control-stop {
+    width: 85%;
+    margin-right: 4px;
     background-color: var(--red) !important;
 }
 
@@ -27,6 +24,8 @@
 }
 
 #activity-control-edit {
+    width: 15%;
+    margin-left: 4px;
     background-color: var(--blurple) !important;
 }
 
@@ -34,7 +33,12 @@
     background-color: var(--blurple-hover) !important;
 }
 
+#activity-control-edit>span {
+    transform: scale(-1, 1);
+}
+
 #activity-control-done {
+    width: 100%;
     background-color: var(--blurple) !important;
 }
 

@@ -23,7 +23,6 @@ body {
     display: flex;
     justify-content: center;
     overflow: hidden;
-    padding: 10px;
 }
 
 @font-face {

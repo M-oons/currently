@@ -1,8 +1,8 @@
 import type ActivityValidationError from "./validation/ActivityValidationError";
 import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
 
-const DETAILS_LENGTH_MIN = 2;
-const DETAILS_LENGTH_MAX = 128;
+export const DETAILS_LENGTH_MIN = 2;
+export const DETAILS_LENGTH_MAX = 128;
 
 export type ActivityDetails = string;
 

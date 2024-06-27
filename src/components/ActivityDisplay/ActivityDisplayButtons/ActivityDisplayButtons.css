@@ -1,0 +1,11 @@
+#activity-buttons>.activity-button {
+    cursor: default;
+}
+
+#activity-buttons>.activity-button:hover {
+    background-color: var(--grey);
+}
+
+#activity-buttons>.activity-button:not(:first-child) {
+    margin-top: 8px;
+}

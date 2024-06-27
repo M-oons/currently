@@ -1,4 +1,5 @@
 import type Activity from "./types/Activity";
+import type ActivityButton from "./types/ActivityButton";
 import type ActivityCount from "./types/ActivityCount";
 import type ActivityDetails from "./types/ActivityDetails";
 import type ActivityImage from "./types/ActivityImage";
@@ -20,6 +21,8 @@ export const parseActivity = (json: string): Activity | null => {
             imageSmall: parseImage(parsedActivity.imageSmall),
             timestampStart: parseTimestampStart(parsedActivity.timestampStart),
             timestampEnd: parseTimestampEnd(parsedActivity.timestampEnd),
+            button1: parseButton(parsedActivity.button1),
+            button2: parseButton(parsedActivity.button2),
         };
     }
     catch {
@@ -94,5 +97,18 @@ const parseTimestampStart = (timestampStart?: ActivityTimestampStart | null): Ac
 const parseTimestampEnd = (timestampEnd?: ActivityTimestampEnd | null): ActivityTimestampEnd | null => {
     return typeof timestampEnd === "number"
         ? timestampEnd
+        : null;
+};
+
+const parseButton = (button?: ActivityButton | null): ActivityButton | null => {
+    return typeof button === "object" && button !== null
+        ? {
+            text: typeof button.text === "string"
+                ? button.text
+                : "",
+            url: typeof button.url === "string"
+                ? button.url
+                : "",
+        }
         : null;
 };
