@@ -12,18 +12,18 @@ const Home = () => {
     const [edit, setEdit] = useState<boolean>(toBoolean(searchParams.get("edit")));
 
     const toggleEdit = useCallback(() => {
-        setEdit(state => !state);
+        setEdit($state => !$state);
     }, []);
 
     return (
         <Page name="home">
-            <ActivityDisplay
-                activity={activity}
-                edit={edit}
-            />
             <ActivityControls
                 edit={edit}
                 onEditToggle={toggleEdit}
+            />
+            <ActivityDisplay
+                activity={activity}
+                edit={edit}
             />
         </Page>
     );

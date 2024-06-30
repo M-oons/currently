@@ -5,23 +5,26 @@ import { buildPresence } from "./presenceBuilder";
 
 let client: Client | null = null;
 
-let currentActivity: Activity | null = null;
+let currentActivity: Activity = loadActivity() ?? defaultActivity;
+let currentClientId: string | null = null;
 let active: boolean = false;
 
 export const getActivity = (): Activity => {
-    currentActivity ??= loadActivity();
-    return currentActivity ?? defaultActivity;
+    return currentActivity;
 };
 
-export const setActivity = async (activity: Activity): Promise<boolean> => {
-    if (client === null || activity.clientId !== currentActivity?.clientId)
-        await createClient(activity.clientId);
+export const setActivity = (activity: Activity): void => {
+    currentActivity = activity;
+};
 
-    const presence: Presence = buildPresence(activity);
+export const startActivity = async (): Promise<boolean> => {
+    if (client === null || currentActivity.clientId !== currentClientId)
+        await createClient(currentActivity.clientId);
+
+    const presence: Presence = buildPresence(currentActivity);
 
     try {
         await client?.setActivity(presence);
-        currentActivity = activity;
         active = true;
     }
     catch { }
@@ -44,6 +47,7 @@ const createClient = async (clientId: string): Promise<void> => {
         await client?.destroy();
         client = new Client({ transport: "ipc" });
         await client.login({ clientId });
+        currentClientId = clientId;
     }
     catch { }
 }

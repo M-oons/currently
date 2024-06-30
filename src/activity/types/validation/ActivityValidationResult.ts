@@ -8,8 +8,8 @@ export type ActivityValidationResult = {
 export const createValidationResult = (errors: ActivityValidationError[]): ActivityValidationResult => {
     return {
         valid: errors.length === 0,
-        errors
+        errors,
     };
-}
+};
 
 export default ActivityValidationResult;

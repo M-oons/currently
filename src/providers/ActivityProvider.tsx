@@ -1,4 +1,4 @@
-import { type Dispatch, type ReactNode, type SetStateAction, createContext, useCallback, useEffect, useState } from "react";
+import { type ReactNode, createContext, useCallback, useEffect, useState } from "react";
 import { type Activity, defaultActivity } from "../activity/types/Activity";
 
 type ActivityProviderProps = {
@@ -7,7 +7,7 @@ type ActivityProviderProps = {
 
 type ActivityContextState = {
     activity: Activity,
-    setActivity: Dispatch<SetStateAction<Activity>>,
+    setActivity: (activity: Activity) => void,
     startActivity: () => Promise<void>,
     stopActivity: () => Promise<void>,
     active: boolean,
@@ -37,11 +37,16 @@ export const ActivityProvider = (props: ActivityProviderProps) => {
         setActive(isActive);
     }, []);
 
+    const updateActivity = useCallback((activity: Activity) => {
+        setActivity(activity);
+        window.api.setActivity(activity);
+    }, []);
+
     return (
         <ActivityContext.Provider
             value={{
                 activity,
-                setActivity,
+                setActivity: updateActivity,
                 startActivity,
                 stopActivity,
                 active,

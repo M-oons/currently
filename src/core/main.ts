@@ -2,7 +2,7 @@ import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import AppInfo from "../AppInfo";
 import type Activity from "../activity/types/Activity";
-import { clearActivity, getActivity, setActivity } from "../activity/activityHandler";
+import { clearActivity, getActivity, setActivity, startActivity } from "../activity/activityHandler";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
 
@@ -126,9 +126,12 @@ ipcMain.handle("get-activity", (): Activity => {
     return getActivity();
 });
 
+ipcMain.handle("set-activity", (_, activity: Activity): void => {
+    return setActivity(activity);
+});
+
 ipcMain.handle("start-activity", async (): Promise<boolean> => {
-    const activity: Activity = getActivity();
-    return await setActivity(activity);
+    return await startActivity();
 });
 
 ipcMain.handle("stop-activity", async (): Promise<boolean> => {

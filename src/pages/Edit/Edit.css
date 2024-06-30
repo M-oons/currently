@@ -1,9 +1,15 @@
 #edit-form .edit-item {
     width: 100%;
+    margin-top: 8px;
 }
 
-#edit-form .edit-item:not(:first-child) {
-    margin-top: 8px;
+.edit-title {
+    color: var(--light-grey);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    user-select: none;
 }
 
 #edit-controls {
@@ -18,6 +24,6 @@
     background-color: var(--blurple) !important;
 }
 
-#edit-done:hover {
+#edit-done:hover:not(:disabled) {
     background-color: var(--blurple-hover) !important;
 }

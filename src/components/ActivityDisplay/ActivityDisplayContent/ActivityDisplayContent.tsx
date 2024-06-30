@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type ActivityCount from "../../../activity/types/ActivityCount";
 import type ActivityDetails from "../../../activity/types/ActivityDetails";
 import type ActivityState from "../../../activity/types/ActivityState";
@@ -6,6 +7,7 @@ import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestamp
 import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
 import { getApplication } from "../../../application/applicationFetcher";
 import useInterval from "../../../hooks/useInterval";
+import { type EditPage } from "../../../pages/Edit/Edit";
 import { formatTimestamp } from "../../../utils/time";
 import type ActivityDisplayComponentProps from "../types/ActivityDisplayComponentProps";
 import "./ActivityDisplayContent.css";
@@ -40,6 +42,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         timestamp: "00:00 left",
         showTimestamp: true,
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (props.clientId === "" || props.clientSecret === "")
@@ -82,6 +85,10 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         props.timestampEnd,
     ]);
 
+    const goToEditPage = (page: EditPage) => {
+        navigate(`/edit/${page}`);
+    };
+
     return (
         <>
             {props.edit
@@ -89,15 +96,21 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
                 : <div id="activity-title" className="activity-content-text">{state.name}</div>
             }
             {props.edit
-                ? <div id="activity-details" className="activity-content-text edit">{state.details}</div>
+                ? state.details === null
+                    ? <div id="activity-details" className="activity-content-text edit empty" onClick={() => goToEditPage("details")}>Details</div>
+                    : <div id="activity-details" className="activity-content-text edit" onClick={() => goToEditPage("details")}>{state.details}</div>
                 : state.showDetails && <div id="activity-details" className="activity-content-text">{state.details}</div>
             }
             {props.edit
-                ? <div id="activity-state" className="activity-content-text edit">{state.state}</div>
+                ? state.state === null
+                    ? <div id="activity-state" className="activity-content-text edit empty" onClick={() => goToEditPage("state")}>State</div>
+                    : <div id="activity-state" className="activity-content-text edit" onClick={() => goToEditPage("state")}>{state.state}</div>
                 : state.showState && <div id="activity-state" className="activity-content-text">{state.state}</div>
             }
             {props.edit
-                ? <div id="activity-timestamp" className="activity-content-text edit">{state.timestamp}</div>
+                ? state.timestamp === null
+                    ? <div id="activity-timestamp" className="activity-content-text edit empty" onClick={() => goToEditPage("timestamp")}>Timestamp</div>
+                    : <div id="activity-timestamp" className="activity-content-text edit" onClick={() => goToEditPage("timestamp")}>{state.timestamp}</div>
                 : state.showTimestamp && <div id="activity-timestamp" className="activity-content-text">{state.timestamp}</div>}
         </>
     );

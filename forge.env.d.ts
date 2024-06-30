@@ -30,6 +30,7 @@ declare global {
             minimize: () => void;
             help: () => void;
             getActivity: () => Promise<Activity>;
+            setActivity: (activity: Activity) => void;
             startActivity: () => Promise<boolean>;
             stopActivity: () => Promise<boolean>;
         };

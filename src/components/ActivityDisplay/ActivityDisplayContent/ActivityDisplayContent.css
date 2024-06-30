@@ -1,35 +1,35 @@
 #activity-title {
     position: relative;
+    margin-left: -4px;
+    padding: 0 20px 0 4px;
     color: white;
     font-size: 14px;
     font-weight: 600;
     line-height: 18px;
+    border-radius: 4px;
 }
 
 #activity-details,
 #activity-state,
 #activity-timestamp {
+    height: 18px;
     position: relative;
+    margin-left: -4px;
+    padding: 0 20px 0 4px;
     color: white;
     font-size: 14px;
     line-height: 18px;
-}
-
-.activity-content-text {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    border-radius: 4px;
 }
 
 #activity-title.edit:hover,
 #activity-details.edit:hover,
 #activity-state.edit:hover,
 #activity-timestamp.edit:hover {
-    border-radius: 4px;
+    color: white;
     background-color: var(--blurple);
+    outline-color: white;
     cursor: pointer;
-    margin-left: -4px;
-    padding: 0 20px 0 4px;
 }
 
 #activity-title.edit::after,
@@ -51,4 +51,55 @@
 #activity-state.edit:hover::after,
 #activity-timestamp.edit:hover::after {
     opacity: 1;
+}
+
+#activity-title.empty,
+#activity-details.empty,
+#activity-state.empty,
+#activity-timestamp.empty {
+    color: var(--light-grey);
+    outline: 1px dashed var(--light-grey);
+    font-style: italic;
+}
+
+#activity-title.edit::after,
+#activity-details.edit::after,
+#activity-state.edit::after,
+#activity-timestamp.edit::after {
+    content: "✎";
+    position: absolute;
+    right: 3px;
+    color: white;
+    transform: scale(-1, 1);
+    opacity: 0;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#activity-title.empty:hover::after,
+#activity-details.empty:hover::after,
+#activity-state.empty:hover::after,
+#activity-timestamp.empty:hover::after {
+    color: white;
+}
+
+#activity-title.empty::after,
+#activity-details.empty::after,
+#activity-state.empty::after,
+#activity-timestamp.empty::after {
+    content: "+";
+    position: absolute;
+    right: 6px;
+    color: var(--light-grey);
+    opacity: 1;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 18px;
+}
+
+.activity-content-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
