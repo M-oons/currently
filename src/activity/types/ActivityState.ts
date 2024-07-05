@@ -1,8 +1,8 @@
 import type ActivityValidationError from "./validation/ActivityValidationError";
 import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
 
-const STATE_LENGTH_MIN = 2;
-const STATE_LENGTH_MAX = 128;
+export const STATE_LENGTH_MIN = 2;
+export const STATE_LENGTH_MAX = 128;
 
 export type ActivityState = string;
 

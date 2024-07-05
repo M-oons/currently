@@ -1,3 +1,7 @@
+#edit-form>.edit-section:not(:first-child) {
+    margin-top: 12px;
+}
+
 #edit-form .edit-item {
     width: 100%;
     margin-top: 8px;
@@ -10,6 +14,20 @@
     text-transform: uppercase;
     letter-spacing: 0.2px;
     user-select: none;
+}
+
+.edit-title-flex {
+    display: flex;
+    color: var(--light-grey);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    user-select: none;
+}
+
+.edit-errors {
+    padding-top: 2px;
 }
 
 #edit-controls {

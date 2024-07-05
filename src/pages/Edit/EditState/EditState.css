@@ -1,0 +1,22 @@
+#edit-count-toggle {
+   margin-left: 6px;
+}
+
+#edit-state,
+#edit-count-current,
+#edit-count-max {
+    width: 100%;
+}
+
+#edit-counts {
+    display: flex;
+    align-items: center;
+}
+
+#edit-count-divider {
+    margin: 0 12px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    user-select: none;
+}

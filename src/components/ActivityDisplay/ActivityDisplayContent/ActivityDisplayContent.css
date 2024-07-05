@@ -59,6 +59,7 @@
 #activity-timestamp.empty {
     color: var(--light-grey);
     outline: 1px dashed var(--light-grey);
+    outline-offset: -2px;
     font-style: italic;
 }
 

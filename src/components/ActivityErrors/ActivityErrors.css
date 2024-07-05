@@ -1,6 +1,5 @@
 #activity-errors {
     width: 100%;
-    margin-top: 2px;
 }
 
 .activity-error {
@@ -9,4 +8,10 @@
     font-size: 12px;
     font-weight: 500;
     padding-left: 4px;
+}
+
+.activity-error-property {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
 }

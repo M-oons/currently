@@ -1,8 +1,8 @@
 import type ActivityValidationError from "./validation/ActivityValidationError";
 import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
 
-const COUNT_CURRENT_MIN = 1;
-const COUNT_MAX_MIN = 1;
+export const COUNT_CURRENT_MIN = 1;
+export const COUNT_MAX_MIN = 1;
 
 export type ActivityCount = {
     current: number,

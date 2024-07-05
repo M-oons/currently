@@ -1,13 +1,13 @@
 import { type ChangeEvent } from "react";
 import "./InputText.css";
 
-const MAX_LENGTH = 999;
+const TEXT_MAX_LENGTH = 999;
 
 type InputTextProps = {
     id?: string,
     className?: string,
     placeholder?: string,
-    value?: string,
+    value: string,
     tabIndex?: number,
     maxLength?: number,
     limit?: boolean,
@@ -35,27 +35,27 @@ const InputText = (props: InputTextProps) => {
             />
             {props.counter &&
                 <div className={`input-counter ${counterValid(props.value, props.maxLength) ? "input-counter-valid" : "input-counter-invalid"}`}>
-                    {counterCount(props.value || "", props.maxLength)}
+                    {counterCount(props.value, props.maxLength)}
                 </div>
             }
         </div>
     );
 };
 
-const maxLength = (maxLength: number = MAX_LENGTH, limit: boolean = false): number => {
+const maxLength = (maxLength: number = TEXT_MAX_LENGTH, limit: boolean = false): number => {
     return limit && maxLength > 0
         ? maxLength
-        : MAX_LENGTH;
+        : TEXT_MAX_LENGTH;
 };
 
-const counterCount = (value: string = "", max?: number): number => {
+const counterCount = (value: string, max?: number): number => {
     if (max === undefined || max <= 0)
         return value.length;
 
-    return Math.min(max, MAX_LENGTH) - value.length;
+    return Math.min(max, TEXT_MAX_LENGTH) - value.length;
 };
 
-const counterValid = (value: string = "", max?: number): boolean => {
+const counterValid = (value: string, max?: number): boolean => {
     if (max === undefined || max <= 0)
         return true;
 
