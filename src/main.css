@@ -1,8 +1,48 @@
+:root {
+    --background-color: #1a1a1a;
+    --scrollbar-color: #0a0a0a;
+    --blurple: #5865f2;
+    --blurple-hover: #4752c4;
+    --green: #05af55;
+    --green-hover: #059e4d;
+    --red: #da373c;
+    --red-hover: #a12828;
+    --grey: #555555;
+    --grey-hover: #4d4d4d;
+    --light-grey: #7a7a7a;
+    --mid-grey: #3a3a3a;
+    --dark-grey: #2a2a2a;
+    --dark-grey-hover: #303030;
+    --darker-grey: #1a1a1a;
+}
+
 *,
 *::before,
 *::after {
     box-sizing: inherit;
     font-family: "gg sans";
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-color: var(--scrollbar-color);
+    min-height: 40px;
+}
+
+*::-webkit-scrollbar-track {
+    border: 2px solid var(--dark-grey);
+    background-color: var(--dark-grey);
 }
 
 html {
