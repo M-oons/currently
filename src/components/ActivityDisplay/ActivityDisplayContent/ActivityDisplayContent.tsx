@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type ActivityCount from "../../../activity/types/ActivityCount";
 import type ActivityDetails from "../../../activity/types/ActivityDetails";
 import type ActivityState from "../../../activity/types/ActivityState";
-import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestampEnd";
-import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
+import { type ActivityTimestamp, ActivityTimestampMode } from "../../../activity/types/ActivityTimestamp";
 import { getApplication } from "../../../application/applicationFetcher";
 import useInterval from "../../../hooks/useInterval";
 import { type EditPage } from "../../../pages/Edit/Edit";
@@ -18,8 +17,9 @@ type ActivityDisplayContentProps = {
     details: ActivityDetails | null,
     state: ActivityState | null,
     count: ActivityCount | null,
-    timestampStart: ActivityTimestampStart | null,
-    timestampEnd: ActivityTimestampEnd | null,
+    timestampMode: ActivityTimestampMode,
+    timestampStart: ActivityTimestamp | null,
+    timestampEnd: ActivityTimestamp | null,
 } & ActivityDisplayComponentProps;
 
 type ActivityDisplayContentState = {
@@ -66,7 +66,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     useInterval(1000, () => {
         const [details, showDetails] = displayDetails(props.details);
         const [state, showState] = displayState(props.state, props.count);
-        const [timestamp, showTimestamp] = displayTimestamp(props.timestampStart, props.timestampEnd);
+        const [timestamp, showTimestamp] = displayTimestamp(props.timestampMode, props.timestampStart, props.timestampEnd);
 
         setState($state => ({
             ...$state,
@@ -127,18 +127,20 @@ const displayState = (state: ActivityState | null, count: ActivityCount | null):
     return [s, s !== null];
 };
 
-const displayTimestamp = (timestampStart: ActivityTimestampStart | null, timestampEnd: ActivityTimestampEnd | null): [timestamp: string | null, showTimestamp: boolean] => {
+const displayTimestamp = (timestampMode: ActivityTimestampMode, timestampStart: ActivityTimestamp | null, timestampEnd: ActivityTimestamp | null): [timestamp: string | null, showTimestamp: boolean] => {
     const now = Date.now();
     let timestampNumber = 0;
     let timestampText: string | null = null;
-    if (timestampStart !== null && timestampEnd === null) {
-        const start = typeof timestampStart === "boolean" ? now : timestampStart;
-        timestampNumber = now - start;
-        timestampText = "elapsed";
-    }
-    else if (timestampEnd !== null) {
-        timestampNumber = timestampEnd - now;
-        timestampText = "left";
+    if (timestampMode !== ActivityTimestampMode.None) {
+        if (timestampStart !== null && timestampEnd === null) {
+            const start = typeof timestampStart === "boolean" ? now : timestampStart;
+            timestampNumber = now - start;
+            timestampText = "elapsed";
+        }
+        else if (timestampEnd !== null) {
+            timestampNumber = timestampEnd - now;
+            timestampText = "left";
+        }
     }
     const timestamp = timestampText !== null
         ? `${formatTimestamp(Math.max(0, timestampNumber))} ${timestampText}`

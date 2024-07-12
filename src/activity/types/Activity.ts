@@ -3,8 +3,7 @@ import type ActivityCount from "./ActivityCount";
 import type ActivityDetails from "./ActivityDetails";
 import type ActivityImage from "./ActivityImage";
 import type ActivityState from "./ActivityState";
-import type ActivityTimestampEnd from "./ActivityTimestampEnd";
-import type ActivityTimestampStart from "./ActivityTimestampStart";
+import { type ActivityTimestamp, ActivityTimestampMode } from "./ActivityTimestamp";
 
 export type Activity = {
     name: string,
@@ -15,8 +14,9 @@ export type Activity = {
     count: ActivityCount | null,
     imageLarge: ActivityImage | null,
     imageSmall: ActivityImage | null,
-    timestampStart: ActivityTimestampStart | null,
-    timestampEnd: ActivityTimestampEnd | null,
+    timestampMode: ActivityTimestampMode,
+    timestampStart: ActivityTimestamp | null,
+    timestampEnd: ActivityTimestamp | null,
     button1: ActivityButton | null,
     button2: ActivityButton | null,
 };
@@ -30,6 +30,7 @@ export const defaultActivity: Activity = {
     count: null,
     imageLarge: null,
     imageSmall: null,
+    timestampMode: ActivityTimestampMode.None,
     timestampStart: null,
     timestampEnd: null,
     button1: null,

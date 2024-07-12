@@ -4,8 +4,7 @@ import type ActivityCount from "./types/ActivityCount";
 import type ActivityDetails from "./types/ActivityDetails";
 import type ActivityImage from "./types/ActivityImage";
 import type ActivityState from "./types/ActivityState";
-import type ActivityTimestampEnd from "./types/ActivityTimestampEnd";
-import type ActivityTimestampStart from "./types/ActivityTimestampStart";
+import { type ActivityTimestamp, ActivityTimestampMode, validateTimestampMode } from "./types/ActivityTimestamp";
 
 export const parseActivity = (json: string): Activity | null => {
     try {
@@ -19,8 +18,9 @@ export const parseActivity = (json: string): Activity | null => {
             count: parseCount(parsedActivity.count),
             imageLarge: parseImage(parsedActivity.imageLarge),
             imageSmall: parseImage(parsedActivity.imageSmall),
-            timestampStart: parseTimestampStart(parsedActivity.timestampStart),
-            timestampEnd: parseTimestampEnd(parsedActivity.timestampEnd),
+            timestampMode: parseTimestampMode(parsedActivity.timestampMode),
+            timestampStart: parseTimestamp(parsedActivity.timestampStart),
+            timestampEnd: parseTimestamp(parsedActivity.timestampEnd),
             button1: parseButton(parsedActivity.button1),
             button2: parseButton(parsedActivity.button2),
         };
@@ -88,15 +88,15 @@ const parseImage = (image?: ActivityImage | null): ActivityImage | null => {
         : null;
 };
 
-const parseTimestampStart = (timestampStart?: ActivityTimestampStart | null): ActivityTimestampStart | null => {
-    return typeof timestampStart === "number" || typeof timestampStart === "boolean"
-        ? timestampStart
-        : null;
+const parseTimestampMode = (timestampMode?: ActivityTimestampMode): ActivityTimestampMode => {
+    return validateTimestampMode(timestampMode)
+        ? timestampMode
+        : ActivityTimestampMode.None;
 };
 
-const parseTimestampEnd = (timestampEnd?: ActivityTimestampEnd | null): ActivityTimestampEnd | null => {
-    return typeof timestampEnd === "number"
-        ? timestampEnd
+const parseTimestamp = (timestamp?: ActivityTimestamp | null): ActivityTimestamp | null => {
+    return typeof timestamp === "number"
+        ? timestamp
         : null;
 };
 

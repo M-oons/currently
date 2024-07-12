@@ -30,6 +30,7 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
                         details={activity.details}
                         state={activity.state}
                         count={activity.count}
+                        timestampMode={activity.timestampMode}
                         timestampStart={activity.timestampStart}
                         timestampEnd={activity.timestampEnd}
                         edit={props.edit}
@@ -38,6 +39,7 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
             </div>
             <div id="activity-progress-bar">
                 <ActivityDisplayProgressBar
+                    timestampMode={activity.timestampMode}
                     timestampStart={activity.timestampStart}
                     timestampEnd={activity.timestampEnd}
                 />

@@ -1,14 +1,14 @@
 import { useState } from "react";
-import type ActivityTimestampEnd from "../../../activity/types/ActivityTimestampEnd";
-import type ActivityTimestampStart from "../../../activity/types/ActivityTimestampStart";
+import { type ActivityTimestamp, ActivityTimestampMode } from "../../../activity/types/ActivityTimestamp";
 import useInterval from "../../../hooks/useInterval";
 import { clamp, roundToFixed } from "../../../utils/math";
 import { formatTimestamp } from "../../../utils/time";
 import "./ActivityDisplayProgressBar.css";
 
 type ActivityDisplayProgressBarProps = {
-    timestampStart: ActivityTimestampStart | null,
-    timestampEnd: ActivityTimestampEnd | null,
+    timestampMode: ActivityTimestampMode,
+    timestampStart: ActivityTimestamp | null,
+    timestampEnd: ActivityTimestamp | null,
 };
 
 type ActivityDisplayProgressBarState = {
@@ -32,7 +32,7 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
             timeCurrent,
             timeMax,
             showProgressBar,
-        ] = displayProgressBar(props.timestampStart, props.timestampEnd);
+        ] = displayProgressBar(props.timestampMode, props.timestampStart, props.timestampEnd);
 
         setState({
             progress,
@@ -60,12 +60,12 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
         : null;
 };
 
-const displayProgressBar = (timestampStart: ActivityTimestampStart | null, timestampEnd: ActivityTimestampEnd | null): [progress: number, timeCurrent: string, timeMax: string, showProgressBar: boolean] => {
+const displayProgressBar = (timestampMode: ActivityTimestampMode, timestampStart: ActivityTimestamp | null, timestampEnd: ActivityTimestamp | null): [progress: number, timeCurrent: string, timeMax: string, showProgressBar: boolean] => {
     const now = Date.now();
     let progress = 0;
     let timeCurrent = "";
     let timeMax = "";
-    const showProgressBar = timestampStart !== null && timestampEnd !== null;
+    const showProgressBar = timestampMode !== ActivityTimestampMode.None && timestampStart !== null && timestampEnd !== null;
     if (showProgressBar) {
         const start = typeof timestampStart === "boolean" ? now : timestampStart;
         const total = Math.max(0, timestampEnd - start);
