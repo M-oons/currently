@@ -22,6 +22,7 @@
 }
 
 #edit-controls {
+    display: flex;
     margin-top: 12px;
 }
 
@@ -30,9 +31,19 @@
 }
 
 #edit-done {
+    margin-right: 4px;
     background-color: var(--blurple) !important;
 }
 
 #edit-done:hover:not(:disabled) {
     background-color: var(--blurple-hover) !important;
+}
+
+#edit-cancel {
+    margin-left: 4px;
+    background-color: var(--grey) !important;
+}
+
+#edit-cancel:hover {
+    background-color: var(--grey-hover) !important;
 }

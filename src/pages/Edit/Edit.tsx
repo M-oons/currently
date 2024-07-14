@@ -45,6 +45,10 @@ export const Edit = () => {
             timestampStart,
             timestampEnd,
         });
+        goBack();
+    };
+
+    const goBack = () => {
         navigate("/?edit=true");
     };
 
@@ -95,6 +99,7 @@ export const Edit = () => {
             </div>
             <div id="edit-controls">
                 <Button id="edit-done" disabled={!valid} onClick={saveActivity}>Done</Button>
+                <Button id="edit-cancel" onClick={goBack}>Cancel</Button>
             </div>
         </Page>
     );
