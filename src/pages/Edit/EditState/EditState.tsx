@@ -25,7 +25,7 @@ const EditState = (props: EditStateProps) => {
     const [useCount, setUseCount] = useState<boolean>(props.count !== null);
 
     useEffect(() => {
-        validate(state, countCurrent, countMax);
+        validate();
     }, [
         state,
         countCurrent,
@@ -33,12 +33,11 @@ const EditState = (props: EditStateProps) => {
         useCount,
     ]);
 
-    const validate = (state: string, countCurrent: number, countMax: number) => {
+    const validate = () => {
         let isValid = true;
 
-        if (state === "") {
+        if (state === "")
             setErrorsState([]);
-        }
         else {
             const stateValidation = validateState(state);
             if (stateValidation.valid) {
@@ -50,13 +49,10 @@ const EditState = (props: EditStateProps) => {
             }
         }
 
-        if (!useCount) {
+        if (!useCount)
             setErrorsCount([]);
-        }
         else {
             const countValidation = validateCount({ current: countCurrent, max: countMax });
-            console.log(countCurrent);
-            console.log(countMax);
             if (countValidation.valid) {
                 setErrorsCount([]);
             }
@@ -78,9 +74,8 @@ const EditState = (props: EditStateProps) => {
                 : null;
             valid(validState, validCount);
         }
-        else {
+        else
             props.setValid(false);
-        }
     };
 
     const valid = (state: ActivityState | null, count: ActivityCount | null) => {
@@ -130,7 +125,7 @@ const EditState = (props: EditStateProps) => {
                 </div>
             </div>
             <div className="edit-section">
-                <div className="edit-title-flex">
+                <div className="edit-title">
                     Count
                     <div id="edit-count-toggle">
                         <Switch

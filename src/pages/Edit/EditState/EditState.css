@@ -1,11 +1,11 @@
-#edit-count-toggle {
-   margin-left: 6px;
-}
-
 #edit-state,
 #edit-count-current,
 #edit-count-max {
     width: 100%;
+}
+
+#edit-count-toggle {
+   margin-left: auto;
 }
 
 #edit-counts {

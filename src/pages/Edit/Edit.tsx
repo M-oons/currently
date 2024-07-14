@@ -3,11 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import type ActivityCount from "../../activity/types/ActivityCount";
 import type ActivityDetails from "../../activity/types/ActivityDetails";
 import type ActivityState from "../../activity/types/ActivityState";
+import { type ActivityTimestamp, ActivityTimestampMode } from "../../activity/types/ActivityTimestamp";
 import Button from "../../components/Button/Button";
 import useActivity from "../../hooks/useActivity";
 import Page from "../Page";
 import EditDetails from "./EditDetails/EditDetails";
 import EditState from "./EditState/EditState";
+import EditTimestamp from "./EditTimestamp/EditTimestamp";
 import "./Edit.css";
 
 type EditParams = {
@@ -29,6 +31,9 @@ export const Edit = () => {
     const [count, setCount] = useState<ActivityCount | null>(activity.count);
     const [details, setDetails] = useState<ActivityDetails | null>(activity.details);
     const [state, setState] = useState<ActivityState | null>(activity.state);
+    const [timestampMode, setTimestampMode] = useState<ActivityTimestampMode>(activity.timestampMode);
+    const [timestampStart, setTimestampStart] = useState<ActivityTimestamp | null>(activity.timestampStart);
+    const [timestampEnd, setTimestampEnd] = useState<ActivityTimestamp | null>(activity.timestampEnd);
 
     const saveActivity = () => {
         setActivity({
@@ -36,6 +41,9 @@ export const Edit = () => {
             details,
             state,
             count,
+            timestampMode,
+            timestampStart,
+            timestampEnd,
         });
         navigate("/?edit=true");
     };
@@ -62,7 +70,15 @@ export const Edit = () => {
                 />;
 
             case "timestamp":
-                return null;
+                return <EditTimestamp
+                    timestampMode={timestampMode}
+                    timestampStart={timestampStart}
+                    timestampEnd={timestampEnd}
+                    setTimestampMode={setTimestampMode}
+                    setTimestampStart={setTimestampStart}
+                    setTimestampEnd={setTimestampEnd}
+                    setValid={setValid}
+                />;
 
             case "assets":
                 return null;

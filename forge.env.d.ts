@@ -29,6 +29,8 @@ declare global {
             close: () => void;
             minimize: () => void;
             help: () => void;
+            getStartupTime: () => Promise<number>;
+            getActivityLastUpdateTime: () => Promise<number>;
             getActivity: () => Promise<Activity>;
             setActivity: (activity: Activity) => void;
             startActivity: () => Promise<boolean>;

@@ -7,7 +7,12 @@ let client: Client | null = null;
 
 let currentActivity: Activity = loadActivity() ?? defaultActivity;
 let currentClientId: string | null = null;
+let lastUpdatedAt: number = 0;
 let active: boolean = false;
+
+export const getActivityLastUpdateTime = (): number => {
+    return lastUpdatedAt;
+};
 
 export const getActivity = (): Activity => {
     return currentActivity;
@@ -26,6 +31,7 @@ export const startActivity = async (): Promise<boolean> => {
     try {
         await client?.setActivity(presence);
         active = true;
+        lastUpdatedAt = Date.now();
     }
     catch { }
 

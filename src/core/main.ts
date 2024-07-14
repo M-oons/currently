@@ -2,9 +2,12 @@ import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import AppInfo from "../AppInfo";
 import type Activity from "../activity/types/Activity";
-import { clearActivity, getActivity, setActivity, startActivity } from "../activity/activityHandler";
+import { clearActivity, getActivity, getActivityLastUpdateTime, setActivity, startActivity } from "../activity/activityHandler";
+import IpcCommand from "../ipc/IpcCommand";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
+
+const startupTime = Date.now();
 
 if (require("electron-squirrel-startup"))
     app.quit();
@@ -56,7 +59,7 @@ const createTray = (): void => {
 const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 308,
-        height: 288,
+        height: 346,
         frame: false,
         transparent: true,
         titleBarStyle: "customButtonsOnHover",
@@ -110,30 +113,41 @@ app.on("activate", () => {
 // ipc messages 
 //===============
 
-ipcMain.on("close", () => {
+ipcMain.on(IpcCommand.Close, () => {
     mainWindow?.close();
 });
 
-ipcMain.on("minimize", () => {
+ipcMain.on(IpcCommand.Minimize, () => {
     mainWindow?.minimize();
 });
 
-ipcMain.on("help", () => {
+ipcMain.on(IpcCommand.Help, () => {
     openURL(AppInfo.url);
 });
 
-ipcMain.handle("get-activity", (): Activity => {
+ipcMain.handle(IpcCommand.GetStartupTime, (): number => {
+    return startupTime;
+});
+
+ipcMain.handle(IpcCommand.GetActivityLastUpdateTime, (): number => {
+    const activityLastUpdateTime = getActivityLastUpdateTime();
+    return activityLastUpdateTime > 0
+        ? activityLastUpdateTime
+        : startupTime;
+});
+
+ipcMain.handle(IpcCommand.GetActivity, (): Activity => {
     return getActivity();
 });
 
-ipcMain.handle("set-activity", (_, activity: Activity): void => {
+ipcMain.handle(IpcCommand.SetActivity, (_, activity: Activity): void => {
     return setActivity(activity);
 });
 
-ipcMain.handle("start-activity", async (): Promise<boolean> => {
+ipcMain.handle(IpcCommand.StartActivity, async (): Promise<boolean> => {
     return await startActivity();
 });
 
-ipcMain.handle("stop-activity", async (): Promise<boolean> => {
+ipcMain.handle(IpcCommand.StopActivity, async (): Promise<boolean> => {
     return await clearActivity();
 });

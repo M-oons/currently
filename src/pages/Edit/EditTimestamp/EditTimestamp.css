@@ -1,0 +1,10 @@
+#edit-timestamp-mode,
+#edit-timestamp-start,
+#edit-timestamp-end {
+    width: 100%;
+}
+
+#edit-timestamp-start-toggle,
+#edit-timestamp-end-toggle {
+    margin-left: auto;
+}

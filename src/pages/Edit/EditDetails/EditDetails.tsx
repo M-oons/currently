@@ -16,15 +16,14 @@ const EditDetails = (props: EditDetailsProps) => {
     const [errors, setErrors] = useState<ActivityValidationError[]>([]);
 
     useEffect(() => {
-        validate(details);
+        validate();
     }, [details]);
 
-    const validate = (details: string) => {
+    const validate = () => {
         let isValid = true;
 
-        if (details === "") {
+        if (details === "")
             setErrors([]);
-        }
         else {
             const validation = validateDetails(details);
             if (validation.valid) {
@@ -43,9 +42,8 @@ const EditDetails = (props: EditDetailsProps) => {
                 : null;
             valid(validDetails);
         }
-        else {
+        else
             props.setValid(false);
-        }
     };
 
     const valid = (details: ActivityDetails | null) => {

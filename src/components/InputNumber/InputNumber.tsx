@@ -33,7 +33,7 @@ const InputNumber = (props: InputNumberProps) => {
 
         let num = parseInt(value);
         if (!isNaN(num)) {
-            num = clamp(num, props.min ?? INT32_MIN_VALUE, props.max ?? INT32_MAX_VALUE);
+            num = clamp(num, props.min ?? INT32_MIN_VALUE * 1000, props.max ?? INT32_MAX_VALUE * 1000);
             setValue(num.toString());
             props.onInput?.(num);
         }

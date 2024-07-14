@@ -1,14 +1,17 @@
 import { contextBridge, ipcRenderer } from "electron";
 import type Activity from "../activity/types/Activity";
+import IpcCommand from "../ipc/IpcCommand";
 
 contextBridge.exposeInMainWorld("api", {
-    close: () => ipcRenderer.send("close"),
-    minimize: () => ipcRenderer.send("minimize"),
-    help: () => ipcRenderer.send("help"),
-    getActivity: (): Promise<Activity> => ipcRenderer.invoke("get-activity"),
-    setActivity: (activity: Activity) => ipcRenderer.invoke("set-activity", activity),
-    startActivity: (): Promise<boolean> => ipcRenderer.invoke("start-activity"),
-    stopActivity: (): Promise<boolean> => ipcRenderer.invoke("stop-activity"),
+    close: () => ipcRenderer.send(IpcCommand.Close),
+    minimize: () => ipcRenderer.send(IpcCommand.Minimize),
+    help: () => ipcRenderer.send(IpcCommand.Help),
+    getStartupTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.GetStartupTime),
+    getActivityLastUpdateTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.GetActivityLastUpdateTime),
+    getActivity: (): Promise<Activity> => ipcRenderer.invoke(IpcCommand.GetActivity),
+    setActivity: (activity: Activity) => ipcRenderer.invoke(IpcCommand.SetActivity, activity),
+    startActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.StartActivity),
+    stopActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.StopActivity),
 });
 
 contextBridge.exposeInMainWorld("utils", {

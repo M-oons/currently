@@ -8,15 +8,6 @@
 }
 
 .edit-title {
-    color: var(--light-grey);
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-    user-select: none;
-}
-
-.edit-title-flex {
     display: flex;
     color: var(--light-grey);
     font-size: 12px;
