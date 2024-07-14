@@ -2,7 +2,7 @@ import { type Dispatch, type SetStateAction, useCallback, useState, useEffect } 
 import { type ActivityTimestamp, ActivityTimestampMode, validateTimestamp, TIMESTAMP_MIN } from "../../../activity/types/ActivityTimestamp";
 import type ActivityValidationError from "../../../activity/types/validation/ActivityValidationError";
 import ActivityErrors from "../../../components/ActivityErrors/ActivityErrors";
-import InputNumber from "../../../components/InputNumber/InputNumber";
+import InputDateTime from "../../../components/InputDateTime/InputDateTime";
 import Select from "../../../components/Select/Select";
 import Switch from "../../../components/Switch/Switch";
 import "./EditTimestamp.css";
@@ -160,7 +160,7 @@ const EditTimestamp = (props: EditTimestampProps) => {
                     {useTimestampStart &&
                         <div className="edit-item">
                             <div id="edit-timestamp-start">
-                                <InputNumber
+                                <InputDateTime
                                     value={timestampStart}
                                     min={TIMESTAMP_MIN}
                                     tabIndex={0}
@@ -190,7 +190,7 @@ const EditTimestamp = (props: EditTimestampProps) => {
                     {useTimestampEnd &&
                         <div className="edit-item">
                             <div id="edit-timestamp-end">
-                                <InputNumber
+                                <InputDateTime
                                     value={timestampEnd}
                                     min={TIMESTAMP_MIN}
                                     tabIndex={1}
