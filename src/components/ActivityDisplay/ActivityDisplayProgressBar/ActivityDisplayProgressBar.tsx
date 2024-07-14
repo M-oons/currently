@@ -67,9 +67,8 @@ const displayProgressBar = (timestampMode: ActivityTimestampMode, timestampStart
     let timeMax = "";
     const showProgressBar = timestampMode !== ActivityTimestampMode.None && timestampStart !== null && timestampEnd !== null;
     if (showProgressBar) {
-        const start = typeof timestampStart === "boolean" ? now : timestampStart;
-        const total = Math.max(0, timestampEnd - start);
-        const current = clamp(now - start, 0, total);
+        const total = Math.max(0, timestampEnd - timestampStart);
+        const current = clamp(now - timestampStart, 0, total);
         timeCurrent = formatTimestamp(current, false);
         timeMax = formatTimestamp(total, false);
         progress = roundToFixed((current / total) * 100, 1);

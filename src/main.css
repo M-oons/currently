@@ -1,6 +1,5 @@
 :root {
     --background-color: #1a1a1a;
-    --scrollbar-color: #0a0a0a;
     --blurple: #5865f2;
     --blurple-hover: #4752c4;
     --green: #05af55;
@@ -14,6 +13,7 @@
     --dark-grey: #2a2a2a;
     --dark-grey-hover: #303030;
     --darker-grey: #1a1a1a;
+    --darkest-grey: #0a0a0a;
 }
 
 *,
@@ -36,7 +36,7 @@
     background-clip: padding-box;
     border: 2px solid transparent;
     border-radius: 8px;
-    background-color: var(--scrollbar-color);
+    background-color: var(--darkest-grey);
     min-height: 40px;
 }
 
