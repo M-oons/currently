@@ -1,8 +1,8 @@
 import type ActivityValidationError from "./validation/ActivityValidationError";
 import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
 
-const TIMESTAMP_START_MIN = 1;
-const TIMESTAMP_START_MAX = 2147483647000;
+export const TIMESTAMP_MIN = 1;
+export const TIMESTAMP_MAX = 2147483647000;
 
 export const ActivityTimestampMode = {
     None: 0,
@@ -22,8 +22,8 @@ export const validateTimestampMode = (timestampMode: any): timestampMode is Acti
 export const validateTimestamp = (timestamp: ActivityTimestamp): ActivityValidationResult => {
     let errors: ActivityValidationError[] = [];
 
-    if (timestamp < TIMESTAMP_START_MIN || timestamp > TIMESTAMP_START_MAX)
-        errors.push({ error: `Value must be between ${TIMESTAMP_START_MIN} and ${TIMESTAMP_START_MAX}` });
+    if (timestamp < TIMESTAMP_MIN || timestamp > TIMESTAMP_MAX)
+        errors.push({ error: `Value must be between ${TIMESTAMP_MIN} and ${TIMESTAMP_MAX}` });
 
     return createValidationResult(errors);
 }
