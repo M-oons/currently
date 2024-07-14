@@ -1,0 +1,25 @@
+.input-datetime {
+    height: 32px;
+    position: relative;
+}
+
+.input-datetime>input[type="datetime-local"] {
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px;
+    background-color: var(--dark-grey);
+    color: white;
+}
+
+.input-datetime>input[type="datetime-local"]:focus {
+    outline: 2px solid white;
+}
+
+.input-datetime>input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}

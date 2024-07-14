@@ -26,7 +26,7 @@ const InputNumber = (props: InputNumberProps) => {
     const [value, setValue] = useState<string>(props.value.toString());
 
     const onInput = (e: ChangeEvent<HTMLInputElement>) => {
-        let value = e.target.value;
+        const value = e.target.value;
 
         if (NUMBER_REGEX.test(value))
             setValue(value);
