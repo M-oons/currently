@@ -21,6 +21,7 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
                         clientId={activity.clientId}
                         imageSmall={activity.imageSmall}
                         imageLarge={activity.imageLarge}
+                        edit={props.edit}
                     />
                 </div>
                 <div id="activity-content">

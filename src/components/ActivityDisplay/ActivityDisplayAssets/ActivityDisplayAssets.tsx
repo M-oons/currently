@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type ActivityImage from "../../../activity/types/ActivityImage"
 import { getApplicationAssetUrl, getApplicationAssets } from "../../../application/applicationFetcher";
+import { type EditPage } from "../../../pages/Edit/Edit";
 import "./ActivityDisplayAssets.css";
 
 type ActivityDisplayAssetsProps = {
     clientId: string,
     imageLarge: ActivityImage | null,
     imageSmall: ActivityImage | null,
+    edit: boolean,
 };
 
 type ActivityDisplayAssetsState = {
@@ -35,6 +38,7 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
         imageSmallTooltip: null,
         showImageSmallTooltip: false,
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getState = async () => {
@@ -69,23 +73,54 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
     }, [
         props.clientId,
         props.imageLarge,
-        props.imageSmall
+        props.imageSmall,
     ]);
+
+    const goToEditPage = (page: EditPage) => {
+        navigate(`/edit/${page}`);
+    };
 
     return (
         <>
-            {state.showImageLarge &&
-                <div id="activity-asset-large">
-                    <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
-                    {state.showImageLargeTooltip && <span id="activity-asset-large-tooltip" className="activity-asset-tooltip">{state.imageLargeTooltip}</span>}
-                </div>
+            {props.edit
+                ? (state.showImageLarge
+                    ? (
+                        <div id="activity-asset-large" className="edit" onClick={() => goToEditPage("assets")}>
+                            <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
+                        </div>
+                    )
+                    : (
+                        <div id="activity-asset-large" className="edit empty" onClick={() => goToEditPage("assets")}></div>
+                    )
+                )
+                : (state.showImageLarge &&
+                    <div id="activity-asset-large">
+                        <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
+                        {state.showImageLargeTooltip && <span id="activity-asset-large-tooltip" className="activity-asset-tooltip">{state.imageLargeTooltip}</span>}
+                    </div>
+                )
             }
-            {state.showImageSmall &&
-                <div id="activity-asset-small">
-                    <div id="activity-asset-small-bg"></div>
-                    <img id="activity-asset-small-image" src={state.imageSmallSrc}></img>
-                    {state.showImageSmallTooltip && <span id="activity-asset-small-tooltip" className="activity-asset-tooltip">{state.imageSmallTooltip}</span>}
-                </div>
+            {props.edit
+                ? (state.showImageSmall
+                    ? (
+                        <div id="activity-asset-small" className="edit" onClick={() => goToEditPage("assets")}>
+                            <div id="activity-asset-small-bg"></div>
+                            <img id="activity-asset-small-image" src={state.imageSmallSrc}></img>
+                        </div>
+                    )
+                    : (
+                        <div id="activity-asset-small" className="edit empty" onClick={() => goToEditPage("assets")}>
+                            <div id="activity-asset-small-bg"></div>
+                        </div>
+                    )
+                )
+                : (state.showImageSmall &&
+                    <div id="activity-asset-small">
+                        <div id="activity-asset-small-bg"></div>
+                        <img id="activity-asset-small-image" src={state.imageSmallSrc}></img>
+                        {state.showImageSmallTooltip && <span id="activity-asset-small-tooltip" className="activity-asset-tooltip">{state.imageSmallTooltip}</span>}
+                    </div>
+                )
             }
         </>
     );

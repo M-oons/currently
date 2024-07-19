@@ -63,20 +63,6 @@
     font-style: italic;
 }
 
-#activity-title.edit::after,
-#activity-details.edit::after,
-#activity-state.edit::after,
-#activity-timestamp.edit::after {
-    content: "✎";
-    position: absolute;
-    right: 3px;
-    color: white;
-    transform: scale(-1, 1);
-    opacity: 0;
-    font-size: 14px;
-    line-height: 18px;
-}
-
 #activity-title.empty:hover::after,
 #activity-details.empty:hover::after,
 #activity-state.empty:hover::after,

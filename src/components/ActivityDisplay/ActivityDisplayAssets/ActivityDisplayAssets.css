@@ -6,6 +6,67 @@
     opacity: 1;
 }
 
+#activity-asset-large.edit:hover,
+#activity-asset-small.edit:hover {
+    cursor: pointer;
+}
+
+#activity-asset-large.edit:not(.empty):hover>#activity-asset-large-image {
+    opacity: 0.7;
+}
+
+#activity-asset-large.edit:not(.empty):hover::after {
+    content: "✎";
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    color: white;
+    font-size: 20px;
+    transform: scale(-1, 1);
+}
+
+#activity-asset-large.empty {
+    width: 60px;
+    height: 60px;
+}
+
+#activity-asset-large.empty::before {
+    content: "";
+    width: 60px;
+    height: 60px;
+    display: block;
+    border: 1px dashed var(--light-grey);
+    border-radius: 8px;
+}
+
+#activity-asset-large.empty::after {
+    content: "+";
+    position: absolute;
+    top: 17px;
+    left: 25px;
+    color: var(--light-grey);
+    font-size: 20px;
+    font-weight: 600;
+    z-index: 1;
+}
+
+#activity-asset-large.empty:hover::before {
+    content: "";
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px dashed white;
+    border-radius: 8px;
+    background-color: var(--blurple);
+    z-index: 1;
+}
+
+#activity-asset-large.empty:hover::after {
+    color: white;
+}
+
 #activity-asset-large-image {
     width: 60px;
     height: 60px;
@@ -17,11 +78,65 @@
 
 #activity-asset-small {
     position: relative;
+    z-index: 10;
 }
 
 #activity-asset-small:hover #activity-asset-small-tooltip {
     opacity: 1;
     scale: 1;
+}
+
+#activity-asset-small.edit:not(.empty):hover>#activity-asset-small-image {
+    opacity: 0.7;
+}
+
+#activity-asset-small.edit:not(.empty):hover::after {
+    content: "✎";
+    position: absolute;
+    top: -13px;
+    left: 49px;
+    color: white;
+    font-size: 10px;
+    transform: scale(-1, 1);
+}
+
+#activity-asset-small.empty::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -16px;
+    left: 44px;
+    border: 1px dashed var(--light-grey);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+#activity-asset-small.empty::after {
+    content: "+";
+    position: absolute;
+    top: -17px;
+    left: 50px;
+    color: var(--light-grey);
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 1;
+}
+
+#activity-asset-small.empty:hover::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -16px;
+    left: 44px;
+    border: 1px dashed white;
+    border-radius: 50%;
+    background-color: var(--blurple);
+}
+
+#activity-asset-small.empty:hover::after {
+    color: white;
 }
 
 #activity-asset-small-image {
