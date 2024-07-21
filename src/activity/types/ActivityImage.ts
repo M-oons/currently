@@ -22,11 +22,11 @@ export const validateImage = (image: ActivityImage, assetType: ActivityAssetType
     let errors: ActivityValidationError[] = [];
 
     if (assetType === ActivityAssetType.URL && getAssetType(image.key) !== ActivityAssetType.URL)
-        errors.push({ property: "key", error: "Invalid image URL" });
+        errors.push({ property: "image", error: "Invalid image URL" });
     if (image.key.length < IMAGE_KEY_LENGTH_MIN || image.key.length > IMAGE_KEY_LENGTH_MAX)
-        errors.push({ property: "key", error: `Length must be between ${IMAGE_KEY_LENGTH_MIN} and ${IMAGE_KEY_LENGTH_MAX} characters` });
+        errors.push({ property: "image", error: `Length must be between ${IMAGE_KEY_LENGTH_MIN} and ${IMAGE_KEY_LENGTH_MAX} characters` });
     if (image.text !== undefined && (image.text.length < IMAGE_TEXT_LENGTH_MIN || image.text.length > IMAGE_TEXT_LENGTH_MAX))
-        errors.push({ property: "text", error: `Length must be between ${IMAGE_TEXT_LENGTH_MIN} and ${IMAGE_TEXT_LENGTH_MAX} characters` });
+        errors.push({ property: "tooltip", error: `Length must be between ${IMAGE_TEXT_LENGTH_MIN} and ${IMAGE_TEXT_LENGTH_MAX} characters` });
     
     return createValidationResult(errors);
 }
