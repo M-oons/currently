@@ -9,6 +9,7 @@ import Button from "../../components/Button/Button";
 import useActivity from "../../hooks/useActivity";
 import Page from "../Page";
 import EditAssetLarge from "./EditAssets/EditAssetLarge";
+import EditAssetSmall from "./EditAssets/EditAssetSmall";
 import EditDetails from "./EditDetails/EditDetails";
 import EditState from "./EditState/EditState";
 import EditTimestamp from "./EditTimestamp/EditTimestamp";
@@ -89,7 +90,12 @@ export const Edit = () => {
                 />;
 
             case "asset-small":
-                return null;
+                return <EditAssetSmall
+                    clientId={activity.clientId}
+                    imageSmall={imageSmall}
+                    setImageSmall={setImageSmall}
+                    setValid={setValid}
+                />;
 
             case "timestamp":
                 return <EditTimestamp
