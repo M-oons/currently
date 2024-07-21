@@ -63,8 +63,8 @@ const EditState = (props: EditStateProps) => {
         }
 
         if (isValid) {
-            const validState: ActivityState | null = state !== ""
-                ? state
+            const validState: ActivityState | null = state.trim() !== ""
+                ? state.trim()
                 : null;
             const validCount: ActivityCount | null = useCount
                 ? {

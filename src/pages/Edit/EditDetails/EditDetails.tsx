@@ -37,8 +37,8 @@ const EditDetails = (props: EditDetailsProps) => {
         }
 
         if (isValid) {
-            const validDetails: ActivityDetails | null = details !== ""
-                ? details
+            const validDetails: ActivityDetails | null = details.trim() !== ""
+                ? details.trim()
                 : null;
             valid(validDetails);
         }

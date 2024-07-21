@@ -62,8 +62,8 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
             if (isValid) {
                 const validImage: ActivityImage | null = useImageSmall
                     ? {
-                        key: imageSmall,
-                        text: imageSmallTooltip === "" ? undefined : imageSmallTooltip,
+                        key: imageSmall.trim(),
+                        text: imageSmallTooltip.trim() === "" ? undefined : imageSmallTooltip.trim(),
                     }
                     : null;
                 valid(validImage);

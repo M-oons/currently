@@ -62,8 +62,8 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
             if (isValid) {
                 const validImage: ActivityImage | null = useImageLarge
                     ? {
-                        key: imageLarge,
-                        text: imageLargeTooltip === "" ? undefined : imageLargeTooltip,
+                        key: imageLarge.trim(),
+                        text: imageLargeTooltip.trim() === "" ? undefined : imageLargeTooltip.trim(),
                     }
                     : null;
                 valid(validImage);
