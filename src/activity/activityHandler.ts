@@ -1,6 +1,6 @@
 import { Client, type Presence } from "discord-rpc";
 import { type Activity, defaultActivity } from "./types/Activity";
-import { loadActivity } from "./activityLoader";
+import { loadActivity, saveActivity } from "./activityLoader";
 import { buildPresence } from "./presenceBuilder";
 
 let client: Client | null = null;
@@ -20,6 +20,7 @@ export const getActivity = (): Activity => {
 
 export const setActivity = (activity: Activity): void => {
     currentActivity = activity;
+    saveActivity(currentActivity);
 };
 
 export const startActivity = async (): Promise<boolean> => {
