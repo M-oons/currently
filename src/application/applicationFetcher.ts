@@ -16,6 +16,7 @@ export const getApplication = async (clientId: string, clientSecret: string): Pr
 export const getApplicationAssets = async (applicationId: string): Promise<ApplicationAsset[]> => {
     const response = await fetch(`${OAUTH_URL}/applications/${applicationId}/assets`);
     const assets = await response.json() as ApplicationAsset[];
+    assets.sort((a, b) => a.name.localeCompare(b.name));
     return assets;
 };
 

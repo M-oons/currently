@@ -59,7 +59,7 @@ const createTray = (): void => {
 const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 308,
-        height: 346,
+        height: 360,
         frame: false,
         transparent: true,
         titleBarStyle: "customButtonsOnHover",

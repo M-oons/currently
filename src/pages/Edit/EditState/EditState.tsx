@@ -63,10 +63,10 @@ const EditState = (props: EditStateProps) => {
         }
 
         if (isValid) {
-            const validState = state !== ""
+            const validState: ActivityState | null = state !== ""
                 ? state
                 : null;
-            const validCount = useCount
+            const validCount: ActivityCount | null = useCount
                 ? {
                     current: countCurrent,
                     max: countMax,

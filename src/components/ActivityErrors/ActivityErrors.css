@@ -1,5 +1,6 @@
 #activity-errors {
     width: 100%;
+    user-select: none;
 }
 
 .activity-error {

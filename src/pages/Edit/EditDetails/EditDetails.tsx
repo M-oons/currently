@@ -37,7 +37,7 @@ const EditDetails = (props: EditDetailsProps) => {
         }
 
         if (isValid) {
-            const validDetails = details !== ""
+            const validDetails: ActivityDetails | null = details !== ""
                 ? details
                 : null;
             valid(validDetails);
@@ -58,23 +58,25 @@ const EditDetails = (props: EditDetailsProps) => {
 
     return (
         <>
-            <div className="edit-title">Details</div>
-            <div className="edit-item">
-                <div id="edit-details">
-                    <InputText
-                        value={details}
-                        placeholder="Details"
-                        maxLength={DETAILS_LENGTH_MAX}
-                        counter={true}
-                        tabIndex={0}
-                        onInput={inputDetails}
-                    />
-                </div>
-                {errors.length > 0 &&
-                    <div className="edit-errors">
-                        <ActivityErrors errors={errors} />
+            <div className="edit-section">
+                <div className="edit-title">Details</div>
+                <div className="edit-item">
+                    <div id="edit-details">
+                        <InputText
+                            value={details}
+                            placeholder="Details"
+                            maxLength={DETAILS_LENGTH_MAX}
+                            counter={true}
+                            tabIndex={0}
+                            onInput={inputDetails}
+                        />
                     </div>
-                }
+                    {errors.length > 0 &&
+                        <div className="edit-errors">
+                            <ActivityErrors errors={errors} />
+                        </div>
+                    }
+                </div>
             </div>
         </>
     );

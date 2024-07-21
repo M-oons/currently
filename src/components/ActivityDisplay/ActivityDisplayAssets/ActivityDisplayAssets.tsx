@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type ActivityImage from "../../../activity/types/ActivityImage"
+import { type ActivityImage, ActivityAssetType, getAssetType } from "../../../activity/types/ActivityImage";
 import { getApplicationAssetUrl, getApplicationAssets } from "../../../application/applicationFetcher";
 import { type EditPage } from "../../../pages/Edit/Edit";
 import "./ActivityDisplayAssets.css";
@@ -85,12 +85,12 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
             {props.edit
                 ? (state.showImageLarge
                     ? (
-                        <div id="activity-asset-large" className="edit" onClick={() => goToEditPage("assets")}>
+                        <div id="activity-asset-large" className="edit" onClick={() => goToEditPage("asset-large")}>
                             <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
                         </div>
                     )
                     : (
-                        <div id="activity-asset-large" className="edit empty" onClick={() => goToEditPage("assets")}></div>
+                        <div id="activity-asset-large" className="edit empty" onClick={() => goToEditPage("asset-large")}></div>
                     )
                 )
                 : (state.showImageLarge &&
@@ -103,13 +103,13 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
             {props.edit
                 ? (state.showImageSmall
                     ? (
-                        <div id="activity-asset-small" className="edit" onClick={() => goToEditPage("assets")}>
+                        <div id="activity-asset-small" className="edit" onClick={() => goToEditPage("asset-small")}>
                             <div id="activity-asset-small-bg"></div>
                             <img id="activity-asset-small-image" src={state.imageSmallSrc}></img>
                         </div>
                     )
                     : (
-                        <div id="activity-asset-small" className="edit empty" onClick={() => goToEditPage("assets")}>
+                        <div id="activity-asset-small" className="edit empty" onClick={() => goToEditPage("asset-small")}>
                             <div id="activity-asset-small-bg"></div>
                         </div>
                     )
@@ -152,7 +152,7 @@ const displayImages = (imageLarge: ActivityImage | null, imageSmall: ActivityIma
 const getImageSource = async (applicationId: string, image: string | null): Promise<string> => {
     if (image === null)
         return "";
-    if (image.toLowerCase().startsWith("http://") || image.toLowerCase().startsWith("https://"))
+    if (getAssetType(image) === ActivityAssetType.URL)
         return image;
 
     const assets = await getApplicationAssets(applicationId);
@@ -160,8 +160,7 @@ const getImageSource = async (applicationId: string, image: string | null): Prom
     if (asset === undefined)
         return "";
 
-    const assetSrc = getApplicationAssetUrl(applicationId, asset.id);
-    return assetSrc;
+    return getApplicationAssetUrl(applicationId, asset.id);
 };
 
 export default ActivityDisplayAssets;

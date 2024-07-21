@@ -76,10 +76,10 @@ const EditTimestamp = (props: EditTimestampProps) => {
         }
 
         if (isValid) {
-            const validTimestampStart = useTimestampStart
+            const validTimestampStart: ActivityTimestamp | null = useTimestampStart
                 ? timestampStart
                 : null;
-            const validTimestampEnd = useTimestampEnd
+            const validTimestampEnd: ActivityTimestamp | null = useTimestampEnd
                 ? timestampEnd
                 : null;
             valid(timestampMode, validTimestampStart, validTimestampEnd);
