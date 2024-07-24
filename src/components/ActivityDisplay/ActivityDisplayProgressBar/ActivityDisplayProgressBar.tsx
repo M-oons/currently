@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type ActivityTimestamp, ActivityTimestampMode } from "../../../activity/types/ActivityTimestamp";
 import useInterval from "../../../hooks/useInterval";
 import { clamp, roundToFixed } from "../../../utils/math";
@@ -25,6 +25,7 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
         timeMax: "00:00",
         showProgressBar: true,
     });
+    const [timestampStart, setTimestampStart] = useState<ActivityTimestamp | null>(props.timestampStart);
 
     useInterval(1000, () => {
         const [
@@ -32,7 +33,7 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
             timeCurrent,
             timeMax,
             showProgressBar,
-        ] = displayProgressBar(props.timestampMode, props.timestampStart, props.timestampEnd);
+        ] = displayProgressBar(props.timestampMode, timestampStart, props.timestampEnd);
 
         setState({
             progress,
@@ -41,9 +42,19 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
             showProgressBar,
         });
     }, [
-        props.timestampStart,
+        timestampStart,
         props.timestampEnd,
     ]);
+
+    useEffect(() => {
+        const changeTimestampStart = async () => {
+            if (props.timestampMode === ActivityTimestampMode.AppStart)
+                setTimestampStart(await window.api.getStartupTime());
+            else if (props.timestampMode === ActivityTimestampMode.ActivityUpdate)
+                setTimestampStart(await window.api.getActivityLastUpdateTime());
+        };
+        changeTimestampStart();
+    }, [props.timestampMode]);
 
     return state.showProgressBar
         ? (

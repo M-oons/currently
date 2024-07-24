@@ -1,13 +1,14 @@
 import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
+import { getActivityLastUpdateTime, getStartupTime, startup } from "../AppFlow";
 import AppInfo from "../AppInfo";
 import type Activity from "../activity/types/Activity";
-import { clearActivity, getActivity, getActivityLastUpdateTime, setActivity, startActivity } from "../activity/activityHandler";
+import { clearActivity, getActivity, setActivity, startActivity } from "../activity/activityHandler";
 import IpcCommand from "../ipc/IpcCommand";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
 
-const startupTime = Date.now();
+startup();
 
 if (require("electron-squirrel-startup"))
     app.quit();
@@ -126,14 +127,11 @@ ipcMain.on(IpcCommand.Help, () => {
 });
 
 ipcMain.handle(IpcCommand.GetStartupTime, (): number => {
-    return startupTime;
+    return getStartupTime();
 });
 
 ipcMain.handle(IpcCommand.GetActivityLastUpdateTime, (): number => {
-    const activityLastUpdateTime = getActivityLastUpdateTime();
-    return activityLastUpdateTime > 0
-        ? activityLastUpdateTime
-        : startupTime;
+    return getActivityLastUpdateTime();
 });
 
 ipcMain.handle(IpcCommand.GetActivity, (): Activity => {

@@ -19,11 +19,11 @@ type EditTimestampProps = {
 
 const EditTimestamp = (props: EditTimestampProps) => {
     const [timestampMode, setTimestampMode] = useState<ActivityTimestampMode>(props.timestampMode);
-    const [timestampStart, setTimestampStart] = useState<number>(props.timestampStart ?? 0);
-    const [timestampEnd, setTimestampEnd] = useState<number>(props.timestampEnd ?? 0);
+    const [timestampStart, setTimestampStart] = useState<number>(props.timestampMode === ActivityTimestampMode.Custom ? props.timestampStart ?? 0 : 0);
+    const [timestampEnd, setTimestampEnd] = useState<number>(props.timestampMode !== ActivityTimestampMode.None ? props.timestampEnd ?? 0 : 0);
     const [errorsTimestampStart, setErrorsTimestampStart] = useState<ActivityValidationError[]>([]);
     const [errorsTimestampEnd, setErrorsTimestampEnd] = useState<ActivityValidationError[]>([]);
-    const [useTimestampStart, setUseTimestampStart] = useState<boolean>(props.timestampMode !== ActivityTimestampMode.None && props.timestampStart !== null);
+    const [useTimestampStart, setUseTimestampStart] = useState<boolean>(props.timestampMode === ActivityTimestampMode.Custom && props.timestampStart !== null);
     const [useTimestampEnd, setUseTimestampEnd] = useState<boolean>(props.timestampMode !== ActivityTimestampMode.None && props.timestampEnd !== null);
 
     useEffect(() => {
@@ -42,10 +42,10 @@ const EditTimestamp = (props: EditTimestampProps) => {
                 valid(timestampMode, null, null);
                 break;
             case ActivityTimestampMode.AppStart:
-                validate(await window.api.getStartupTime(), timestampEnd);
+                validate(null, timestampEnd);
                 break;
             case ActivityTimestampMode.ActivityUpdate:
-                validate(await window.api.getActivityLastUpdateTime(), timestampEnd);
+                validate(null, timestampEnd);
                 break;
             case ActivityTimestampMode.Custom:
                 validate(timestampStart, timestampEnd);

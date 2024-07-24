@@ -2,17 +2,13 @@ import { Client, type Presence } from "discord-rpc";
 import { type Activity, defaultActivity } from "./types/Activity";
 import { loadActivity, saveActivity } from "./activityLoader";
 import { buildPresence } from "./presenceBuilder";
+import { activityUpdated } from "../AppFlow";
 
 let client: Client | null = null;
 
 let currentActivity: Activity = loadActivity() ?? defaultActivity;
 let currentClientId: string | null = null;
-let lastUpdatedAt: number = 0;
 let active: boolean = false;
-
-export const getActivityLastUpdateTime = (): number => {
-    return lastUpdatedAt;
-};
 
 export const getActivity = (): Activity => {
     return currentActivity;
@@ -27,12 +23,12 @@ export const startActivity = async (): Promise<boolean> => {
     if (client === null || currentActivity.clientId !== currentClientId)
         await createClient(currentActivity.clientId);
 
-    const presence: Presence = buildPresence(currentActivity);
+    const presence: Presence = await buildPresence(currentActivity);
 
     try {
         await client?.setActivity(presence);
         active = true;
-        lastUpdatedAt = Date.now();
+        activityUpdated();
     }
     catch { }
 

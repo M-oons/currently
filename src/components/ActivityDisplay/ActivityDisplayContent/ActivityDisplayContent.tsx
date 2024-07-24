@@ -42,6 +42,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         timestamp: "00:00 left",
         showTimestamp: true,
     });
+    const [timestampStart, setTimestampStart] = useState<ActivityTimestamp | null>(props.timestampStart);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -63,10 +64,20 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         props.clientSecret,
     ]);
 
+    useEffect(() => {
+        const changeTimestampStart = async () => {
+            if (props.timestampMode === ActivityTimestampMode.AppStart)
+                setTimestampStart(await window.api.getStartupTime());
+            else if (props.timestampMode === ActivityTimestampMode.ActivityUpdate)
+                setTimestampStart(await window.api.getActivityLastUpdateTime());
+        };
+        changeTimestampStart();
+    }, [props.timestampMode]);
+
     useInterval(1000, () => {
         const [details, showDetails] = displayDetails(props.details);
         const [state, showState] = displayState(props.state, props.count);
-        const [timestamp, showTimestamp] = displayTimestamp(props.timestampMode, props.timestampStart, props.timestampEnd);
+        const [timestamp, showTimestamp] = displayTimestamp(props.timestampMode, timestampStart, props.timestampEnd);
 
         setState($state => ({
             ...$state,
@@ -81,7 +92,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         props.details,
         props.state,
         props.count,
-        props.timestampStart,
+        timestampStart,
         props.timestampEnd,
     ]);
 
