@@ -99,8 +99,8 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
         setUseImageSmall(value);
     }, []);
 
-    const errorsImage = errors.filter(f => f.property === "key");
-    const errorsTooltip = errors.filter(f => f.property === "text");
+    const errorsImage = errors.filter(f => f.property === "image");
+    const errorsTooltip = errors.filter(f => f.property === "tooltip");
 
     return (
         <>
