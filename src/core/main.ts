@@ -59,8 +59,8 @@ const createTray = (): void => {
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({
-        width: 308,
-        height: 360,
+        width: 368,
+        height: 436,
         frame: false,
         transparent: true,
         titleBarStyle: "customButtonsOnHover",
@@ -73,11 +73,10 @@ const createWindow = () => {
         },
     });
 
-    if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+    if (MAIN_WINDOW_VITE_DEV_SERVER_URL)
         mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
-    } else {
+    else
         mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
-    }
 
     mainWindow.once("ready-to-show", () => {
         mainWindow?.show();

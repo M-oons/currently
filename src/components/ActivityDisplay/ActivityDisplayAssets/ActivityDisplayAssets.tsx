@@ -96,7 +96,14 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
                 : (state.showImageLarge &&
                     <div id="activity-asset-large">
                         <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
-                        {state.showImageLargeTooltip && <span id="activity-asset-large-tooltip" className="activity-asset-tooltip">{state.imageLargeTooltip}</span>}
+                        {state.showImageLargeTooltip &&
+                            <div id="activity-asset-large-tooltip" className="activity-asset-tooltip">
+                                <div className="activity-asset-tooltip-inner">
+                                    <div className="activity-asset-tooltip-pointer"></div>
+                                    <div className="activity-asset-tooltip-content">{state.imageLargeTooltip}</div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 )
             }
@@ -118,7 +125,14 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
                     <div id="activity-asset-small">
                         <div id="activity-asset-small-bg"></div>
                         <img id="activity-asset-small-image" src={state.imageSmallSrc}></img>
-                        {state.showImageSmallTooltip && <span id="activity-asset-small-tooltip" className="activity-asset-tooltip">{state.imageSmallTooltip}</span>}
+                        {state.showImageSmallTooltip &&
+                            <div id="activity-asset-small-tooltip" className="activity-asset-tooltip">
+                                <div className="activity-asset-tooltip-inner">
+                                    <div className="activity-asset-tooltip-pointer"></div>
+                                    <div className="activity-asset-tooltip-content">{state.imageSmallTooltip}</div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 )
             }
