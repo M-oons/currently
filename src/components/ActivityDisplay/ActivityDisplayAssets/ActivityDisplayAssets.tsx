@@ -80,10 +80,10 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
         navigate(`/edit/${page}`);
     };
 
-    return (
-        <>
-            {props.edit
-                ? (state.showImageLarge
+    return props.edit
+        ? (
+            <>
+                {state.showImageLarge
                     ? (
                         <div id="activity-asset-large" className="edit" onClick={() => goToEditPage("asset-large")}>
                             <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
@@ -92,23 +92,8 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
                     : (
                         <div id="activity-asset-large" className="edit empty" onClick={() => goToEditPage("asset-large")}></div>
                     )
-                )
-                : (state.showImageLarge &&
-                    <div id="activity-asset-large">
-                        <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
-                        {state.showImageLargeTooltip &&
-                            <div id="activity-asset-large-tooltip" className="activity-asset-tooltip">
-                                <div className="activity-asset-tooltip-inner">
-                                    <div className="activity-asset-tooltip-pointer"></div>
-                                    <div className="activity-asset-tooltip-content">{state.imageLargeTooltip}</div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                )
-            }
-            {props.edit
-                ? (state.showImageSmall
+                }
+                {state.showImageSmall
                     ? (
                         <div id="activity-asset-small" className="edit" onClick={() => goToEditPage("asset-small")}>
                             <div id="activity-asset-small-bg"></div>
@@ -120,8 +105,25 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
                             <div id="activity-asset-small-bg"></div>
                         </div>
                     )
-                )
-                : (state.showImageSmall &&
+                }
+            </>
+        )
+        : (
+            <>
+                {state.showImageLarge &&
+                    <div id="activity-asset-large">
+                        <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
+                        {state.showImageLargeTooltip &&
+                            <div id="activity-asset-large-tooltip" className="activity-asset-tooltip">
+                                <div className="activity-asset-tooltip-inner">
+                                    <div className="activity-asset-tooltip-pointer"></div>
+                                    <div className="activity-asset-tooltip-content">{state.imageLargeTooltip}</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                {state.showImageSmall &&
                     <div id="activity-asset-small">
                         <div id="activity-asset-small-bg"></div>
                         <img id="activity-asset-small-image" src={state.imageSmallSrc}></img>
@@ -134,10 +136,9 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
                             </div>
                         }
                     </div>
-                )
-            }
-        </>
-    );
+                }
+            </>
+        );
 };
 
 const displayImages = (imageLarge: ActivityImage | null, imageSmall: ActivityImage | null): [imageLarge: string | null, showImageLarge: boolean, imageLargeTooltip: string | null, showImageLargeTooltip: boolean, imageSmall: string | null, showImageSmall: boolean, imageSmallTooltip: string | null, showImageSmallTooltip: boolean] => {
