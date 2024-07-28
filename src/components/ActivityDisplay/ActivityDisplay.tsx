@@ -49,6 +49,7 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
                 <ActivityDisplayButtons
                     button1={activity.button1}
                     button2={activity.button2}
+                    edit={props.edit}
                 />
             </div>
         </div>

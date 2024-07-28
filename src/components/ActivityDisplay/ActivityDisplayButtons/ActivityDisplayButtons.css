@@ -1,11 +1,55 @@
-#activity-buttons>.activity-button {
-    cursor: default;
-}
-
-#activity-buttons>.activity-button:hover {
-    background-color: var(--grey);
-}
-
 #activity-buttons>.activity-button:not(:first-child) {
     margin-top: 8px;
+}
+
+.activity-button:hover {
+    background-color: var(--grey) !important;
+    cursor: default !important;
+}
+
+.activity-button.edit:hover {
+    background-color: var(--blurple) !important;
+    cursor: pointer !important;
+}
+
+.activity-button.edit:after {
+    content: "✎";
+    position: absolute;
+    right: 3px;
+    color: white;
+    transform: scale(-1, 1);
+    opacity: 0;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.activity-button.edit:hover::after {
+    opacity: 1;
+}
+
+.activity-button.empty {
+    border: 2px dashed var(--light-grey);
+    background-color: transparent !important;
+}
+
+.activity-button.empty:hover {
+    color: white;
+    border-color: white;
+}
+
+.activity-button.empty::after {
+    content: "+";
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    color: var(--light-grey);
+    opacity: 1;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 18px;
+}
+
+.activity-button.empty:hover::after {
+    color: white;
 }

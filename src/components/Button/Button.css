@@ -3,12 +3,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     border: none;
     border-radius: 3px;
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
-    padding: 2px 16px;
+    padding: 2px 20px;
     user-select: none;
     background-color: var(--grey);
     color: white;

@@ -1,4 +1,4 @@
-import { act, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type ActivityCount from "../../activity/types/ActivityCount";
 import type ActivityDetails from "../../activity/types/ActivityDetails";
@@ -25,7 +25,8 @@ export type EditPage =
     | "state"
     | "asset-large"
     | "asset-small"
-    | "timestamp";
+    | "timestamp"
+    | "buttons";
 
 export const Edit = () => {
     const { page } = useParams<EditParams>();
@@ -107,6 +108,9 @@ export const Edit = () => {
                     setTimestampEnd={setTimestampEnd}
                     setValid={setValid}
                 />;
+
+            case "buttons":
+                return null;
 
             default:
                 return null;
