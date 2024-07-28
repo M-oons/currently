@@ -100,31 +100,38 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         navigate(`/edit/${page}`);
     };
 
-    return (
-        <>
-            {props.edit
-                ? <div id="activity-title" className="activity-content-text edit">{state.name}</div>
-                : <div id="activity-title" className="activity-content-text">{state.name}</div>
-            }
-            {props.edit
-                ? state.details === null
-                    ? <div id="activity-details" className="activity-content-text edit empty" onClick={() => goToEditPage("details")}>Details</div>
-                    : <div id="activity-details" className="activity-content-text edit" onClick={() => goToEditPage("details")}>{state.details}</div>
-                : state.showDetails && <div id="activity-details" className="activity-content-text">{state.details}</div>
-            }
-            {props.edit
-                ? state.state === null
-                    ? <div id="activity-state" className="activity-content-text edit empty" onClick={() => goToEditPage("state")}>State</div>
-                    : <div id="activity-state" className="activity-content-text edit" onClick={() => goToEditPage("state")}>{state.state}</div>
-                : state.showState && <div id="activity-state" className="activity-content-text">{state.state}</div>
-            }
-            {props.edit
-                ? state.timestamp === null
-                    ? <div id="activity-timestamp" className="activity-content-text edit empty" onClick={() => goToEditPage("timestamp")}>Timestamp</div>
-                    : <div id="activity-timestamp" className="activity-content-text edit" onClick={() => goToEditPage("timestamp")}>{state.timestamp}</div>
-                : state.showTimestamp && <div id="activity-timestamp" className="activity-content-text">{state.timestamp}</div>}
-        </>
-    );
+    return props.edit
+        ? (
+            <>
+                <div id="activity-title" className="activity-content-text edit">{state.name}</div>
+                {state.details !== null
+                    ? <div id="activity-details" className="activity-content-text edit" onClick={() => goToEditPage("details")}>{state.details}</div>
+                    : <div id="activity-details" className="activity-content-text edit empty" onClick={() => goToEditPage("details")}>Details</div>
+                }
+                {state.state !== null
+                    ? <div id="activity-state" className="activity-content-text edit" onClick={() => goToEditPage("state")}>{state.state}</div>
+                    : <div id="activity-state" className="activity-content-text edit empty" onClick={() => goToEditPage("state")}>State</div>
+                }
+                {state.timestamp !== null
+                    ? <div id="activity-timestamp" className="activity-content-text edit" onClick={() => goToEditPage("timestamp")}>{state.timestamp}</div>
+                    : <div id="activity-timestamp" className="activity-content-text edit empty" onClick={() => goToEditPage("timestamp")}>Timestamp</div>
+                }
+            </>
+        )
+        : (
+            <>
+                <div id="activity-title" className="activity-content-text">{state.name}</div>
+                {state.showDetails &&
+                    <div id="activity-details" className="activity-content-text">{state.details}</div>
+                }
+                {state.showState &&
+                    <div id="activity-state" className="activity-content-text">{state.state}</div>
+                }
+                {state.showTimestamp &&
+                    <div id="activity-timestamp" className="activity-content-text">{state.timestamp}</div>
+                }
+            </>
+        );
 };
 
 const displayDetails = (details: ActivityDetails | null): [details: string | null, showDetails: boolean] => {
