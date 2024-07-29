@@ -139,7 +139,7 @@ const EditButtons = (props: EditButtonsProps) => {
                                     placeholder="Text"
                                     maxLength={BUTTON_TEXT_LENGTH_MAX}
                                     counter={true}
-                                    tabIndex={0}
+                                    tabIndex={10}
                                     onInput={inputButton1Text}
                                 />
                             </div>
@@ -154,7 +154,7 @@ const EditButtons = (props: EditButtonsProps) => {
                                 <InputText
                                     value={button1Url}
                                     placeholder="URL"
-                                    tabIndex={1}
+                                    tabIndex={11}
                                     onInput={inputButton1Url}
                                 />
                             </div>
@@ -186,7 +186,7 @@ const EditButtons = (props: EditButtonsProps) => {
                                     placeholder="Text"
                                     maxLength={BUTTON_TEXT_LENGTH_MAX}
                                     counter={true}
-                                    tabIndex={2}
+                                    tabIndex={12}
                                     onInput={inputButton2Text}
                                 />
                             </div>
@@ -201,7 +201,7 @@ const EditButtons = (props: EditButtonsProps) => {
                                 <InputText
                                     value={button2Url}
                                     placeholder="URL"
-                                    tabIndex={3}
+                                    tabIndex={13}
                                     onInput={inputButton2Url}
                                 />
                             </div>
