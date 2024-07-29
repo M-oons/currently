@@ -1,0 +1,11 @@
+#edit-button1-text,
+#edit-button1-url,
+#edit-button2-text,
+#edit-button2-url {
+    width: 100%;
+}
+
+#edit-button1-toggle,
+#edit-button2-toggle {
+    margin-left: auto;
+}

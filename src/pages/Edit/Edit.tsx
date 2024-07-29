@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import type ActivityButton from "../../activity/types/ActivityButton";
 import type ActivityCount from "../../activity/types/ActivityCount";
 import type ActivityDetails from "../../activity/types/ActivityDetails";
 import type ActivityState from "../../activity/types/ActivityState";
@@ -10,6 +11,7 @@ import useActivity from "../../hooks/useActivity";
 import Page from "../Page";
 import EditAssetLarge from "./EditAssets/EditAssetLarge";
 import EditAssetSmall from "./EditAssets/EditAssetSmall";
+import EditButtons from "./EditButtons/EditButtons";
 import EditDetails from "./EditDetails/EditDetails";
 import EditState from "./EditState/EditState";
 import EditTimestamp from "./EditTimestamp/EditTimestamp";
@@ -41,6 +43,8 @@ export const Edit = () => {
     const [timestampMode, setTimestampMode] = useState<ActivityTimestampMode>(activity.timestampMode);
     const [timestampStart, setTimestampStart] = useState<ActivityTimestamp | null>(activity.timestampStart);
     const [timestampEnd, setTimestampEnd] = useState<ActivityTimestamp | null>(activity.timestampEnd);
+    const [button1, setButton1] = useState<ActivityButton | null>(activity.button1);
+    const [button2, setButton2] = useState<ActivityButton | null>(activity.button2);
 
     const saveActivity = () => {
         setActivity({
@@ -53,6 +57,8 @@ export const Edit = () => {
             timestampMode,
             timestampStart,
             timestampEnd,
+            button1,
+            button2,
         });
         goBack();
     };
@@ -110,7 +116,13 @@ export const Edit = () => {
                 />;
 
             case "buttons":
-                return null;
+                return <EditButtons
+                    button1={button1}
+                    button2={button2}
+                    setButton1={setButton1}
+                    setButton2={setButton2}
+                    setValid={setValid}
+                />;
 
             default:
                 return null;

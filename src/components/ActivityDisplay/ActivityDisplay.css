@@ -22,6 +22,9 @@
 
 #activity-progress-bar {
     width: 100%;
+}
+
+#activity-progress-bar:not(:empty) {
     margin-top: 12px;
 }
 
@@ -31,5 +34,8 @@
     flex-wrap: wrap;
     align-items: stretch;
     justify-content: flex-start;
+}
+
+#activity-buttons:not(:empty) {
     margin-top: 12px;
 }

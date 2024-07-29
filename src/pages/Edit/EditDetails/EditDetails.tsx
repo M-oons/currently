@@ -26,9 +26,8 @@ const EditDetails = (props: EditDetailsProps) => {
             setErrors([]);
         else {
             const validation = validateDetails(details);
-            if (validation.valid) {
+            if (validation.valid)
                 setErrors([]);
-            }
             else {
                 isValid = false;
                 setErrors(validation.errors);

@@ -2,8 +2,8 @@ import type ActivityValidationError from "./validation/ActivityValidationError";
 import { type ActivityValidationResult, createValidationResult } from "./validation/ActivityValidationResult";
 import { isValidUrl } from "../../utils/validation";
 
-const BUTTON_TEXT_LENGTH_MIN = 2;
-const BUTTON_TEXT_LENGTH_MAX = 32;
+export const BUTTON_TEXT_LENGTH_MIN = 2;
+export const BUTTON_TEXT_LENGTH_MAX = 32;
 
 export type ActivityButton = {
     text: string,

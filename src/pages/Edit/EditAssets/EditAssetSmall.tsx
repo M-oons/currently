@@ -21,8 +21,8 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
     const [assetType, setAssetType] = useState<ActivityAssetType>(getAssetType(props.imageSmall?.key ?? ""));
     const [imageSmall, setImageSmall] = useState<string>(props.imageSmall?.key ?? "");
     const [imageSmallTooltip, setImageSmallTooltip] = useState<string>(props.imageSmall?.text ?? "");
-    const [errors, setErrors] = useState<ActivityValidationError[]>([]);
     const [useImageSmall, setUseImageSmall] = useState<boolean>(props.imageSmall !== null);
+    const [errors, setErrors] = useState<ActivityValidationError[]>([]);
 
     useEffect(() => {
         validate();
@@ -51,9 +51,8 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
             valid(null);
         else {
             const validation = validateImage({ key: imageSmall, text: imageSmallTooltip === "" ? undefined : imageSmallTooltip }, assetType);
-            if (validation.valid) {
+            if (validation.valid)
                 setErrors([]);
-            }
             else {
                 isValid = false;
                 setErrors(validation.errors);

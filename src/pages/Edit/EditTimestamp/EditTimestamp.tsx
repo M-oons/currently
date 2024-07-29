@@ -21,10 +21,10 @@ const EditTimestamp = (props: EditTimestampProps) => {
     const [timestampMode, setTimestampMode] = useState<ActivityTimestampMode>(props.timestampMode);
     const [timestampStart, setTimestampStart] = useState<number>(props.timestampMode === ActivityTimestampMode.Custom ? props.timestampStart ?? 0 : 0);
     const [timestampEnd, setTimestampEnd] = useState<number>(props.timestampMode !== ActivityTimestampMode.None ? props.timestampEnd ?? 0 : 0);
-    const [errorsTimestampStart, setErrorsTimestampStart] = useState<ActivityValidationError[]>([]);
-    const [errorsTimestampEnd, setErrorsTimestampEnd] = useState<ActivityValidationError[]>([]);
     const [useTimestampStart, setUseTimestampStart] = useState<boolean>(props.timestampMode === ActivityTimestampMode.Custom && props.timestampStart !== null);
     const [useTimestampEnd, setUseTimestampEnd] = useState<boolean>(props.timestampMode !== ActivityTimestampMode.None && props.timestampEnd !== null);
+    const [errorsTimestampStart, setErrorsTimestampStart] = useState<ActivityValidationError[]>([]);
+    const [errorsTimestampEnd, setErrorsTimestampEnd] = useState<ActivityValidationError[]>([]);
 
     useEffect(() => {
         validateAll();

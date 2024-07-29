@@ -20,9 +20,9 @@ const EditState = (props: EditStateProps) => {
     const [state, setState] = useState<string>(props.state ?? "");
     const [countCurrent, setCountCurrent] = useState<number>(props.count?.current ?? 0);
     const [countMax, setCountMax] = useState<number>(props.count?.max ?? 0);
+    const [useCount, setUseCount] = useState<boolean>(props.count !== null);
     const [errorsState, setErrorsState] = useState<ActivityValidationError[]>([]);
     const [errorsCount, setErrorsCount] = useState<ActivityValidationError[]>([]);
-    const [useCount, setUseCount] = useState<boolean>(props.count !== null);
 
     useEffect(() => {
         validate();
@@ -40,9 +40,8 @@ const EditState = (props: EditStateProps) => {
             setErrorsState([]);
         else {
             const stateValidation = validateState(state);
-            if (stateValidation.valid) {
+            if (stateValidation.valid)
                 setErrorsState([]);
-            }
             else {
                 isValid = false;
                 setErrorsState(stateValidation.errors);
@@ -53,9 +52,8 @@ const EditState = (props: EditStateProps) => {
             setErrorsCount([]);
         else {
             const countValidation = validateCount({ current: countCurrent, max: countMax });
-            if (countValidation.valid) {
+            if (countValidation.valid)
                 setErrorsCount([]);
-            }
             else {
                 isValid = false;
                 setErrorsCount(countValidation.errors);
