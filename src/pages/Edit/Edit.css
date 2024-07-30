@@ -9,6 +9,7 @@
 
 .edit-title {
     display: flex;
+    align-items: center;
     color: var(--light-grey);
     font-size: 12px;
     font-weight: 700;

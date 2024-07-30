@@ -23,7 +23,7 @@ export const startActivity = async (): Promise<boolean> => {
     if (client === null || currentActivity.clientId !== currentClientId)
         await createClient(currentActivity.clientId);
 
-    const presence: Presence = await buildPresence(currentActivity);
+    const presence: Presence = buildPresence(currentActivity);
 
     try {
         await client?.setActivity(presence);

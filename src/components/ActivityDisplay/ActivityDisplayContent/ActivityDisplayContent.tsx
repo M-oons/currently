@@ -51,8 +51,10 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
 
         const fetchApplication = async () => {
             const application = await getApplication(props.clientId, props.clientSecret);
-            const name = application.name;
+            if (application === null)
+                return props.clientId;
 
+            const name = application.name;
             setState($state => ({
                 ...$state,
                 name,
@@ -103,7 +105,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     return props.edit
         ? (
             <>
-                <div id="activity-title" className="activity-content-text edit">{state.name}</div>
+                <div id="activity-title" className="activity-content-text edit" onClick={() => goToEditPage("application")}>{state.name}</div>
                 {state.details !== null
                     ? <div id="activity-details" className="activity-content-text edit" onClick={() => goToEditPage("details")}>{state.details}</div>
                     : <div id="activity-details" className="activity-content-text edit empty" onClick={() => goToEditPage("details")}>Details</div>

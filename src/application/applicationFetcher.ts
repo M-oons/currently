@@ -9,21 +9,28 @@ const CACHE_LIFETIME = 60000; // 1 minute
 const cachedApplications = new ExpiryCache<string, Application>(CACHE_LIFETIME);
 const cachedAssets = new ExpiryCache<string, ApplicationAsset[]>(CACHE_LIFETIME);
 
-export const getApplication = async (clientId: string, clientSecret: string): Promise<Application> => {
+export const getApplication = async (clientId: string, clientSecret: string): Promise<Application | null> => {
     return cachedApplications.getAsync(clientId, async (clientId) => {
         const authResponse = await authorize(clientId, clientSecret);
+        if (authResponse === null)
+            return null;
         const authToken = authResponse.access_token;
         const meResponse = await me(authToken);
         return meResponse.application;
     });
 };
 
-export const getApplicationAssets = async (applicationId: string): Promise<ApplicationAsset[]> => {
+export const getApplicationAssets = async (applicationId: string): Promise<ApplicationAsset[] | null> => {
     return cachedAssets.getAsync(applicationId, async (applicationId) => {
-        const response = await fetch(`${OAUTH_URL}/applications/${applicationId}/assets`);
-        const assets = await response.json() as ApplicationAsset[];
-        assets.sort((a, b) => a.name.localeCompare(b.name));
-        return assets;
+        try {
+            const response = await fetch(`${OAUTH_URL}/applications/${applicationId}/assets`);
+            const assets = await response.json() as ApplicationAsset[];
+            assets.sort((a, b) => a.name.localeCompare(b.name));
+            return assets;
+        }
+        catch {
+            return null;
+        }
     });
 };
 

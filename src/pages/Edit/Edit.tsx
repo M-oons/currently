@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type ActivityButton from "../../activity/types/ActivityButton";
+import type ActivityClientId from "../../activity/types/ActivityClientId";
+import type ActivityClientSecret from "../../activity/types/ActivityClientSecret";
 import type ActivityCount from "../../activity/types/ActivityCount";
 import type ActivityDetails from "../../activity/types/ActivityDetails";
 import type ActivityState from "../../activity/types/ActivityState";
@@ -9,6 +11,7 @@ import { type ActivityTimestamp, ActivityTimestampMode } from "../../activity/ty
 import Button from "../../components/Button/Button";
 import useActivity from "../../hooks/useActivity";
 import Page from "../Page";
+import EditApplication from "./EditApplication/EditApplication";
 import EditAssetLarge from "./EditAssets/EditAssetLarge";
 import EditAssetSmall from "./EditAssets/EditAssetSmall";
 import EditButtons from "./EditButtons/EditButtons";
@@ -34,7 +37,8 @@ export const Edit = () => {
     const { page } = useParams<EditParams>();
     const navigate = useNavigate();
     const { activity, setActivity } = useActivity();
-    const [valid, setValid] = useState<boolean>(true);
+    const [clientId, setClientId] = useState<ActivityClientId>(activity.clientId);
+    const [clientSecret, setClientSecret] = useState<ActivityClientSecret | null>(activity.clientSecret);
     const [count, setCount] = useState<ActivityCount | null>(activity.count);
     const [details, setDetails] = useState<ActivityDetails | null>(activity.details);
     const [state, setState] = useState<ActivityState | null>(activity.state);
@@ -45,10 +49,13 @@ export const Edit = () => {
     const [timestampEnd, setTimestampEnd] = useState<ActivityTimestamp | null>(activity.timestampEnd);
     const [button1, setButton1] = useState<ActivityButton | null>(activity.button1);
     const [button2, setButton2] = useState<ActivityButton | null>(activity.button2);
+    const [valid, setValid] = useState<boolean>(true);
 
     const saveActivity = () => {
         setActivity({
             ...activity,
+            clientId,
+            clientSecret,
             details,
             state,
             count,
@@ -70,7 +77,13 @@ export const Edit = () => {
     const renderPage = () => {
         switch (page) {
             case "application":
-                return null;
+                return <EditApplication
+                    clientId={clientId}
+                    clientSecret={clientSecret}
+                    setClientId={setClientId}
+                    setClientSecret={setClientSecret}
+                    setValid={setValid}
+                />;
 
             case "details":
                 return <EditDetails

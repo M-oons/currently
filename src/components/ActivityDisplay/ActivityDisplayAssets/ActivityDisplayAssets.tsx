@@ -172,6 +172,9 @@ const getImageSource = async (applicationId: string, image: string | null): Prom
         return image;
 
     const assets = await getApplicationAssets(applicationId);
+    if (assets === null)
+        return "";
+    
     const asset = assets.find(a => a.name === image);
     if (asset === undefined)
         return "";

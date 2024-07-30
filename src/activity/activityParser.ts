@@ -1,5 +1,7 @@
 import type Activity from "./types/Activity";
 import type ActivityButton from "./types/ActivityButton";
+import type ActivityClientId from "./types/ActivityClientId";
+import type ActivityClientSecret from "./types/ActivityClientSecret";
 import type ActivityCount from "./types/ActivityCount";
 import type ActivityDetails from "./types/ActivityDetails";
 import type ActivityImage from "./types/ActivityImage";
@@ -38,13 +40,13 @@ const parseName = (name?: string): string => {
         : "";
 };
 
-const parseClientId = (clientId?: string): string => {
+const parseClientId = (clientId?: ActivityClientId): ActivityClientId => {
     return typeof clientId === "string"
         ? clientId
         : "";
 };
 
-const parseClientSecret = (clientSecret?: string): string => {
+const parseClientSecret = (clientSecret?: ActivityClientSecret): ActivityClientSecret => {
     return typeof clientSecret === "string"
         ? clientSecret
         : "";

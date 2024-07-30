@@ -1,4 +1,6 @@
 import type ActivityButton from "./ActivityButton";
+import type ActivityClientId from "./ActivityClientId";
+import type ActivityClientSecret from "./ActivityClientSecret";
 import type ActivityCount from "./ActivityCount";
 import type ActivityDetails from "./ActivityDetails";
 import type ActivityImage from "./ActivityImage";
@@ -7,8 +9,8 @@ import { type ActivityTimestamp, ActivityTimestampMode } from "./ActivityTimesta
 
 export type Activity = {
     name: string,
-    clientId: string,
-    clientSecret: string,
+    clientId: ActivityClientId,
+    clientSecret: ActivityClientSecret | null,
     details: ActivityDetails | null,
     state: ActivityState | null,
     count: ActivityCount | null,
@@ -22,9 +24,9 @@ export type Activity = {
 };
 
 export const defaultActivity: Activity = {
-    clientId: "",
-    clientSecret: "",
     name: "",
+    clientId: "",
+    clientSecret: null,
     details: null,
     state: null,
     count: null,
