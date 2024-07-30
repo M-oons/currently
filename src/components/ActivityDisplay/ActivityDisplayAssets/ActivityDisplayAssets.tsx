@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { type ActivityImage, ActivityAssetType, getAssetType } from "../../../activity/types/ActivityImage";
 import { getApplicationAssetUrl, getApplicationAssets } from "../../../application/applicationFetcher";
+import Tooltip from "../../../components/Tooltip/Tooltip";
 import { type EditPage } from "../../../pages/Edit/Edit";
 import "./ActivityDisplayAssets.css";
 
@@ -114,12 +115,12 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
                     <div id="activity-asset-large">
                         <img id="activity-asset-large-image" src={state.imageLargeSrc}></img>
                         {state.showImageLargeTooltip &&
-                            <div id="activity-asset-large-tooltip" className="activity-asset-tooltip">
-                                <div className="activity-asset-tooltip-inner">
-                                    <div className="activity-asset-tooltip-pointer"></div>
-                                    <div className="activity-asset-tooltip-content">{state.imageLargeTooltip}</div>
-                                </div>
-                            </div>
+                            <Tooltip
+                                id="activity-asset-large-tooltip"
+                                text={state.imageLargeTooltip ?? ""}
+                                x={30}
+                                y={69}
+                            />
                         }
                     </div>
                 }
@@ -128,12 +129,12 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
                         <div id="activity-asset-small-bg"></div>
                         <img id="activity-asset-small-image" src={state.imageSmallSrc}></img>
                         {state.showImageSmallTooltip &&
-                            <div id="activity-asset-small-tooltip" className="activity-asset-tooltip">
-                                <div className="activity-asset-tooltip-inner">
-                                    <div className="activity-asset-tooltip-pointer"></div>
-                                    <div className="activity-asset-tooltip-content">{state.imageSmallTooltip}</div>
-                                </div>
-                            </div>
+                            <Tooltip
+                                id="activity-asset-small-tooltip"
+                                text={state.imageSmallTooltip ?? ""}
+                                x={54}
+                                y={25}
+                            />
                         }
                     </div>
                 }
