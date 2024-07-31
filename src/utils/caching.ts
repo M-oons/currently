@@ -22,31 +22,41 @@ export class ExpiryCache<K, V> {
         this.lifetime = lifetime;
     }
 
-    public get(key: K, fetcher: (key: K) => V | null): V | null {
-        const cached = this.cache.get(key);
-        if (cached !== undefined && !cached.expired)
-            return cached.value;
+    public get(key: K, fetcher: (key: K) => V | null, useCache: boolean = true): V | null {
+        if (useCache) {
+            const cached = this.cache.get(key);
+            if (cached !== undefined) {
+                if (!cached.expired)
+                    return cached.value;
+
+                this.cache.delete(key);
+            }
+        }
 
         const fetched = fetcher(key);
         if (fetched === null)
             return null;
 
-        this.cache.delete(key);
         const item = new ExpiryCacheItem<V>(fetched, this.lifetime);
         this.cache.set(key, item);
         return fetched;
     }
 
-    public async getAsync(key: K, fetcher: (key: K) => Promise<V | null>): Promise<V | null> {
-        const cached = this.cache.get(key);
-        if (cached !== undefined && !cached.expired)
-            return cached.value;
+    public async getAsync(key: K, fetcher: (key: K) => Promise<V | null>, useCache: boolean = true): Promise<V | null> {
+        if (useCache) {
+            const cached = this.cache.get(key);
+            if (cached !== undefined) {
+                if (!cached.expired)
+                    return cached.value;
+
+                this.cache.delete(key);
+            }
+        }
 
         const fetched = await fetcher(key);
         if (fetched === null)
             return null;
 
-        this.cache.delete(key);
         const item = new ExpiryCacheItem<V>(fetched, this.lifetime);
         this.cache.set(key, item);
         return fetched;

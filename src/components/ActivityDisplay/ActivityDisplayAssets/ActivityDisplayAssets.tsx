@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { type ActivityImage, ActivityAssetType, getAssetType } from "../../../activity/types/ActivityImage";
-import { getApplicationAssetUrl, getApplicationAssets } from "../../../application/applicationFetcher";
+import { getApplicationAssetUrl, getApplicationAssets } from "../../../api/applicationFetcher";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import { type EditPage } from "../../../pages/Edit/Edit";
 import "./ActivityDisplayAssets.css";

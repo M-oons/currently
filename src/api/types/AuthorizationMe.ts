@@ -1,4 +1,4 @@
-import Application from "../../application/types/Application";
+import type Application from "../types/Application";
 
 export type AuthorizationMe = {
     application: Application,

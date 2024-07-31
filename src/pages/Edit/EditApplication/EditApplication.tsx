@@ -2,7 +2,9 @@ import { type Dispatch, type SetStateAction, useCallback, useEffect, useState } 
 import { type ActivityClientId, validateClientId, CLIENT_ID_LENGTH_MAX } from "../../../activity/types/ActivityClientId";
 import { type ActivityClientSecret, validateClientSecret, CLIENT_SECRET_LENGTH } from "../../../activity/types/ActivityClientSecret";
 import type ActivityValidationError from "../../../activity/types/validation/ActivityValidationError";
+import { getApplication, getApplicationAssets } from "../../../api/applicationFetcher";
 import ActivityErrors from "../../../components/ActivityErrors/ActivityErrors";
+import Button from "../../../components/Button/Button";
 import InputText from "../../../components/InputText/InputText";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import "./EditApplication.css";
@@ -18,11 +20,20 @@ type EditApplicationProps = {
 const EditApplication = (props: EditApplicationProps) => {
     const [clientId, setClientId] = useState<string>(props.clientId);
     const [clientSecret, setClientSecret] = useState<string>(props.clientSecret ?? "");
+    const [validApplication, setValidApplication] = useState<boolean | null>(null);
     const [errorsClientId, setErrorsClientId] = useState<ActivityValidationError[]>([]);
     const [errorsClientSecret, setErrorsClientSecret] = useState<ActivityValidationError[]>([]);
 
     useEffect(() => {
         validate();
+    }, [
+        clientId,
+        clientSecret,
+        validApplication,
+    ]);
+
+    useEffect(() => {
+        setValidApplication(null);
     }, [
         clientId,
         clientSecret,
@@ -51,7 +62,7 @@ const EditApplication = (props: EditApplicationProps) => {
             }
         }
 
-        if (isValid) {
+        if (isValid && validApplication) {
             const validClientId = clientId.trim();
             const validClientSecret: ActivityClientSecret | null = clientSecret.trim() !== ""
                 ? clientSecret.trim()
@@ -77,6 +88,21 @@ const EditApplication = (props: EditApplicationProps) => {
     const inputClientSecret = useCallback((clientSecret: string) => {
         setClientSecret(clientSecret);
     }, []);
+
+    const validateClient = async () => {
+        let isValid = false;
+
+        if (clientSecret !== "") {
+            const application = await getApplication(clientId, clientSecret, false);
+            isValid = application !== null;
+        }
+        else {
+            const assets = await getApplicationAssets(clientId, false);
+            isValid = assets !== null;
+        }
+
+        setValidApplication(isValid);
+    };
 
     return (
         <>
@@ -130,6 +156,14 @@ const EditApplication = (props: EditApplicationProps) => {
                         </div>
                     }
                 </div>
+            </div>
+            <div className="edit-section">
+                {validApplication === null
+                    ? <Button id="edit-client-validation" onClick={validateClient}>Validate client details</Button>
+                    : validApplication
+                        ? <Button id="edit-client-validation-valid">Valid client details</Button>
+                        : <Button id="edit-client-validation-invalid">Invalid client details</Button>
+                }
             </div>
         </>
     );

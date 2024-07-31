@@ -1,8 +1,8 @@
 import { type Dispatch, type SetStateAction, useCallback, useState, useEffect, } from "react";
 import { type ActivityImage, ActivityAssetType, getAssetType, validateImage, IMAGE_KEY_LENGTH_MAX, IMAGE_TEXT_LENGTH_MAX } from "../../../activity/types/ActivityImage";
 import type ActivityValidationError from "../../../activity/types/validation/ActivityValidationError";
-import type ApplicationAsset from "../../../application/types/ApplicationAsset";
-import { getApplicationAssets } from "../../../application/applicationFetcher";
+import type ApplicationAsset from "../../../api/types/ApplicationAsset";
+import { getApplicationAssets } from "../../../api/applicationFetcher";
 import ActivityErrors from "../../../components/ActivityErrors/ActivityErrors";
 import InputText from "../../../components/InputText/InputText";
 import Select from "../../../components/Select/Select";

@@ -34,3 +34,22 @@
 #edit-client-secret-tooltip {
     text-transform: none;
 }
+
+#edit-client-validation {
+    width: 100%;
+    background-color: var(--yellow) !important;
+}
+
+#edit-client-validation:hover {
+    background-color: var(--yellow-hover) !important;
+}
+
+#edit-client-validation-valid {
+    width: 100%;
+    background-color: var(--green) !important;
+}
+
+#edit-client-validation-invalid {
+    width: 100%;
+    background-color: var(--red) !important;
+}

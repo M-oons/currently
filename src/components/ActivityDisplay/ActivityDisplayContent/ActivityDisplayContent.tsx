@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import type ActivityClientId from "../../../activity/types/ActivityClientId";
+import type ActivityClientSecret from "../../../activity/types/ActivityClientSecret";
 import type ActivityCount from "../../../activity/types/ActivityCount";
 import type ActivityDetails from "../../../activity/types/ActivityDetails";
 import type ActivityState from "../../../activity/types/ActivityState";
 import { type ActivityTimestamp, ActivityTimestampMode } from "../../../activity/types/ActivityTimestamp";
-import { getApplication } from "../../../application/applicationFetcher";
+import { getApplication } from "../../../api/applicationFetcher";
 import useInterval from "../../../hooks/useInterval";
 import { type EditPage } from "../../../pages/Edit/Edit";
 import { formatTimestamp } from "../../../utils/time";
@@ -12,8 +14,8 @@ import type ActivityDisplayComponentProps from "../types/ActivityDisplayComponen
 import "./ActivityDisplayContent.css";
 
 type ActivityDisplayContentProps = {
-    clientId: string,
-    clientSecret: string,
+    clientId: ActivityClientId,
+    clientSecret: ActivityClientSecret | null,
     details: ActivityDetails | null,
     state: ActivityState | null,
     count: ActivityCount | null,
@@ -34,7 +36,7 @@ type ActivityDisplayContentState = {
 
 const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     const [state, setState] = useState<ActivityDisplayContentState>({
-        name: "Name",
+        name: props.clientId,
         details: "Details",
         showDetails: true,
         state: "State (0 of 0)",
@@ -46,11 +48,11 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (props.clientId === "" || props.clientSecret === "")
+        if (props.clientId === "" || props.clientSecret === "" || props.clientSecret === null)
             return;
 
         const fetchApplication = async () => {
-            const application = await getApplication(props.clientId, props.clientSecret);
+            const application = await getApplication(props.clientId, props.clientSecret!);
             if (application === null)
                 return props.clientId;
 

@@ -46,10 +46,10 @@ const parseClientId = (clientId?: ActivityClientId): ActivityClientId => {
         : "";
 };
 
-const parseClientSecret = (clientSecret?: ActivityClientSecret): ActivityClientSecret => {
+const parseClientSecret = (clientSecret?: ActivityClientSecret | null): ActivityClientSecret | null => {
     return typeof clientSecret === "string"
         ? clientSecret
-        : "";
+        : null;
 };
 
 const parseDetails = (details?: ActivityDetails | null): ActivityDetails | null => {
