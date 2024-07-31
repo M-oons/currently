@@ -163,7 +163,7 @@ const EditTimestamp = (props: EditTimestampProps) => {
                                 <InputDateTime
                                     value={timestampStart}
                                     min={TIMESTAMP_MIN}
-                                    tabIndex={8}
+                                    tabIndex={10}
                                     onInput={inputTimestampStart}
                                 />
                             </div>
@@ -193,7 +193,7 @@ const EditTimestamp = (props: EditTimestampProps) => {
                                 <InputDateTime
                                     value={timestampEnd}
                                     min={TIMESTAMP_MIN}
-                                    tabIndex={9}
+                                    tabIndex={11}
                                     onInput={inputTimestampEnd}
                                 />
                             </div>

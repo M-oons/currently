@@ -153,7 +153,7 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
                                             placeholder="Image URL"
                                             maxLength={IMAGE_KEY_LENGTH_MAX}
                                             counter={true}
-                                            tabIndex={4}
+                                            tabIndex={6}
                                             onInput={inputImage}
                                         />
                                     )
@@ -175,7 +175,7 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
                                     placeholder="Tooltip"
                                     maxLength={IMAGE_TEXT_LENGTH_MAX}
                                     counter={true}
-                                    tabIndex={5}
+                                    tabIndex={7}
                                     onInput={inputImageTooltip}
                                 />
                             </div>

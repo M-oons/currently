@@ -66,7 +66,7 @@ const EditDetails = (props: EditDetailsProps) => {
                             placeholder="Details"
                             maxLength={DETAILS_LENGTH_MAX}
                             counter={true}
-                            tabIndex={0}
+                            tabIndex={2}
                             onInput={inputDetails}
                         />
                     </div>

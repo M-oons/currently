@@ -111,7 +111,7 @@ const EditState = (props: EditStateProps) => {
                             placeholder="State"
                             maxLength={STATE_LENGTH_MAX}
                             counter={true}
-                            tabIndex={1}
+                            tabIndex={3}
                             onInput={inputState}
                         />
                     </div>
@@ -139,7 +139,7 @@ const EditState = (props: EditStateProps) => {
                                 <InputNumber
                                     value={countCurrent}
                                     min={COUNT_CURRENT_MIN}
-                                    tabIndex={2}
+                                    tabIndex={4}
                                     onInput={inputCountCurrent}
                                 />
                             </div>
@@ -148,7 +148,7 @@ const EditState = (props: EditStateProps) => {
                                 <InputNumber
                                     value={countMax}
                                     min={COUNT_MAX_MIN}
-                                    tabIndex={3}
+                                    tabIndex={5}
                                     onInput={inputCountMax}
                                 />
                             </div>
