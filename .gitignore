@@ -82,6 +82,9 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# Typescript
+dist/
+
 # Webpack
 .webpack/
 
