@@ -122,7 +122,7 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
                                     { label: "URL", value: ActivityAssetType.URL },
                                 ]}
                                 value={assetType}
-                                label="Type"
+                                label="- Select Type -"
                                 onChange={changeAssetType}
                             />
                         </div>
@@ -143,7 +143,7 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
                                                 value: asset.name,
                                             })) ?? []}
                                             value={imageSmall}
-                                            label={assets === null ? "Loading assets..." : "Asset"}
+                                            label="- Select Asset -"
                                             onChange={changeImage}
                                         />
                                     )

@@ -140,7 +140,7 @@ const EditTimestamp = (props: EditTimestampProps) => {
                                 { label: "Custom", value: ActivityTimestampMode.Custom },
                             ]}
                             value={props.timestampMode}
-                            label="Mode"
+                            label="- Select Mode -"
                             onChange={changeTimestampMode}
                         />
                     </div>

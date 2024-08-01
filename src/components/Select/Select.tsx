@@ -10,14 +10,14 @@ type Option<T extends SelectValueType> = {
 
 type SelectProps<T extends SelectValueType> = {
     options: Option<T>[],
-    value: T,
+    value: T | null,
     label?: string,
     onChange: (value: T) => void,
 };
 
 const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
     const [open, setOpen] = useState<boolean>(false);
-    const [selected, setSelected] = useState<T>(props.value);
+    const [selected, setSelected] = useState<T | null>(props.value);
     const selectRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -27,6 +27,8 @@ const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
             setSelected(defaultValue);
             props.onChange(defaultValue);
         }
+        else if (props.options.length === 0)
+            setSelected(null);
     }, [
         props.options,
         props.value,
@@ -60,7 +62,7 @@ const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
         <div className="select" ref={selectRef}>
             <div className={`select-input ${open ? "select-input-open" : ""}`.trim()} onClick={clickDropdown}>
                 <span>
-                    {selected !== ""
+                    {selected !== null
                         ? props.options.find(option => option.value === selected)?.label
                         : props.label
                     }
