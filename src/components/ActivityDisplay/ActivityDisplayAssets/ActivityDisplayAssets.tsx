@@ -4,14 +4,14 @@ import { type ActivityImage, ActivityAssetType, getAssetType } from "../../../ac
 import { getApplicationAssetUrl, getApplicationAssets } from "../../../api/applicationFetcher";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import { type EditPage } from "../../../pages/Edit/Edit";
+import type ActivityDisplayComponentProps from "../types/ActivityDisplayComponentProps";
 import "./ActivityDisplayAssets.css";
 
 type ActivityDisplayAssetsProps = {
     clientId: string,
     imageLarge: ActivityImage | null,
     imageSmall: ActivityImage | null,
-    edit: boolean,
-};
+} & ActivityDisplayComponentProps;
 
 type ActivityDisplayAssetsState = {
     imageLarge: string | null,

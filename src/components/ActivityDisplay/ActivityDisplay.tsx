@@ -1,4 +1,5 @@
 import type Activity from "../../activity/types/Activity";
+import type ActivityDisplayComponentProps from "./types/ActivityDisplayComponentProps";
 import ActivityDisplayAssets from "./ActivityDisplayAssets/ActivityDisplayAssets";
 import ActivityDisplayButtons from "./ActivityDisplayButtons/ActivityDisplayButtons";
 import ActivityDisplayContent from "./ActivityDisplayContent/ActivityDisplayContent";
@@ -7,8 +8,7 @@ import "./ActivityDisplay.css";
 
 type ActivityDisplayProps = {
     activity: Activity,
-    edit: boolean,
-};
+} & ActivityDisplayComponentProps;
 
 const ActivityDisplay = (props: ActivityDisplayProps) => {
     const activity = props.activity;
