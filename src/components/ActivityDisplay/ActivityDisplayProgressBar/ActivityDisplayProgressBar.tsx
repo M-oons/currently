@@ -41,7 +41,7 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
             timeMax,
             showProgressBar,
         });
-    }, [
+    }, true, [
         timestampStart,
         props.timestampEnd,
     ]);

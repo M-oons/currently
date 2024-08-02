@@ -36,13 +36,13 @@ type ActivityDisplayContentState = {
 
 const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     const [state, setState] = useState<ActivityDisplayContentState>({
-        name: props.clientId,
-        details: "Details",
-        showDetails: true,
-        state: "State (0 of 0)",
-        showState: true,
-        timestamp: "00:00 left",
-        showTimestamp: true,
+        name: "",
+        details: "",
+        showDetails: false,
+        state: "",
+        showState: false,
+        timestamp: "",
+        showTimestamp: false,
     });
     const [timestampStart, setTimestampStart] = useState<ActivityTimestamp | null>(props.timestampStart);
     const navigate = useNavigate();
@@ -53,10 +53,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
 
         const fetchApplication = async () => {
             const application = await getApplication(props.clientId, props.clientSecret!);
-            if (application === null)
-                return props.clientId;
-
-            const name = application.name;
+            const name = application?.name ?? props.clientId;
             setState($state => ({
                 ...$state,
                 name,
@@ -92,7 +89,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
             timestamp,
             showTimestamp,
         }));
-    }, [
+    }, true, [
         props.details,
         props.state,
         props.count,
@@ -124,7 +121,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         )
         : (
             <>
-                <div id="activity-title" className="activity-content-text">{state.name}</div>
+                <div id="activity-title" className="activity-content-text">{state.name || props.clientId}</div>
                 {state.showDetails &&
                     <div id="activity-details" className="activity-content-text">{state.details}</div>
                 }

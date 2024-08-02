@@ -14,3 +14,10 @@ export const formatTimestamp = (timestamp: number, pad: boolean = true): string 
 
     return formatted.join(":");
 };
+
+export const createTimer = (callback: () => void, ms: number, immediate: boolean = false): NodeJS.Timeout => {
+    if (immediate)
+        callback();
+
+    return setInterval(callback, ms);
+};

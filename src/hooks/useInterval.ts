@@ -1,8 +1,9 @@
 import { type DependencyList, useEffect } from "react";
+import { createTimer } from "../utils/time";
 
-const useInterval = (ms: number, callback: () => void, deps?: DependencyList) => {
+const useInterval = (ms: number, callback: () => void, immediate: boolean = false, deps?: DependencyList) => {
     useEffect(() => {
-        const interval = setInterval(callback, ms);
+        const interval = createTimer(callback, ms, immediate);
         return () => clearInterval(interval);
     }, deps);
 };
