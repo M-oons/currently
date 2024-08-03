@@ -27,7 +27,8 @@ export const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
         else {
             let selected = props.options.find(option => option.value === props.value) ?? props.options[0];
             setSelected(selected);
-            props.onChange(selected.value);
+            if (selected.value !== props.value)
+                props.onChange(selected.value);
         }
     }, [
         props.options,
@@ -48,8 +49,10 @@ export const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
     };
 
     const clickOption = (option: Option<T>) => {
-        setSelected(option);
-        props.onChange(option.value);
+        if (option !== selected) {
+            setSelected(option);
+            props.onChange(option.value);
+        }
         setOpen(false);
     };
 
