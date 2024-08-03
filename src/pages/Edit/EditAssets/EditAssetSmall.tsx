@@ -80,6 +80,7 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
 
     const changeAssetType = useCallback((assetType: ActivityAssetType) => {
         setAssetType(assetType);
+        setImageSmall("");
     }, []);
 
     const inputImage = useCallback((image: string) => {

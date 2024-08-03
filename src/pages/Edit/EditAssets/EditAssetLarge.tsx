@@ -80,6 +80,7 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
 
     const changeAssetType = useCallback((assetType: ActivityAssetType) => {
         setAssetType(assetType);
+        setImageLarge("");
     }, []);
 
     const inputImage = useCallback((image: string) => {
