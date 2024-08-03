@@ -60,12 +60,12 @@ const ActivityDisplayAssets = (props: ActivityDisplayAssetsProps) => {
             setState({
                 imageLarge,
                 imageLargeSrc,
-                showImageLarge,
+                showImageLarge: showImageLarge && imageLargeSrc !== "",
                 imageLargeTooltip,
                 showImageLargeTooltip,
                 imageSmall,
                 imageSmallSrc,
-                showImageSmall,
+                showImageSmall: showImageSmall && imageSmallSrc !== "",
                 imageSmallTooltip,
                 showImageSmallTooltip,
             });

@@ -3,9 +3,10 @@ import "./Select.css";
 
 type SelectValueType = string | number;
 
-type Option<T extends SelectValueType> = {
+export type Option<T extends SelectValueType> = {
     label: string,
     value: T,
+    image?: string,
 };
 
 type SelectProps<T extends SelectValueType> = {
@@ -15,20 +16,19 @@ type SelectProps<T extends SelectValueType> = {
     onChange: (value: T) => void,
 };
 
-const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
+export const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
     const [open, setOpen] = useState<boolean>(false);
-    const [selected, setSelected] = useState<T | null>(props.value);
+    const [selected, setSelected] = useState<Option<T> | null>(null);
     const selectRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // check if props.value is a valid option, otherwise select the first option
-        if (props.options.length > 0 && !props.options.find(option => option.value === props.value)) {
-            const defaultValue = props.options[0].value;
-            setSelected(defaultValue);
-            props.onChange(defaultValue);
-        }
-        else if (props.options.length === 0)
+        if (props.options.length === 0)
             setSelected(null);
+        else {
+            let selected = props.options.find(option => option.value === props.value) ?? props.options[0];
+            setSelected(selected);
+            props.onChange(selected.value);
+        }
     }, [
         props.options,
         props.value,
@@ -48,7 +48,7 @@ const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
     };
 
     const clickOption = (option: Option<T>) => {
-        setSelected(option.value);
+        setSelected(option);
         props.onChange(option.value);
         setOpen(false);
     };
@@ -61,12 +61,15 @@ const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
     return (
         <div className="select" ref={selectRef}>
             <div className={`select-input ${open ? "select-input-open" : ""}`.trim()} onClick={clickDropdown}>
-                <span>
-                    {selected !== null
-                        ? props.options.find(option => option.value === selected)?.label
-                        : props.label
-                    }
-                </span>
+                {selected !== null
+                    ? (
+                        <>
+                            {selected.image !== undefined && <img className="option-selected-image" src={selected.image}></img>}
+                            <span>{selected.label}</span>
+                        </>
+                    )
+                    : <span>{props.label}</span>
+                }
                 <span className={open ? "select-arrow-up" : "select-arrow"}>⌵</span>
             </div>
             {open &&
@@ -74,12 +77,13 @@ const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
                     {props.options.length > 0
                         ? props.options.map(option => (
                             <div
-                                className={`option ${option.value === selected ? "option-selected" : ""}`.trim()}
+                                className={`option ${option === selected ? "option-selected" : ""}`.trim()}
                                 onClick={() => clickOption(option)}
                                 key={option.value}
                             >
+                                {option.image !== undefined && <img className="option-image" src={option.image}></img>}
                                 <span>{option.label}</span>
-                                {option.value === selected && <span className="option-selected-icon">✓</span>}
+                                {option === selected && <span className="option-selected-icon">✓</span>}
                             </div>
                         ))
                         : (
