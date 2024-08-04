@@ -132,7 +132,7 @@ const EditApplication = (props: EditApplicationProps) => {
                     <div id="edit-client-secret-icon">
                         <Tooltip
                             id="edit-client-secret-tooltip"
-                            text={"(Optional)\n\nUsed to fetch the name of your application - if not specified, the ID will be displayed in the app instead"}
+                            text={"[Optional]\n\nUsed to fetch the name of your application - if not specified, the ID will be displayed in the app instead"}
                             maxWidth={250}
                             x={6}
                             y={21}
