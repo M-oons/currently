@@ -46,7 +46,7 @@ const buildPresenceTimestampEnd = (timestampMode: ActivityTimestampMode, timesta
         : timestampEnd ?? undefined;
 };
 
-const buildPresenceButtons = (button1: ActivityButton | null, button2: ActivityButton | null): PresenceButton[] => {
+const buildPresenceButtons = (button1: ActivityButton | null, button2: ActivityButton | null): PresenceButton[] | undefined => {
     const buttons: PresenceButton[] = [];
 
     if (button1 !== null)
@@ -60,5 +60,7 @@ const buildPresenceButtons = (button1: ActivityButton | null, button2: ActivityB
             url: button2.url,
         });
 
-    return buttons;
+    return buttons.length > 0
+        ? buttons
+        : undefined;
 };
