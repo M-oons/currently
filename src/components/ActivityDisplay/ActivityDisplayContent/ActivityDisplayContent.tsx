@@ -105,7 +105,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         ? (
             <>
                 {props.clientId !== ""
-                    ? <div id="activity-title" className="activity-content-text edit" onClick={() => goToEditPage("application")}>{state.name}</div>
+                    ? <div id="activity-title" className="activity-content-text edit" onClick={() => goToEditPage("application")}>{state.name || props.clientId}</div>
                     : <div id="activity-title" className="activity-content-text edit empty" onClick={() => goToEditPage("application")}>Application</div>
                 }
                 {state.details !== null
@@ -124,7 +124,9 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         )
         : (
             <>
-                <div id="activity-title" className="activity-content-text">{state.name || props.clientId}</div>
+                {props.clientId !== "" &&
+                    <div id="activity-title" className="activity-content-text">{state.name || props.clientId}</div>
+                }
                 {state.showDetails &&
                     <div id="activity-details" className="activity-content-text">{state.details}</div>
                 }
