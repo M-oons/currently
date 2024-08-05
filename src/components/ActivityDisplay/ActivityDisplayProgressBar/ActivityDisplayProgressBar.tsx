@@ -20,10 +20,10 @@ type ActivityDisplayProgressBarState = {
 
 const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
     const [state, setState] = useState<ActivityDisplayProgressBarState>({
-        progress: 100,
-        timeCurrent: "00:00",
-        timeMax: "00:00",
-        showProgressBar: true,
+        progress: 0,
+        timeCurrent: "",
+        timeMax: "",
+        showProgressBar: false,
     });
     const [timestampStart, setTimestampStart] = useState<ActivityTimestamp | null>(props.timestampStart);
 
