@@ -9,7 +9,7 @@ import Page from "../Page";
 const Home = () => {
     const [searchParams] = useSearchParams();
     const { activity } = useActivity();
-    const [edit, setEdit] = useState<boolean>(toBoolean(searchParams.get("edit")) || activity.clientId === "");
+    const [edit, setEdit] = useState<boolean>(toBoolean(searchParams.get("edit")) || !activity.clientId);
 
     const toggleEdit = useCallback(() => {
         setEdit($state => !$state);
@@ -17,7 +17,7 @@ const Home = () => {
 
     return (
         <Page name="home">
-            {activity.clientId !== "" &&
+            {activity.clientId &&
                 <ActivityControls
                     edit={edit}
                     onEditToggle={toggleEdit}

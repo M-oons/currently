@@ -14,7 +14,7 @@ import type ActivityDisplayComponentProps from "../types/ActivityDisplayComponen
 import "./ActivityDisplayContent.css";
 
 type ActivityDisplayContentProps = {
-    clientId: ActivityClientId,
+    clientId: ActivityClientId | null,
     clientSecret: ActivityClientSecret | null,
     details: ActivityDetails | null,
     state: ActivityState | null,
@@ -48,11 +48,11 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (props.clientId === "" || props.clientSecret === "" || props.clientSecret === null)
-            return;
-
         const fetchApplication = async () => {
-            const application = await getApplication(props.clientId, props.clientSecret!);
+            if (!props.clientId || !props.clientSecret)
+                return;
+
+            const application = await getApplication(props.clientId, props.clientSecret);
             const name = application?.name ?? props.clientId;
             setState($state => ({
                 ...$state,
@@ -104,7 +104,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
     return props.edit
         ? (
             <>
-                {props.clientId !== ""
+                {props.clientId !== null
                     ? <div id="activity-title" className="activity-content-text edit" onClick={() => goToEditPage("application")}>{state.name || props.clientId}</div>
                     : <div id="activity-title" className="activity-content-text edit empty" onClick={() => goToEditPage("application")}>Application</div>
                 }
@@ -124,7 +124,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
         )
         : (
             <>
-                {props.clientId !== "" &&
+                {props.clientId !== null &&
                     <div id="activity-title" className="activity-content-text">{state.name || props.clientId}</div>
                 }
                 {state.showDetails &&

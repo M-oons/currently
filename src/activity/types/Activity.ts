@@ -9,7 +9,7 @@ import { type ActivityTimestamp, ActivityTimestampMode } from "./ActivityTimesta
 
 export type Activity = {
     name: string,
-    clientId: ActivityClientId,
+    clientId: ActivityClientId | null,
     clientSecret: ActivityClientSecret | null,
     details: ActivityDetails | null,
     state: ActivityState | null,
@@ -25,7 +25,7 @@ export type Activity = {
 
 export const defaultActivity: Activity = {
     name: "",
-    clientId: "",
+    clientId: null,
     clientSecret: null,
     details: null,
     state: null,

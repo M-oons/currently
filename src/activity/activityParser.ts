@@ -40,10 +40,10 @@ const parseName = (name?: string): string => {
         : "";
 };
 
-const parseClientId = (clientId?: ActivityClientId): ActivityClientId => {
+const parseClientId = (clientId?: ActivityClientId | null): ActivityClientId | null => {
     return typeof clientId === "string"
         ? clientId
-        : "";
+        : null;
 };
 
 const parseClientSecret = (clientSecret?: ActivityClientSecret | null): ActivityClientSecret | null => {

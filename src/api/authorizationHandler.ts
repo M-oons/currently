@@ -2,6 +2,8 @@ import type Authorization from "./types/Authorization";
 import type AuthorizationMe from "./types/AuthorizationMe";
 import type AuthorizationMeResponse from "./types/AuthorizationMeResponse";
 import type AuthorizationResponse from "./types/AuthorizationResponse";
+import type ActivityClientSecret from "../activity/types/ActivityClientSecret";
+import type ActivityClientId from "../activity/types/ActivityClientId";
 import { toBase64 } from "../utils/shared";
 
 export const OAUTH_URL = "https://discord.com/api/oauth2";
@@ -14,7 +16,7 @@ export const isMeSuccess = (response: AuthorizationMeResponse): response is Auth
     return (response as AuthorizationMe).application !== undefined;
 };
 
-export const authorize = async (clientId: string, clientSecret: string): Promise<AuthorizationResponse | null> => {
+export const authorize = async (clientId: ActivityClientId, clientSecret: ActivityClientSecret): Promise<AuthorizationResponse | null> => {
     const params = new URLSearchParams({
         "grant_type": "client_credentials",
         "scope": "identify",

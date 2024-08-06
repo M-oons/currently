@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import type ActivityClientId from "../../../activity/types/ActivityClientId";
 import { type ActivityImage, ActivityAssetType, getAssetType } from "../../../activity/types/ActivityImage";
 import { getApplicationAssetUrl, getApplicationAssets } from "../../../api/applicationFetcher";
 import Tooltip from "../../../components/Tooltip/Tooltip";
@@ -8,7 +9,7 @@ import type ActivityDisplayComponentProps from "../types/ActivityDisplayComponen
 import "./ActivityDisplayAssets.css";
 
 type ActivityDisplayAssetsProps = {
-    clientId: string,
+    clientId: ActivityClientId | null,
     imageLarge: ActivityImage | null,
     imageSmall: ActivityImage | null,
 } & ActivityDisplayComponentProps;
@@ -165,8 +166,8 @@ const displayImages = (imageLarge: ActivityImage | null, imageSmall: ActivityIma
     ];
 };
 
-const getImageSource = async (applicationId: string, image: string | null): Promise<string> => {
-    if (image === null)
+const getImageSource = async (applicationId: ActivityClientId | null, image: string | null): Promise<string> => {
+    if (!applicationId || !image)
         return "";
     if (getAssetType(image) === ActivityAssetType.URL)
         return image;
@@ -174,7 +175,7 @@ const getImageSource = async (applicationId: string, image: string | null): Prom
     const assets = await getApplicationAssets(applicationId);
     if (assets === null)
         return "";
-    
+
     const asset = assets.find(a => a.name === image);
     if (asset === undefined)
         return "";

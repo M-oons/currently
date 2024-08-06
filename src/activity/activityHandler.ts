@@ -1,5 +1,6 @@
 import { Client, type Presence } from "discord-rpc";
 import { type Activity, defaultActivity } from "./types/Activity";
+import type ActivityClientId from "./types/ActivityClientId";
 import { loadActivity, saveActivity } from "./activityLoader";
 import { buildPresence } from "./presenceBuilder";
 import { activityUpdated } from "../AppFlow";
@@ -7,7 +8,7 @@ import { activityUpdated } from "../AppFlow";
 let client: Client | null = null;
 
 let currentActivity: Activity = loadActivity() ?? defaultActivity;
-let currentClientId: string | null = null;
+let currentClientId: ActivityClientId | null = null;
 let active: boolean = false;
 
 export const getActivity = (): Activity => {
@@ -21,9 +22,9 @@ export const setActivity = (activity: Activity): void => {
 
 export const startActivity = async (): Promise<boolean> => {
     if (client === null || currentActivity.clientId !== currentClientId)
-        await createClient(currentActivity.clientId);
+        await updateClient(currentActivity.clientId);
 
-    const presence: Presence = buildPresence(currentActivity);
+    const presence = buildPresence(currentActivity);
 
     try {
         await client?.setActivity(presence);
@@ -45,9 +46,14 @@ export const clearActivity = async (): Promise<boolean> => {
     return active;
 }
 
-const createClient = async (clientId: string): Promise<void> => {
+const updateClient = async (clientId: ActivityClientId | null): Promise<void> => {
     try {
         await client?.destroy();
+        client = null;
+
+        if (clientId === null)
+            return;
+
         client = new Client({ transport: "ipc" });
         await client.login({ clientId });
         currentClientId = clientId;

@@ -10,16 +10,16 @@ import Tooltip from "../../../components/Tooltip/Tooltip";
 import "./EditApplication.css";
 
 type EditApplicationProps = {
-    clientId: ActivityClientId,
+    clientId: ActivityClientId | null,
     clientSecret: ActivityClientSecret | null,
     resetClient: () => void,
-    setClientId: Dispatch<SetStateAction<ActivityClientId>>,
+    setClientId: Dispatch<SetStateAction<ActivityClientId | null>>,
     setClientSecret: Dispatch<SetStateAction<ActivityClientId | null>>,
     setValid: Dispatch<SetStateAction<boolean>>,
 };
 
 const EditApplication = (props: EditApplicationProps) => {
-    const [clientId, setClientId] = useState<string>(props.clientId);
+    const [clientId, setClientId] = useState<string>(props.clientId ?? "");
     const [clientSecret, setClientSecret] = useState<string>(props.clientSecret ?? "");
     const [validApplication, setValidApplication] = useState<boolean | null>(null);
     const [errorsClientId, setErrorsClientId] = useState<ActivityValidationError[]>([]);
@@ -97,7 +97,7 @@ const EditApplication = (props: EditApplicationProps) => {
             const application = await getApplication(clientId, clientSecret, false);
             isValid = application !== null;
         }
-        else {
+        else if (clientId !== "") {
             const assets = await getApplicationAssets(clientId, false);
             isValid = assets !== null;
         }

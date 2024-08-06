@@ -2,19 +2,21 @@ import type Application from "./types/Application";
 import type ApplicationAsset from "./types/ApplicationAsset";
 import type ApplicationAssetsResponse from "./types/ApplicationAssetsResponse";
 import { authorize, isAuthorizeSuccess, isMeSuccess, me, OAUTH_URL } from "./authorizationHandler";
+import type ActivityClientId from "../activity/types/ActivityClientId";
+import type ActivityClientSecret from "../activity/types/ActivityClientSecret";
 import { ExpiryCache } from "../utils/caching";
 
 const ASSETS_URL = "https://cdn.discordapp.com/app-assets";
 const CACHE_LIFETIME = 60000; // 1 minute
 
-const cachedApplications = new ExpiryCache<string, Application>(CACHE_LIFETIME);
-const cachedAssets = new ExpiryCache<string, ApplicationAsset[]>(CACHE_LIFETIME);
+const cachedApplications = new ExpiryCache<ActivityClientId, Application>(CACHE_LIFETIME);
+const cachedAssets = new ExpiryCache<ActivityClientId, ApplicationAsset[]>(CACHE_LIFETIME);
 
 const isApplicationAssetsSuccess = (response: ApplicationAssetsResponse): response is ApplicationAsset[] => {
     return (response as ApplicationAsset[]).length !== undefined;
 };
 
-export const getApplication = async (clientId: string, clientSecret: string, useCache: boolean = true): Promise<Application | null> => {
+export const getApplication = async (clientId: ActivityClientId, clientSecret: ActivityClientSecret, useCache: boolean = true): Promise<Application | null> => {
     return cachedApplications.getAsync(
         clientId,
         async (clientId) => {
@@ -30,7 +32,7 @@ export const getApplication = async (clientId: string, clientSecret: string, use
         useCache);
 };
 
-export const getApplicationAssets = async (applicationId: string, useCache: boolean = true): Promise<ApplicationAsset[] | null> => {
+export const getApplicationAssets = async (applicationId: ActivityClientId, useCache: boolean = true): Promise<ApplicationAsset[] | null> => {
     return cachedAssets.getAsync(
         applicationId,
         async (applicationId) => {
@@ -49,6 +51,6 @@ export const getApplicationAssets = async (applicationId: string, useCache: bool
         useCache);
 };
 
-export const getApplicationAssetUrl = (applicationId: string, assetId: string, size: number = 160): string => {
+export const getApplicationAssetUrl = (applicationId: ActivityClientId, assetId: string, size: number = 160): string => {
     return `${ASSETS_URL}/${applicationId}/${assetId}.png?size=${size}`;
 };

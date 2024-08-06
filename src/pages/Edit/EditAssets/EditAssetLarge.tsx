@@ -1,4 +1,5 @@
 import { type Dispatch, type SetStateAction, useCallback, useState, useEffect, } from "react";
+import type ActivityClientId from "../../../activity/types/ActivityClientId";
 import { type ActivityImage, ActivityAssetType, getAssetType, validateImage, IMAGE_KEY_LENGTH_MAX, IMAGE_TEXT_LENGTH_MAX } from "../../../activity/types/ActivityImage";
 import type ActivityValidationError from "../../../activity/types/validation/ActivityValidationError";
 import type ApplicationAsset from "../../../api/types/ApplicationAsset";
@@ -10,7 +11,7 @@ import Switch from "../../../components/Switch/Switch";
 import "./EditAssets.css";
 
 type EditAssetLargeProps = {
-    clientId: string,
+    clientId: ActivityClientId | null,
     imageLarge: ActivityImage | null,
     setImageLarge: Dispatch<SetStateAction<ActivityImage | null>>,
     setValid: Dispatch<SetStateAction<boolean>>,
@@ -35,6 +36,9 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
 
     useEffect(() => {
         const getAssets = async () => {
+            if (!props.clientId)
+                return;
+
             setAssets(null);
             const assets = await getApplicationAssets(props.clientId);
             setAssets(assets);
@@ -142,7 +146,7 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
                                             options={assets?.map((asset): Option<string> => ({
                                                 label: asset.name,
                                                 value: asset.name,
-                                                image: getApplicationAssetUrl(props.clientId, asset.id),
+                                                image: props.clientId ? getApplicationAssetUrl(props.clientId, asset.id) : undefined,
                                             })) ?? []}
                                             value={imageLarge}
                                             label="- Select Asset -"

@@ -37,7 +37,7 @@ export const Edit = () => {
     const { page } = useParams<EditParams>();
     const navigate = useNavigate();
     const { activity, setActivity } = useActivity();
-    const [clientId, setClientId] = useState<ActivityClientId>(activity.clientId);
+    const [clientId, setClientId] = useState<ActivityClientId | null>(activity.clientId);
     const [clientSecret, setClientSecret] = useState<ActivityClientSecret | null>(activity.clientSecret);
     const [count, setCount] = useState<ActivityCount | null>(activity.count);
     const [details, setDetails] = useState<ActivityDetails | null>(activity.details);
@@ -51,7 +51,7 @@ export const Edit = () => {
     const [button2, setButton2] = useState<ActivityButton | null>(activity.button2);
     const [valid, setValid] = useState<boolean>(true);
 
-    const saveActivity = useCallback(() => {
+    const saveActivity = () => {
         setActivity({
             ...activity,
             clientId,
@@ -68,16 +68,16 @@ export const Edit = () => {
             button2,
         });
         goBack();
-    }, []);
+    };
 
-    const resetClient = useCallback(() => {
+    const resetClient = () => {
         setActivity({
             ...activity,
-            clientId: "",
+            clientId: null,
             clientSecret: null,
         });
         goBack();
-    }, []);
+    };
 
     const goBack = () => {
         navigate("/?edit=true");
