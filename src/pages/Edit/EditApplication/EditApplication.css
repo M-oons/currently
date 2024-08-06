@@ -35,8 +35,13 @@
     text-transform: none;
 }
 
+#edit-client-controls {
+    display: flex;
+}
+
 #edit-client-validation {
-    width: 100%;
+    width: 85%;
+    margin-right: 4px;
     background-color: var(--yellow) !important;
 }
 
@@ -45,11 +50,23 @@
 }
 
 #edit-client-validation-valid {
-    width: 100%;
+    width: 85%;
+    margin-right: 4px;
     background-color: var(--green) !important;
 }
 
 #edit-client-validation-invalid {
-    width: 100%;
+    width: 85%;
+    margin-right: 4px;
     background-color: var(--red) !important;
+}
+
+#edit-reset-client {
+    width: 15%;
+    margin-left: 4px;
+    background-color: var(--red) !important;
+}
+
+#edit-reset-client:hover {
+    background-color: var(--red-hover) !important;
 }

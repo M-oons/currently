@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type ActivityButton from "../../activity/types/ActivityButton";
 import type ActivityClientId from "../../activity/types/ActivityClientId";
@@ -51,7 +51,7 @@ export const Edit = () => {
     const [button2, setButton2] = useState<ActivityButton | null>(activity.button2);
     const [valid, setValid] = useState<boolean>(true);
 
-    const saveActivity = () => {
+    const saveActivity = useCallback(() => {
         setActivity({
             ...activity,
             clientId,
@@ -68,7 +68,16 @@ export const Edit = () => {
             button2,
         });
         goBack();
-    };
+    }, []);
+
+    const resetClient = useCallback(() => {
+        setActivity({
+            ...activity,
+            clientId: "",
+            clientSecret: null,
+        });
+        goBack();
+    }, []);
 
     const goBack = () => {
         navigate("/?edit=true");
@@ -80,6 +89,7 @@ export const Edit = () => {
                 return <EditApplication
                     clientId={clientId}
                     clientSecret={clientSecret}
+                    resetClient={resetClient}
                     setClientId={setClientId}
                     setClientSecret={setClientSecret}
                     setValid={setValid}

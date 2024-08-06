@@ -12,6 +12,7 @@ import "./EditApplication.css";
 type EditApplicationProps = {
     clientId: ActivityClientId,
     clientSecret: ActivityClientSecret | null,
+    resetClient: () => void,
     setClientId: Dispatch<SetStateAction<ActivityClientId>>,
     setClientSecret: Dispatch<SetStateAction<ActivityClientId | null>>,
     setValid: Dispatch<SetStateAction<boolean>>,
@@ -158,12 +159,15 @@ const EditApplication = (props: EditApplicationProps) => {
                 </div>
             </div>
             <div className="edit-section">
-                {validApplication === null
-                    ? <Button id="edit-client-validation" onClick={validateClient}>Validate client details</Button>
-                    : validApplication
-                        ? <Button id="edit-client-validation-valid">Valid client details</Button>
-                        : <Button id="edit-client-validation-invalid">Invalid client details</Button>
-                }
+                <div id="edit-client-controls">
+                    {validApplication === null
+                        ? <Button id="edit-client-validation" onClick={validateClient}>Validate client details</Button>
+                        : validApplication
+                            ? <Button id="edit-client-validation-valid">Valid client details</Button>
+                            : <Button id="edit-client-validation-invalid">Invalid client details</Button>
+                    }
+                    <Button id="edit-reset-client" onClick={props.resetClient}>↺</Button>
+                </div>
             </div>
         </>
     );
