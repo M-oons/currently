@@ -1,6 +1,11 @@
 import { contextBridge, ipcRenderer } from "electron";
 import type Activity from "../activity/types/Activity";
 import IpcCommand from "../ipc/IpcCommand";
+import { handleMouseEvent } from "../utils/inputHandler";
+
+//==============
+// ipc
+//==============
 
 contextBridge.exposeInMainWorld("api", {
     close: () => ipcRenderer.send(IpcCommand.Close),
@@ -16,4 +21,12 @@ contextBridge.exposeInMainWorld("api", {
 
 contextBridge.exposeInMainWorld("utils", {
     toBase64: (data: string): string => Buffer.from(data).toString("base64"),
+});
+
+//==============
+// events
+//==============
+
+window.addEventListener("mouseup", (event) => {
+    handleMouseEvent(event);
 });

@@ -8,10 +8,10 @@ import IpcCommand from "../ipc/IpcCommand";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
 
-startup();
-
 if (require("electron-squirrel-startup"))
     app.quit();
+
+startup();
 
 let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
@@ -93,7 +93,7 @@ const showWindow = (): void => {
 };
 
 //==============
-// main events 
+// main events
 //==============
 
 app.on("ready", () => {
@@ -101,7 +101,7 @@ app.on("ready", () => {
     createWindow();
 });
 
-app.on("window-all-closed", (event: Event) => {
+app.on("window-all-closed", (event: Electron.Event) => {
     event.preventDefault();
 });
 
@@ -110,7 +110,7 @@ app.on("activate", () => {
 });
 
 //===============
-// ipc messages 
+// ipc messages
 //===============
 
 ipcMain.on(IpcCommand.Close, () => {
