@@ -26,23 +26,27 @@ declare global {
 
     // context bridge API
     interface Window {
-        api: {
+        info: {
             getAppInfo: () => Promise<AppInfo>,
-
-            close: () => void,
-            minimize: () => void,
-            help: () => void,
-
+        },
+        flow: {
             getStartupTime: () => Promise<number>,
             getActivityLastUpdateTime: () => Promise<number>,
-
+        },
+        config: {
             getConfig: () => Promise<Config>,
             setConfig: (config: Config) => void,
-
+        },
+        activity: {
             getActivity: () => Promise<Activity>,
             setActivity: (activity: Activity) => void,
             startActivity: () => Promise<boolean>,
             stopActivity: () => Promise<boolean>,
+        },
+        functions: {
+            close: () => void,
+            minimize: () => void,
+            help: () => void,
         },
         utils: {
             toBase64: (data: string) => string,

@@ -16,7 +16,7 @@ const Settings = () => {
 
     useEffect(() => {
         const getAppInfo = async () => {
-            const appInfo = await window.api.getAppInfo();
+            const appInfo = await window.info.getAppInfo();
             setAppInfo(appInfo);
         };
         getAppInfo();

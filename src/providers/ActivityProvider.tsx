@@ -21,25 +21,25 @@ export const ActivityProvider = (props: ActivityProviderProps) => {
 
     useEffect(() => {
         const getActivity = async () => {
-            const activity: Activity = await window.api.getActivity();
+            const activity: Activity = await window.activity.getActivity();
             setActivity(activity);
         };
         getActivity();
     }, []);
 
     const startActivity = useCallback(async () => {
-        const isActive = await window.api.startActivity();
+        const isActive = await window.activity.startActivity();
         setActive(isActive);
     }, []);
 
     const stopActivity = useCallback(async () => {
-        const isActive = await window.api.stopActivity();
+        const isActive = await window.activity.stopActivity();
         setActive(isActive);
     }, []);
 
     const updateActivity = useCallback((activity: Activity) => {
         setActivity(activity);
-        window.api.setActivity(activity);
+        window.activity.setActivity(activity);
     }, []);
 
     return (

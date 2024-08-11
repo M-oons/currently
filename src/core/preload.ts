@@ -8,23 +8,31 @@ import { handleMouseEvent } from "../utils/inputHandler";
 // ipc
 //==============
 
-contextBridge.exposeInMainWorld("api", {
-    getAppInfo: () => ipcRenderer.invoke(IpcCommand.GetAppInfo),
+contextBridge.exposeInMainWorld("info", {
+    getAppInfo: () => ipcRenderer.invoke(IpcCommand.info.GetAppInfo),
+});
 
-    close: () => ipcRenderer.send(IpcCommand.Close),
-    minimize: () => ipcRenderer.send(IpcCommand.Minimize),
-    help: () => ipcRenderer.send(IpcCommand.Help),
+contextBridge.exposeInMainWorld("flow", {
+    getStartupTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.flow.GetStartupTime),
+    getActivityLastUpdateTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.flow.GetActivityLastUpdateTime),
+});
 
-    getStartupTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.GetStartupTime),
-    getActivityLastUpdateTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.GetActivityLastUpdateTime),
-    
-    getConfig: (): Promise<Config> => ipcRenderer.invoke(IpcCommand.GetConfig),
-    setConfig: (config: Config) => ipcRenderer.invoke(IpcCommand.SetConfig, config),
+contextBridge.exposeInMainWorld("config", {
+    getConfig: (): Promise<Config> => ipcRenderer.invoke(IpcCommand.config.GetConfig),
+    setConfig: (config: Config) => ipcRenderer.invoke(IpcCommand.config.SetConfig, config),
+});
 
-    getActivity: (): Promise<Activity> => ipcRenderer.invoke(IpcCommand.GetActivity),
-    setActivity: (activity: Activity) => ipcRenderer.invoke(IpcCommand.SetActivity, activity),
-    startActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.StartActivity),
-    stopActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.StopActivity),
+contextBridge.exposeInMainWorld("activity", {
+    getActivity: (): Promise<Activity> => ipcRenderer.invoke(IpcCommand.activity.GetActivity),
+    setActivity: (activity: Activity) => ipcRenderer.invoke(IpcCommand.activity.SetActivity, activity),
+    startActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.StartActivity),
+    stopActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.StopActivity),
+});
+
+contextBridge.exposeInMainWorld("functions", {
+    close: () => ipcRenderer.send(IpcCommand.functions.Close),
+    minimize: () => ipcRenderer.send(IpcCommand.functions.Minimize),
+    help: () => ipcRenderer.send(IpcCommand.functions.Help),
 });
 
 contextBridge.exposeInMainWorld("utils", {

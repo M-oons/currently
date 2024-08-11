@@ -17,7 +17,7 @@ export const ConfigProvider = (props: ConfigProviderProps) => {
 
     useEffect(() => {
         const getConfig = async () => {
-            const config = await window.api.getConfig();
+            const config = await window.config.getConfig();
             setConfig(config);
         };
         getConfig();
@@ -25,7 +25,7 @@ export const ConfigProvider = (props: ConfigProviderProps) => {
 
     const updateConfig = useCallback((config: Config) => {
         setConfig(config);
-        window.api.setConfig(config);
+        window.config.setConfig(config);
     }, []);
 
     return (

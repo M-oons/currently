@@ -49,9 +49,9 @@ const ActivityDisplayProgressBar = (props: ActivityDisplayProgressBarProps) => {
     useEffect(() => {
         const changeTimestampStart = async () => {
             if (props.timestampMode === ActivityTimestampMode.AppStart)
-                setTimestampStart(await window.api.getStartupTime());
+                setTimestampStart(await window.flow.getStartupTime());
             else if (props.timestampMode === ActivityTimestampMode.ActivityUpdate)
-                setTimestampStart(await window.api.getActivityLastUpdateTime());
+                setTimestampStart(await window.flow.getActivityLastUpdateTime());
         };
         changeTimestampStart();
     }, [props.timestampMode]);

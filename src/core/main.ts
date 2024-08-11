@@ -115,50 +115,50 @@ app.on("activate", () => {
 // ipc messages
 //===============
 
-ipcMain.handle(IpcCommand.GetAppInfo, (): AppInfo => {
+ipcMain.handle(IpcCommand.info.GetAppInfo, (): AppInfo => {
     return appInfo;
 })
 
-ipcMain.on(IpcCommand.Close, () => {
+ipcMain.on(IpcCommand.functions.Close, () => {
     mainWindow?.close();
 });
 
-ipcMain.on(IpcCommand.Minimize, () => {
+ipcMain.on(IpcCommand.functions.Minimize, () => {
     mainWindow?.minimize();
 });
 
-ipcMain.on(IpcCommand.Help, () => {
+ipcMain.on(IpcCommand.functions.Help, () => {
     openURL(appInfo.url);
 });
 
-ipcMain.handle(IpcCommand.GetStartupTime, (): number => {
+ipcMain.handle(IpcCommand.flow.GetStartupTime, (): number => {
     return getStartupTime();
 });
 
-ipcMain.handle(IpcCommand.GetActivityLastUpdateTime, (): number => {
+ipcMain.handle(IpcCommand.flow.GetActivityLastUpdateTime, (): number => {
     return getActivityLastUpdateTime();
 });
 
-ipcMain.handle(IpcCommand.GetConfig, (): Config => {
+ipcMain.handle(IpcCommand.config.GetConfig, (): Config => {
     return loadConfig() ?? defaultConfig;
 });
 
-ipcMain.handle(IpcCommand.SetConfig, (_, config: Config): void => {
+ipcMain.handle(IpcCommand.config.SetConfig, (_, config: Config): void => {
     return saveConfig(config);
 });
 
-ipcMain.handle(IpcCommand.GetActivity, (): Activity => {
+ipcMain.handle(IpcCommand.activity.GetActivity, (): Activity => {
     return getActivity();
 });
 
-ipcMain.handle(IpcCommand.SetActivity, (_, activity: Activity): void => {
+ipcMain.handle(IpcCommand.activity.SetActivity, (_, activity: Activity): void => {
     return setActivity(activity);
 });
 
-ipcMain.handle(IpcCommand.StartActivity, async (): Promise<boolean> => {
+ipcMain.handle(IpcCommand.activity.StartActivity, async (): Promise<boolean> => {
     return await startActivity();
 });
 
-ipcMain.handle(IpcCommand.StopActivity, async (): Promise<boolean> => {
+ipcMain.handle(IpcCommand.activity.StopActivity, async (): Promise<boolean> => {
     return await clearActivity();
 });
