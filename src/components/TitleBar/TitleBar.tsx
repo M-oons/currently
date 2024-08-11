@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import useActivity from "../../hooks/useActivity";
 import "./TitleBar.css";
 
 const TitleBar = () => {
+    const navigate = useNavigate();
     const { active } = useActivity();
 
     return (
@@ -12,6 +14,7 @@ const TitleBar = () => {
                 <div id="title-bar-button-close" className="title-bar-button" onClick={window.api.close}>⨉</div>
                 <div id="title-bar-button-minimize" className="title-bar-button" onClick={window.api.minimize}>─</div>
                 <div id="title-bar-button-help" className="title-bar-button" onClick={window.api.help}>?</div>
+                <div id="title-bar-button-settings" className="title-bar-button" onClick={() => navigate("/settings")}>⚙</div>
             </div>
         </div>
     );

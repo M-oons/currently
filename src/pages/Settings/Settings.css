@@ -1,0 +1,54 @@
+.settings-section:not(:first-child) {
+    margin-top: 12px;
+}
+
+.settings-item {
+    width: 100%;
+    margin-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--grey);
+    user-select: none;
+}
+
+.settings-title {
+    display: flex;
+    align-items: center;
+    color: var(--light-grey);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    user-select: none;
+}
+
+.setting-main {
+    display: flex;
+    align-items: center;
+}
+
+.setting-label {
+    width: 240px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.setting-description {
+    width: 100%;
+    margin-top: 6px;
+    color: var(--light-grey);
+    font-size: 12px;
+}
+
+.setting-input {
+    margin-left: auto;
+}
+
+#settings-controls {
+    display: flex;
+    margin-top: 12px;
+}
+
+#settings-controls>button {
+    width: 100%;
+}

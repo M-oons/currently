@@ -12,46 +12,51 @@ declare global {
     namespace NodeJS {
         interface Process {
             // Used for hot reload after preload scripts.
-            viteDevServers: Record<string, import("vite").ViteDevServer>;
+            viteDevServers: Record<string, import("vite").ViteDevServer>,
         }
     }
 
     type VitePluginConfig = ConstructorParameters<typeof import("@electron-forge/plugin-vite").VitePlugin>[0];
 
     interface VitePluginRuntimeKeys {
-        VITE_DEV_SERVER_URL: `${string}_VITE_DEV_SERVER_URL`;
-        VITE_NAME: `${string}_VITE_NAME`;
+        VITE_DEV_SERVER_URL: `${string}_VITE_DEV_SERVER_URL`,
+        VITE_NAME: `${string}_VITE_NAME`,
     }
 
     // context bridge API
     interface Window {
         api: {
-            close: () => void;
-            minimize: () => void;
-            help: () => void;
-            getStartupTime: () => Promise<number>;
-            getActivityLastUpdateTime: () => Promise<number>;
-            getActivity: () => Promise<Activity>;
-            setActivity: (activity: Activity) => void;
-            startActivity: () => Promise<boolean>;
-            stopActivity: () => Promise<boolean>;
-        };
+            close: () => void,
+            minimize: () => void,
+            help: () => void,
+
+            getStartupTime: () => Promise<number>,
+            getActivityLastUpdateTime: () => Promise<number>,
+
+            getConfig: () => Promise<Config>,
+            setConfig: (config: Config) => void,
+
+            getActivity: () => Promise<Activity>,
+            setActivity: (activity: Activity) => void,
+            startActivity: () => Promise<boolean>,
+            stopActivity: () => Promise<boolean>,
+        },
         utils: {
-            toBase64: (data: string) => string;
-        };
+            toBase64: (data: string) => string,
+        },
     }
 }
 
 declare module "vite" {
     interface ConfigEnv<K extends keyof VitePluginConfig = keyof VitePluginConfig> {
-        root: string;
-        forgeConfig: VitePluginConfig;
-        forgeConfigSelf: VitePluginConfig[K][number];
+        root: string,
+        forgeConfig: VitePluginConfig,
+        forgeConfigSelf: VitePluginConfig[K][number],
     }
 }
 
 declare module "react" {
     interface CSSProperties {
-        "--scale"?: number;
+        "--scale"?: number,
     }
 }

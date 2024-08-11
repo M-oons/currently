@@ -1,9 +1,11 @@
-import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import { getActivityLastUpdateTime, getStartupTime, startup } from "../AppFlow";
 import AppInfo from "../AppInfo";
 import type Activity from "../activity/types/Activity";
 import { clearActivity, getActivity, setActivity, startActivity } from "../activity/activityHandler";
+import { type Config, defaultConfig } from "../config/types/Config";
+import { loadConfig, saveConfig } from "../config/configLoader";
 import IpcCommand from "../ipc/IpcCommand";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
@@ -131,6 +133,14 @@ ipcMain.handle(IpcCommand.GetStartupTime, (): number => {
 
 ipcMain.handle(IpcCommand.GetActivityLastUpdateTime, (): number => {
     return getActivityLastUpdateTime();
+});
+
+ipcMain.handle(IpcCommand.GetConfig, (): Config => {
+    return loadConfig() ?? defaultConfig;
+});
+
+ipcMain.handle(IpcCommand.SetConfig, (_, config: Config): void => {
+    return saveConfig(config);
 });
 
 ipcMain.handle(IpcCommand.GetActivity, (): Activity => {
