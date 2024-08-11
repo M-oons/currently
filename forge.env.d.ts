@@ -1,3 +1,4 @@
+import { type AppInfo } from "./src/AppInfo";
 import Activity from "./src/activity/types/Activity";
 
 export { }; // Make this a module
@@ -26,6 +27,8 @@ declare global {
     // context bridge API
     interface Window {
         api: {
+            getAppInfo: () => Promise<AppInfo>,
+
             close: () => void,
             minimize: () => void,
             help: () => void,

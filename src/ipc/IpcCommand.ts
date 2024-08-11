@@ -1,4 +1,6 @@
 export const IpcCommand = {
+    GetAppInfo: "get-app-info",
+
     Close: "close",
     Minimize: "minimize",
     Help: "help",

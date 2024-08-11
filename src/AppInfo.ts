@@ -12,12 +12,21 @@ type PackageInfo = {
     },
 };
 
+export type AppInfo = {
+    name: string,
+    version: string,
+    author: string,
+    url: string,
+};
+
 const pkgData = readFileSync(join(__dirname, "../../package.json"), "utf-8");
 const pkg = JSON.parse(pkgData) as PackageInfo;
 
-export default {
+export const appInfo: AppInfo = {
     name: pkg.productName,
-    author: pkg.author,
+    author: pkg.author.name,
     version: pkg.version,
     url: pkg.repository.url,
 };
+
+export default appInfo;

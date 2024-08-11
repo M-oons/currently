@@ -9,6 +9,8 @@ import { handleMouseEvent } from "../utils/inputHandler";
 //==============
 
 contextBridge.exposeInMainWorld("api", {
+    getAppInfo: () => ipcRenderer.invoke(IpcCommand.GetAppInfo),
+
     close: () => ipcRenderer.send(IpcCommand.Close),
     minimize: () => ipcRenderer.send(IpcCommand.Minimize),
     help: () => ipcRenderer.send(IpcCommand.Help),

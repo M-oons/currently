@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import { getActivityLastUpdateTime, getStartupTime, startup } from "../AppFlow";
-import AppInfo from "../AppInfo";
+import { type AppInfo, appInfo } from "../AppInfo";
 import type Activity from "../activity/types/Activity";
 import { clearActivity, getActivity, setActivity, startActivity } from "../activity/activityHandler";
 import { type Config, defaultConfig } from "../config/types/Config";
@@ -23,11 +23,11 @@ const createTray = (): void => {
 
     const menu = Menu.buildFromTemplate([
         {
-            label: AppInfo.name,
+            label: appInfo.name,
             type: "submenu",
             submenu: [
                 {
-                    label: AppInfo.version,
+                    label: appInfo.version,
                     type: "normal",
                     enabled: false,
                 },
@@ -51,7 +51,7 @@ const createTray = (): void => {
     ]);
 
     tray = new Tray(icon);
-    tray.setToolTip(AppInfo.name);
+    tray.setToolTip(appInfo.name);
     tray.setContextMenu(menu);
 
     tray.on("double-click", () => {
@@ -115,6 +115,10 @@ app.on("activate", () => {
 // ipc messages
 //===============
 
+ipcMain.handle(IpcCommand.GetAppInfo, (): AppInfo => {
+    return appInfo;
+})
+
 ipcMain.on(IpcCommand.Close, () => {
     mainWindow?.close();
 });
@@ -124,7 +128,7 @@ ipcMain.on(IpcCommand.Minimize, () => {
 });
 
 ipcMain.on(IpcCommand.Help, () => {
-    openURL(AppInfo.url);
+    openURL(appInfo.url);
 });
 
 ipcMain.handle(IpcCommand.GetStartupTime, (): number => {
