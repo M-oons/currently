@@ -1,12 +1,12 @@
 import { type ReactNode, createContext, useCallback, useEffect, useState } from "react";
-import { type Activity, defaultActivity } from "../activity/types/Activity";
+import type Activity from "../activity/types/Activity";
 
 type ActivityProviderProps = {
     children: ReactNode,
 };
 
 type ActivityContextState = {
-    activity: Activity,
+    activity: Activity | null,
     setActivity: (activity: Activity) => void,
     startActivity: () => Promise<void>,
     stopActivity: () => Promise<void>,
@@ -16,7 +16,7 @@ type ActivityContextState = {
 export const ActivityContext = createContext<ActivityContextState>({} as ActivityContextState);
 
 export const ActivityProvider = (props: ActivityProviderProps) => {
-    const [activity, setActivity] = useState<Activity>(defaultActivity);
+    const [activity, setActivity] = useState<Activity | null>(null);
     const [active, setActive] = useState<boolean>(false);
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type ActivityButton from "../../activity/types/ActivityButton";
 import type ActivityClientId from "../../activity/types/ActivityClientId";
@@ -37,21 +37,24 @@ export const Edit = () => {
     const { page } = useParams<EditParams>();
     const navigate = useNavigate();
     const { activity, setActivity } = useActivity();
-    const [clientId, setClientId] = useState<ActivityClientId | null>(activity.clientId);
-    const [clientSecret, setClientSecret] = useState<ActivityClientSecret | null>(activity.clientSecret);
-    const [count, setCount] = useState<ActivityCount | null>(activity.count);
-    const [details, setDetails] = useState<ActivityDetails | null>(activity.details);
-    const [state, setState] = useState<ActivityState | null>(activity.state);
-    const [imageLarge, setImageLarge] = useState<ActivityImage | null>(activity.imageLarge);
-    const [imageSmall, setImageSmall] = useState<ActivityImage | null>(activity.imageSmall);
-    const [timestampMode, setTimestampMode] = useState<ActivityTimestampMode>(activity.timestampMode);
-    const [timestampStart, setTimestampStart] = useState<ActivityTimestamp | null>(activity.timestampStart);
-    const [timestampEnd, setTimestampEnd] = useState<ActivityTimestamp | null>(activity.timestampEnd);
-    const [button1, setButton1] = useState<ActivityButton | null>(activity.button1);
-    const [button2, setButton2] = useState<ActivityButton | null>(activity.button2);
+    const [clientId, setClientId] = useState<ActivityClientId | null>(activity?.clientId ?? null);
+    const [clientSecret, setClientSecret] = useState<ActivityClientSecret | null>(activity?.clientSecret ?? null);
+    const [count, setCount] = useState<ActivityCount | null>(activity?.count ?? null);
+    const [details, setDetails] = useState<ActivityDetails | null>(activity?.details ?? null);
+    const [state, setState] = useState<ActivityState | null>(activity?.state ?? null);
+    const [imageLarge, setImageLarge] = useState<ActivityImage | null>(activity?.imageLarge ?? null);
+    const [imageSmall, setImageSmall] = useState<ActivityImage | null>(activity?.imageSmall ?? null);
+    const [timestampMode, setTimestampMode] = useState<ActivityTimestampMode>(activity?.timestampMode ?? ActivityTimestampMode.None);
+    const [timestampStart, setTimestampStart] = useState<ActivityTimestamp | null>(activity?.timestampStart ?? null);
+    const [timestampEnd, setTimestampEnd] = useState<ActivityTimestamp | null>(activity?.timestampEnd ?? null);
+    const [button1, setButton1] = useState<ActivityButton | null>(activity?.button1 ?? null);
+    const [button2, setButton2] = useState<ActivityButton | null>(activity?.button2 ?? null);
     const [valid, setValid] = useState<boolean>(true);
 
     const saveActivity = () => {
+        if (activity === null)
+            return;
+
         setActivity({
             ...activity,
             clientId,
@@ -71,6 +74,9 @@ export const Edit = () => {
     };
 
     const resetClient = () => {
+        if (activity === null)
+            return;
+
         setActivity({
             ...activity,
             clientId: null,
@@ -84,6 +90,9 @@ export const Edit = () => {
     };
 
     const renderPage = () => {
+        if (activity === null)
+            return;
+
         switch (page) {
             case "application":
                 return <EditApplication
