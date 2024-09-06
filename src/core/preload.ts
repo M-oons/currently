@@ -9,7 +9,7 @@ import { handleMouseEvent } from "../utils/inputHandler";
 //==============
 
 contextBridge.exposeInMainWorld("info", {
-    getAppInfo: () => ipcRenderer.invoke(IpcCommand.info.GetAppInfo),
+    getAppInfo: (): Promise<any> => ipcRenderer.invoke(IpcCommand.info.GetAppInfo),
 });
 
 contextBridge.exposeInMainWorld("flow", {
@@ -19,20 +19,21 @@ contextBridge.exposeInMainWorld("flow", {
 
 contextBridge.exposeInMainWorld("config", {
     getConfig: (): Promise<Config> => ipcRenderer.invoke(IpcCommand.config.GetConfig),
-    setConfig: (config: Config) => ipcRenderer.invoke(IpcCommand.config.SetConfig, config),
+    setConfig: (config: Config): Promise<any> => ipcRenderer.invoke(IpcCommand.config.SetConfig, config),
 });
 
 contextBridge.exposeInMainWorld("activity", {
     getActivity: (): Promise<Activity> => ipcRenderer.invoke(IpcCommand.activity.GetActivity),
-    setActivity: (activity: Activity) => ipcRenderer.invoke(IpcCommand.activity.SetActivity, activity),
+    setActivity: (activity: Activity): Promise<any> => ipcRenderer.invoke(IpcCommand.activity.SetActivity, activity),
+    getActiveState: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.GetActiveState),
     startActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.StartActivity),
     stopActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.StopActivity),
 });
 
 contextBridge.exposeInMainWorld("functions", {
-    close: () => ipcRenderer.send(IpcCommand.functions.Close),
-    minimize: () => ipcRenderer.send(IpcCommand.functions.Minimize),
-    help: () => ipcRenderer.send(IpcCommand.functions.Help),
+    close: (): void => ipcRenderer.send(IpcCommand.functions.Close),
+    minimize: (): void => ipcRenderer.send(IpcCommand.functions.Minimize),
+    help: (): void => ipcRenderer.send(IpcCommand.functions.Help),
 });
 
 contextBridge.exposeInMainWorld("utils", {

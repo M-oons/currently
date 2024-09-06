@@ -40,6 +40,7 @@ declare global {
         activity: {
             getActivity: () => Promise<Activity>,
             setActivity: (activity: Activity) => void,
+            getActiveState: () => Promise<boolean>,
             startActivity: () => Promise<boolean>,
             stopActivity: () => Promise<boolean>,
         },

@@ -20,6 +20,10 @@ export const setActivity = (activity: Activity): void => {
     saveActivity(currentActivity);
 };
 
+export const getActiveState = (): boolean => {
+    return active;
+}
+
 export const startActivity = async (): Promise<boolean> => {
     if (client === null || currentActivity.clientId !== currentClientId)
         await updateClient(currentActivity.clientId);

@@ -21,8 +21,10 @@ export const ActivityProvider = (props: ActivityProviderProps) => {
 
     useEffect(() => {
         const getActivity = async () => {
-            const activity: Activity = await window.activity.getActivity();
+            const activity = await window.activity.getActivity();
+            const active = await window.activity.getActiveState();
             setActivity(activity);
+            setActive(active);
         };
         getActivity();
     }, []);

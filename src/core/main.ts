@@ -3,9 +3,9 @@ import path from "path";
 import { getActivityLastUpdateTime, getStartupTime, startup } from "../AppFlow";
 import { type AppInfo, appInfo } from "../AppInfo";
 import type Activity from "../activity/types/Activity";
-import { clearActivity, getActivity, setActivity, startActivity } from "../activity/activityHandler";
-import { type Config, defaultConfig } from "../config/types/Config";
-import { loadConfig, saveConfig } from "../config/configLoader";
+import { clearActivity, getActivity, getActiveState, setActivity, startActivity } from "../activity/activityHandler";
+import type Config from "../config/types/Config";
+import { getConfig, setConfig } from "../config/configHandler";
 import IpcCommand from "../ipc/IpcCommand";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
@@ -140,11 +140,11 @@ ipcMain.handle(IpcCommand.flow.GetActivityLastUpdateTime, (): number => {
 });
 
 ipcMain.handle(IpcCommand.config.GetConfig, (): Config => {
-    return loadConfig() ?? defaultConfig;
+    return getConfig();
 });
 
 ipcMain.handle(IpcCommand.config.SetConfig, (_, config: Config): void => {
-    return saveConfig(config);
+    return setConfig(config);
 });
 
 ipcMain.handle(IpcCommand.activity.GetActivity, (): Activity => {
@@ -153,6 +153,10 @@ ipcMain.handle(IpcCommand.activity.GetActivity, (): Activity => {
 
 ipcMain.handle(IpcCommand.activity.SetActivity, (_, activity: Activity): void => {
     return setActivity(activity);
+});
+
+ipcMain.handle(IpcCommand.activity.GetActiveState, async (): Promise<boolean> => {
+    return getActiveState();
 });
 
 ipcMain.handle(IpcCommand.activity.StartActivity, async (): Promise<boolean> => {
