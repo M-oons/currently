@@ -15,6 +15,7 @@ contextBridge.exposeInMainWorld("info", {
 contextBridge.exposeInMainWorld("flow", {
     getStartupTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.flow.GetStartupTime),
     getActivityLastUpdateTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.flow.GetActivityLastUpdateTime),
+    isDiscordRunning: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.flow.IsDiscordRunning),
 });
 
 contextBridge.exposeInMainWorld("config", {

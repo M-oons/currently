@@ -9,7 +9,7 @@
     background-color: var(--green) !important;
 }
 
-#activity-control-start:hover {
+#activity-control-start:hover:not(:disabled) {
     background-color: var(--green-hover) !important;
 }
 
@@ -19,7 +19,7 @@
     background-color: var(--red) !important;
 }
 
-#activity-control-stop:hover {
+#activity-control-stop:hover:not(:disabled) {
     background-color: var(--red-hover) !important;
 }
 

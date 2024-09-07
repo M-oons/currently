@@ -4,6 +4,7 @@ import "./ActivityControls.css";
 
 type ActivityControlsProps = {
     edit: boolean,
+    disabled: boolean,
     onEditToggle: (value: boolean) => void,
 };
 
@@ -22,8 +23,8 @@ const ActivityControls = (props: ActivityControlsProps) => {
         <div id="activity-controls">
             {!props.edit &&
                 (active
-                    ? <Button id="activity-control-stop" onClick={stopActivity}>Stop</Button>
-                    : <Button id="activity-control-start" onClick={startActivity}>Start</Button>
+                    ? <Button id="activity-control-stop" disabled={props.disabled} onClick={stopActivity}>Stop</Button>
+                    : <Button id="activity-control-start" disabled={props.disabled} onClick={startActivity}>Start</Button>
                 )
             }
             {props.edit

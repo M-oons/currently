@@ -5,6 +5,7 @@ export const IpcCommand = {
     flow: {
         GetStartupTime: "get-startup-time",
         GetActivityLastUpdateTime: "get-activity-last-update-time",
+        IsDiscordRunning: "is-discord-running",
     },
     config: {
         GetConfig: "get-config",

@@ -9,6 +9,7 @@ import { getConfig, setConfig } from "../config/configHandler";
 import IpcCommand from "../ipc/IpcCommand";
 import { getIcon } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
+import { isDiscordRunning } from "../utils/processHandler";
 
 if (require("electron-squirrel-startup"))
     app.quit();
@@ -137,6 +138,10 @@ ipcMain.handle(IpcCommand.flow.GetStartupTime, (): number => {
 
 ipcMain.handle(IpcCommand.flow.GetActivityLastUpdateTime, (): number => {
     return getActivityLastUpdateTime();
+});
+
+ipcMain.handle(IpcCommand.flow.IsDiscordRunning, async (): Promise<boolean> => {
+    return await isDiscordRunning();
 });
 
 ipcMain.handle(IpcCommand.config.GetConfig, (): Config => {

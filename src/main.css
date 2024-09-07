@@ -2,11 +2,15 @@
     --background-color: #1a1a1a;
     --blurple: #5865f2;
     --blurple-hover: #4752c4;
+    --blue: #00a8fc;
+    --blue-alert: #0f2028;
     --green: #05af55;
     --green-hover: #059e4d;
     --red: #da373c;
+    --red-alert: #311010;
     --red-hover: #a12828;
     --yellow: #f0b232;
+    --yellow-alert: #272114;
     --yellow-hover: #cc972a;
     --grey: #555555;
     --grey-hover: #4d4d4d;

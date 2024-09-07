@@ -32,6 +32,7 @@ declare global {
         flow: {
             getStartupTime: () => Promise<number>,
             getActivityLastUpdateTime: () => Promise<number>,
+            isDiscordRunning: () => Promise<boolean>,
         },
         config: {
             getConfig: () => Promise<Config>,
