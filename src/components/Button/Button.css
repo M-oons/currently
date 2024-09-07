@@ -24,3 +24,51 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.button-grey {
+    background-color: var(--grey);
+}
+
+.button-grey:hover:not(:disabled) {
+    background-color: var(--grey-hover);
+}
+
+.button-blurple {
+    background-color: var(--blurple);
+}
+
+.button-blurple:hover:not(:disabled) {
+    background-color: var(--blurple-hover);
+}
+
+.button-green {
+    background-color: var(--green);
+}
+
+.button-green:hover:not(:disabled) {
+    background-color: var(--green-hover);
+}
+
+.button-red {
+    background-color: var(--red);
+}
+
+.button-red:hover:not(:disabled) {
+    background-color: var(--red-hover);
+}
+
+.button-yellow {
+    background-color: var(--yellow);
+}
+
+.button-yellow:hover:not(:disabled) {
+    background-color: var(--yellow-hover);
+}
+
+.button-transparent {
+    background-color: transparent;
+}
+
+.button-transparent:hover:not(:disabled) {
+    background-color: transparent;
+}

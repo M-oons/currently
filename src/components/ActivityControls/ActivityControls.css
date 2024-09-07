@@ -6,31 +6,16 @@
 #activity-control-start {
     width: 85%;
     margin-right: 4px;
-    background-color: var(--green) !important;
-}
-
-#activity-control-start:hover:not(:disabled) {
-    background-color: var(--green-hover) !important;
 }
 
 #activity-control-stop {
     width: 85%;
     margin-right: 4px;
-    background-color: var(--red) !important;
-}
-
-#activity-control-stop:hover:not(:disabled) {
-    background-color: var(--red-hover) !important;
 }
 
 #activity-control-edit {
     width: 15%;
     margin-left: 4px;
-    background-color: var(--blurple) !important;
-}
-
-#activity-control-edit:hover {
-    background-color: var(--blurple-hover) !important;
 }
 
 #activity-control-edit>span {
@@ -39,9 +24,4 @@
 
 #activity-control-done {
     width: 100%;
-    background-color: var(--blurple) !important;
-}
-
-#activity-control-done:hover {
-    background-color: var(--blurple-hover) !important;
 }

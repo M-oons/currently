@@ -70,7 +70,7 @@ const Settings = () => {
                 </div>
             </div>
             <div id="settings-controls">
-                <Button id="edit-done" onClick={saveSettings}>Save</Button>
+                <Button id="settings-done" color="blurple" onClick={saveSettings}>Save</Button>
             </div>
         </Page>
     );

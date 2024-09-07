@@ -21,22 +21,22 @@ const ActivityDisplayButtons = (props: ActivityDisplayButtonsProps) => {
         ? (
             <>
                 {props.button1 !== null
-                    ? <Button className="activity-button edit" onClick={() => goToEditPage("buttons")}>{props.button1.text}</Button>
-                    : <Button className="activity-button edit empty" onClick={() => goToEditPage("buttons")} />
+                    ? <Button className="activity-button edit" color="grey" onClick={() => goToEditPage("buttons")}>{props.button1.text}</Button>
+                    : <Button className="activity-button edit empty" color="transparent" onClick={() => goToEditPage("buttons")} />
                 }
                 {props.button2 !== null
-                    ? <Button className="activity-button edit" onClick={() => goToEditPage("buttons")}>{props.button2.text}</Button>
-                    : <Button className="activity-button edit empty" onClick={() => goToEditPage("buttons")} />
+                    ? <Button className="activity-button edit" color="grey" onClick={() => goToEditPage("buttons")}>{props.button2.text}</Button>
+                    : <Button className="activity-button edit empty" color="transparent" onClick={() => goToEditPage("buttons")} />
                 }
             </>
         )
         : (
             <>
                 {props.button1 !== null &&
-                    <Button className="activity-button">{props.button1.text}</Button>
+                    <Button className="activity-button" color="grey">{props.button1.text}</Button>
                 }
                 {props.button2 !== null &&
-                    <Button className="activity-button">{props.button2.text}</Button>
+                    <Button className="activity-button" color="grey">{props.button2.text}</Button>
                 }
             </>
         );

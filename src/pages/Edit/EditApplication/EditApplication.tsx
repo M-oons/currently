@@ -161,12 +161,12 @@ const EditApplication = (props: EditApplicationProps) => {
             <div className="edit-section">
                 <div id="edit-client-controls">
                     {validApplication === null
-                        ? <Button id="edit-client-validation" onClick={validateClient}>Validate client details</Button>
+                        ? <Button id="edit-client-validation" color="yellow" onClick={validateClient}>Validate client details</Button>
                         : validApplication
-                            ? <Button id="edit-client-validation-valid">Valid client details</Button>
-                            : <Button id="edit-client-validation-invalid">Invalid client details</Button>
+                            ? <Button id="edit-client-validation-valid" color="green">Valid client details</Button>
+                            : <Button id="edit-client-validation-invalid" color="red">Invalid client details</Button>
                     }
-                    <Button id="edit-reset-client" onClick={props.resetClient}>↺</Button>
+                    <Button id="edit-reset-client" color="red" onClick={props.resetClient}>↺</Button>
                 </div>
             </div>
         </>

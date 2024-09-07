@@ -29,7 +29,6 @@
 
 .activity-button.empty {
     border: 2px dashed var(--light-grey);
-    background-color: transparent !important;
 }
 
 .activity-button.empty:hover {

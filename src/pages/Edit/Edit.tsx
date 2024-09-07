@@ -167,8 +167,8 @@ export const Edit = () => {
                 {renderPage()}
             </div>
             <div id="edit-controls">
-                <Button id="edit-done" disabled={!valid} onClick={saveActivity}>Done</Button>
-                <Button id="edit-cancel" onClick={goBack}>Cancel</Button>
+                <Button id="edit-done" color="blurple" disabled={!valid} onClick={saveActivity}>Done</Button>
+                <Button id="edit-cancel" color="grey" onClick={goBack}>Cancel</Button>
             </div>
         </Page>
     );

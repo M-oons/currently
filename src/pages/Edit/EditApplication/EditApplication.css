@@ -42,31 +42,29 @@
 #edit-client-validation {
     width: 85%;
     margin-right: 4px;
-    background-color: var(--yellow) !important;
-}
-
-#edit-client-validation:hover {
-    background-color: var(--yellow-hover) !important;
 }
 
 #edit-client-validation-valid {
     width: 85%;
     margin-right: 4px;
+}
+
+#edit-client-validation-valid:hover {
     background-color: var(--green) !important;
+    cursor: default !important;
 }
 
 #edit-client-validation-invalid {
     width: 85%;
     margin-right: 4px;
+}
+
+#edit-client-validation-invalid:hover {
     background-color: var(--red) !important;
+    cursor: default !important;
 }
 
 #edit-reset-client {
     width: 15%;
     margin-left: 4px;
-    background-color: var(--red) !important;
-}
-
-#edit-reset-client:hover {
-    background-color: var(--red-hover) !important;
 }

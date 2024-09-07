@@ -23,13 +23,13 @@ const ActivityControls = (props: ActivityControlsProps) => {
         <div id="activity-controls">
             {!props.edit &&
                 (active
-                    ? <Button id="activity-control-stop" disabled={props.disabled} onClick={stopActivity}>Stop</Button>
-                    : <Button id="activity-control-start" disabled={props.disabled} onClick={startActivity}>Start</Button>
+                    ? <Button id="activity-control-stop" color="red" disabled={props.disabled} onClick={stopActivity}>Stop</Button>
+                    : <Button id="activity-control-start" color="green" disabled={props.disabled} onClick={startActivity}>Start</Button>
                 )
             }
             {props.edit
-                ? <Button id="activity-control-done" onClick={stopEdit}>Done</Button>
-                : <Button id="activity-control-edit" onClick={startEdit}><span>✎</span></Button>
+                ? <Button id="activity-control-done" color="blurple" onClick={stopEdit}>Done</Button>
+                : <Button id="activity-control-edit" color="blurple" onClick={startEdit}><span>✎</span></Button>
             }
         </div>
     );
