@@ -43,10 +43,16 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Install dependencies
+      - name: Install Python
+        run: brew install python@3
+  
+      - name: Install Python dependencies
+        run: pip3 install setuptools
+
+      - name: Install Node dependencies
         run: npm install
 
-      - name: Install appdmg
+      - name: Install other dependencies
         run: npm install -D appdmg
 
       - name: Package and make macOS installer
