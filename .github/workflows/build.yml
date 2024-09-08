@@ -43,10 +43,8 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Install Python
-        run: |
-          brew install python@3
-          brew install python-setuptools
+      - name: Install Python dependencies
+        run: brew install python-setuptools
 
       - name: Install Node dependencies
         run: npm install
