@@ -9,6 +9,8 @@ import { FuseV1Options, FuseVersion } from "@electron/fuses";
 const config: ForgeConfig = {
     packagerConfig: {
         asar: true,
+        name: "Currently",
+        executableName: "Currently",
     },
     rebuildConfig: {},
     makers: [
