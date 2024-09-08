@@ -14,9 +14,10 @@ const config: ForgeConfig = {
     rebuildConfig: {},
     makers: [
         new MakerSquirrel({}),
-        new MakerZIP({}, ["darwin"]),
+        new MakerZIP({}, ["win32", "darwin", "linux"]),
         new MakerRpm({}),
-        new MakerDeb({})],
+        new MakerDeb({})
+    ],
     plugins: [
         new VitePlugin({
             // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
