@@ -76,6 +76,9 @@ jobs:
       - name: Install build dependencies for DEB
         run: sudo apt-get install -y dpkg fakeroot
 
+      - name: Build Electron app
+        run: npm run package
+
       - name: Package and make Linux installer
         run: npm run make
 
