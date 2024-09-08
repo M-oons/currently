@@ -70,9 +70,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install RPM build tools
-        run: sudo apt-get install rpm -y
-
       - name: Package and make Linux installer
         run: npm run make
 
