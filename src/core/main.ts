@@ -7,7 +7,7 @@ import { clearActivity, getActivity, getActiveState, setActivity, startActivity 
 import type Config from "../config/types/Config";
 import { getConfig, setConfig } from "../config/configHandler";
 import IpcCommand from "../ipc/IpcCommand";
-import { getIcon } from "../utils/assetLoader";
+import { getAsset } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
 import { isDiscordRunning } from "../utils/processHandler";
 
@@ -20,7 +20,7 @@ let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
 
 const createTray = (): void => {
-    const icon = getIcon("icon");
+    const icon = getAsset("tray");
 
     const menu = Menu.buildFromTemplate([
         {
@@ -70,7 +70,7 @@ const createWindow = () => {
         maximizable: false,
         resizable: false,
         show: false,
-        icon: getIcon("icon"),
+        icon: getAsset("app"),
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
         },

@@ -4,15 +4,24 @@ import { MakerDMG } from "@electron-forge/maker-dmg";
 import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
+import { getAssetPath } from "./src/utils/assetLoader";
 
 const config: ForgeConfig = {
     packagerConfig: {
         asar: true,
+        icon: getAssetPath("packager", true),
     },
     rebuildConfig: {},
     makers: [
-        new MakerSquirrel({}),
-        new MakerDMG({}),
+        new MakerSquirrel({
+            iconUrl: "",
+            setupIcon: getAssetPath("app", true),
+        }),
+        new MakerDMG({
+            background: getAssetPath("installer", true),
+            icon: getAssetPath("app", true),
+            format: "ULFO",
+        }),
     ],
     plugins: [
         new VitePlugin({
