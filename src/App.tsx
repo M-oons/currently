@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import TitleBar from "./components/TitleBar/TitleBar";
 import Edit from "./pages/Edit/Edit";
 import Home from "./pages/Home/Home";
@@ -10,7 +10,7 @@ import "./App.css";
 const App = () => {
     return (
         <div id="app">
-            <BrowserRouter>
+            <HashRouter>
                 <ConfigProvider>
                     <ActivityProvider>
                         <TitleBar />
@@ -23,7 +23,7 @@ const App = () => {
                         </div>
                     </ActivityProvider>
                 </ConfigProvider>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 };
