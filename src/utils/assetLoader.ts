@@ -50,8 +50,7 @@ export const getAssetPath = (type: AssetType, relative: boolean = false): string
     }
 
     name = `assets/${name}`;
-
     return relative
-        ? name
+        ? `public/${name}`
         : join(__dirname, name);
 };

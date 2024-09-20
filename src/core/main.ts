@@ -20,8 +20,6 @@ let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
 
 const createTray = (): void => {
-    const icon = getAsset("tray");
-
     const menu = Menu.buildFromTemplate([
         {
             label: appInfo.name,
@@ -51,7 +49,7 @@ const createTray = (): void => {
         },
     ]);
 
-    tray = new Tray(icon);
+    tray = new Tray(getAsset("tray"));
     tray.setToolTip(appInfo.name);
     tray.setContextMenu(menu);
 

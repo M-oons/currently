@@ -14,7 +14,7 @@ const config: ForgeConfig = {
     rebuildConfig: {},
     makers: [
         new MakerSquirrel({
-            iconUrl: "",
+            iconUrl: "https://github.com/M-oons/currently/blob/main/public/images/image.png?raw=true",
             setupIcon: getAssetPath("app", true),
         }),
         new MakerDMG({
