@@ -9,10 +9,10 @@ type AssetType =
 
 export const getAsset = (type: AssetType): NativeImage => {
     const image = nativeImage.createFromPath(getAssetPath(type));
-
+    
     if (process.platform === "darwin")
         image.setTemplateImage(true);
-
+    
     return image;
 };
 
@@ -26,7 +26,7 @@ export const getAssetPath = (type: AssetType, relative: boolean = false): string
                 name = "app.icns";
                 break;
             case "tray":
-                name = "app-Template.icns";
+                name = "appTemplate.png";
                 break;
             case "installer":
                 name = "installer.png";
