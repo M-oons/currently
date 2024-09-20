@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Installing application dependencies..."
-npm install
+npm install --no-audit --no-fund
 
 if [ $? -ne 0 ]; then
     echo "Error installing application dependencies."
