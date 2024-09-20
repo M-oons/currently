@@ -11,8 +11,8 @@ const DISCORD_PATHS_WINDOWS = [
     "\\program files\\discordcanary\\",
 ];
 const DISCORD_PATHS_OTHER = [
-    "/Applications/Discord.app/",
-    "/Applications/Discord Canary.app/",
+    "/applications/discord.app/",
+    "/applications/discord canary.app/",
     "/usr/lib/discord/",
     "/usr/lib/discord-canary/",
 ];
@@ -49,7 +49,7 @@ const isDiscordRunningWindows = (): Promise<boolean> => {
 
 const isDiscordRunningOther = (): Promise<boolean> => {
     return new Promise((resolve) => {
-        exec("ps -aux", (err, stdout, stderr) => {
+        exec("ps aux", (err, stdout, stderr) => {
             if (err !== null || stderr !== "")
                 return resolve(false);
 
