@@ -7,25 +7,40 @@
 - [Node.js](https://nodejs.org/en/download)
 
 ### Windows
+
+#### Build
 ```bash
-> git clone https://github.com/M-oons/currently.git
+> git clone --depth 1 https://github.com/M-oons/currently.git
 > cd currently
+> ./build.bat
+```
+
+#### Update
+```bash
+> git pull
 > ./build.bat
 ```
 
 ### macOS
 
 #### Prerequisites
-- Python setuptools
 ```bash
+# Python setuptools
 > pip3 install setuptools
-#       or
+    # or
 > brew install python-setuptools
 ```
 
+#### Build
 ```bash
-> git clone https://github.com/M-oons/currently.git
+> git clone --depth 1 https://github.com/M-oons/currently.git
 > cd currently
 > chmod +x ./build.sh
+> ./build.sh
+```
+
+#### Update
+```bash
+> git pull
 > ./build.sh
 ```
