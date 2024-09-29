@@ -1,7 +1,7 @@
 @echo off
 
 echo Installing application dependencies...
-call npm install --no-audit --no-fund
+call npm install --loglevel=silent --no-audit --no-fund
 
 if %errorlevel% neq 0 (
     echo Error installing application dependencies.
