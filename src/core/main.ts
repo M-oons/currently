@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
+import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import { getActivityLastUpdateTime, getStartupTime, startup } from "../AppFlow";
 import { type AppInfo, appInfo } from "../AppInfo";
@@ -20,38 +20,9 @@ let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
 
 const createTray = (): void => {
-    const menu = Menu.buildFromTemplate([
-        {
-            label: appInfo.name,
-            type: "submenu",
-            submenu: [
-                {
-                    label: appInfo.version,
-                    type: "normal",
-                    enabled: false,
-                },
-            ],
-        },
-        { type: "separator" },
-        {
-            label: "Show",
-            type: "normal",
-            click: () => {
-                showWindow();
-            },
-        },
-        {
-            label: "Quit",
-            type: "normal",
-            click: () => {
-                app.quit();
-            },
-        },
-    ]);
-
     tray = new Tray(getAsset("tray"));
     tray.setToolTip(appInfo.name);
-    tray.setContextMenu(menu);
+    updateTrayMenu();
 
     tray.on("double-click", () => {
         showWindow();
@@ -93,6 +64,58 @@ const showWindow = (): void => {
     mainWindow.show();
 };
 
+const updateTrayMenu = (): void => {
+    const menu = Menu.buildFromTemplate([
+        {
+            label: appInfo.name,
+            type: "submenu",
+            submenu: [
+                {
+                    label: appInfo.version,
+                    type: "normal",
+                    enabled: false,
+                },
+            ],
+        },
+        { type: "separator" },
+        {
+            label: getActiveState()
+                ? "Stop activity"
+                : "Start activity",
+            type: "normal",
+            click: async () => {
+                const active = getActiveState();
+                await toggleActivity(!active);
+            },
+        },
+        { type: "separator" },
+        {
+            label: "Show",
+            type: "normal",
+            click: () => {
+                showWindow();
+            },
+        },
+        {
+            label: "Quit",
+            type: "normal",
+            click: () => {
+                app.quit();
+            },
+        },
+    ]);
+    tray?.setContextMenu(menu);
+};
+
+const toggleActivity = async (state: boolean): Promise<boolean> => {
+    const active = state
+        ? await startActivity()
+        : await clearActivity();
+    updateTrayMenu();
+    mainWindow?.webContents.send(IpcCommand.activity.SetActiveState, active);
+    return active;
+};
+
 //==============
 // main events
 //==============
@@ -102,7 +125,7 @@ app.on("ready", () => {
     createWindow();
 });
 
-app.on("window-all-closed", (event: Electron.Event) => {
+app.on("window-all-closed", (event: Event) => {
     event.preventDefault();
 });
 
@@ -163,9 +186,9 @@ ipcMain.handle(IpcCommand.activity.GetActiveState, async (): Promise<boolean> =>
 });
 
 ipcMain.handle(IpcCommand.activity.StartActivity, async (): Promise<boolean> => {
-    return await startActivity();
+    return toggleActivity(true);
 });
 
 ipcMain.handle(IpcCommand.activity.StopActivity, async (): Promise<boolean> => {
-    return await clearActivity();
+    return toggleActivity(false);
 });

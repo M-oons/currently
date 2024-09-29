@@ -20,13 +20,22 @@ export const ActivityProvider = (props: ActivityProviderProps) => {
     const [active, setActive] = useState<boolean>(false);
 
     useEffect(() => {
+        window.activity.onSetActiveState((_, active: boolean) => {
+            setActive(active);
+        });
+
         const getActivity = async () => {
             const activity = await window.activity.getActivity();
             const active = await window.activity.getActiveState();
             setActivity(activity);
             setActive(active);
         };
+
         getActivity();
+
+        return () => {
+            window.activity.removeSetActiveStateListeners();
+        };
     }, []);
 
     const startActivity = useCallback(async () => {

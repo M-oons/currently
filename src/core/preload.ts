@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer, type IpcRenderer, type IpcRendererEvent } from "electron";
 import type Activity from "../activity/types/Activity";
 import type Config from "../config/types/Config";
 import IpcCommand from "../ipc/IpcCommand";
@@ -27,6 +27,8 @@ contextBridge.exposeInMainWorld("activity", {
     getActivity: (): Promise<Activity> => ipcRenderer.invoke(IpcCommand.activity.GetActivity),
     setActivity: (activity: Activity): Promise<any> => ipcRenderer.invoke(IpcCommand.activity.SetActivity, activity),
     getActiveState: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.GetActiveState),
+    onSetActiveState: (callback: (event: IpcRendererEvent, active: boolean) => void): IpcRenderer => ipcRenderer.on(IpcCommand.activity.SetActiveState, callback),
+    removeSetActiveStateListeners: (): IpcRenderer => ipcRenderer.removeAllListeners(IpcCommand.activity.SetActiveState),
     startActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.StartActivity),
     stopActivity: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.StopActivity),
 });
