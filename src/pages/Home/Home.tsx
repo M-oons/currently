@@ -4,6 +4,7 @@ import ActivityControls from "../../components/ActivityControls/ActivityControls
 import ActivityDisplay from "../../components/ActivityDisplay/ActivityDisplay";
 import Alert from "../../components/Alert/Alert";
 import useActivity from "../../hooks/useActivity";
+import useInterval from "../../hooks/useInterval";
 import { toBoolean } from "../../utils/conversion";
 import Page from "../Page";
 import "./Home.css";
@@ -12,16 +13,15 @@ const Home = () => {
     const [searchParams] = useSearchParams();
     const { activity } = useActivity();
     const [edit, setEdit] = useState<boolean>(toBoolean(searchParams.get("edit")));
-    const [discordRunning, setDiscordRunning] = useState<boolean>(true);
+    const [discordRunning, setDiscordRunning] = useState<boolean>(false);
 
-    useEffect(() => {
-        const checkDiscordRunning = async () => {
-            const isRunning = await window.flow.isDiscordRunning();
-            setDiscordRunning(isRunning);
-        };
+    useInterval(5000, async () => {
+        if (discordRunning)
+            return;
 
-        checkDiscordRunning();
-    }, []);
+        const isRunning = await window.flow.isDiscordRunning();
+        setDiscordRunning(isRunning);
+    }, true, [discordRunning]);
 
     useEffect(() => {
         if (activity !== null && activity.clientId === null)
