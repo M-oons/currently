@@ -133,6 +133,10 @@ app.on("activate", () => {
     showWindow();
 });
 
+app.on("before-quit", async () => {
+    await clearActivity();
+});
+
 //===============
 // ipc messages
 //===============
