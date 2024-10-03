@@ -12,6 +12,7 @@ const Settings = () => {
     const { config, setConfig } = useConfig();
     const [appInfo, setAppInfo] = useState<AppInfo>({} as AppInfo);
     const [launchOnSystemStartup, setLaunchOnSystemStartup] = useState<boolean>(config.launchOnSystemStartup);
+    const [startMinimized, setStartMinimized] = useState<boolean>(config.startMinimized);
     const [setActivityOnLaunch, setSetActivityOnLaunch] = useState<boolean>(config.setActivityOnLaunch);
 
     useEffect(() => {
@@ -26,6 +27,10 @@ const Settings = () => {
         setLaunchOnSystemStartup(value);
     }, []);
 
+    const toggleStartMinimized = useCallback((value: boolean) => {
+        setStartMinimized(value);
+    }, []);
+
     const toggleSetActivityOnLaunch = useCallback((value: boolean) => {
         setSetActivityOnLaunch(value);
     }, []);
@@ -33,6 +38,7 @@ const Settings = () => {
     const saveSettings = () => {
         setConfig({
             launchOnSystemStartup,
+            startMinimized,
             setActivityOnLaunch,
         });
         navigate("/");
@@ -53,7 +59,20 @@ const Settings = () => {
                             />
                         </div>
                     </div>
-                    <div className="setting-description">Automatically launch {appInfo.name} when your computer starts up</div>
+                    <div className="setting-description">Automatically launch {appInfo.name} when your computer starts up.</div>
+                </div>
+                <div className="settings-item">
+                    <div className="setting-main">
+                        <div className="setting-label">Start minimized</div>
+                        <div className="setting-input">
+                            <Switch
+                                scale={1.2}
+                                value={config.startMinimized}
+                                onChange={toggleStartMinimized}
+                            />
+                        </div>
+                    </div>
+                    <div className="setting-description">{appInfo.name} will start in the background, minimized to the system tray.</div>
                 </div>
                 <div className="settings-item">
                     <div className="setting-main">
@@ -66,7 +85,7 @@ const Settings = () => {
                             />
                         </div>
                     </div>
-                    <div className="setting-description">Automatically set activity when {appInfo.name} is launched</div>
+                    <div className="setting-description">Automatically set activity when {appInfo.name} is launched.</div>
                 </div>
             </div>
             <div id="settings-controls">

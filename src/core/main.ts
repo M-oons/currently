@@ -121,8 +121,12 @@ const toggleActivity = async (state: boolean): Promise<boolean> => {
 //==============
 
 app.on("ready", () => {
+    const config = getConfig();
+
     createTray();
-    createWindow();
+
+    if (!config.startMinimized)
+        createWindow();
 });
 
 app.on("window-all-closed", (event: Event) => {

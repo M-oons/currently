@@ -5,6 +5,7 @@ export const parseConfig = (json: string): Config | null => {
         const parsedConfig = JSON.parse(json) as Config;
         return {
             launchOnSystemStartup: parseLaunchOnSystemStartup(parsedConfig.launchOnSystemStartup),
+            startMinimized: parseStartMinimized(parsedConfig.startMinimized),
             setActivityOnLaunch: parseSetActivityOnLaunch(parsedConfig.setActivityOnLaunch),
         };
     }
@@ -18,6 +19,12 @@ export const parseConfig = (json: string): Config | null => {
 const parseLaunchOnSystemStartup = (launchOnSystemStartup?: boolean): boolean => {
     return typeof launchOnSystemStartup === "boolean"
         ? launchOnSystemStartup
+        : false;
+};
+
+const parseStartMinimized = (startMinimized?: boolean): boolean => {
+    return typeof startMinimized === "boolean"
+        ? startMinimized
         : false;
 };
 
