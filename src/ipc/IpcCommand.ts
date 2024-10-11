@@ -6,6 +6,7 @@ export const IpcCommand = {
         GetStartupTime: "get-startup-time",
         GetActivityLastUpdateTime: "get-activity-last-update-time",
         IsDiscordRunning: "is-discord-running",
+        CheckForUpdate: "check-for-update",
     },
     config: {
         GetConfig: "get-config",

@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 
-type PackageInfo = {
+export type PackageInfo = {
     productName: string,
     version: string,
     author: {

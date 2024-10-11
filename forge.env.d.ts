@@ -1,6 +1,7 @@
 import { type IpcRenderer, type IpcRendererEvent } from "electron";
 import { type AppInfo } from "./src/AppInfo";
 import Activity from "./src/activity/types/Activity";
+import { type UpdateInfo } from "./src/utils/updater";
 
 export { };
 
@@ -34,6 +35,7 @@ declare global {
             getStartupTime: () => Promise<number>,
             getActivityLastUpdateTime: () => Promise<number>,
             isDiscordRunning: () => Promise<boolean>,
+            checkForUpdate: () => Promise<UpdateInfo>,
         },
         config: {
             getConfig: () => Promise<Config>,

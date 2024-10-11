@@ -10,6 +10,7 @@ import IpcCommand from "../ipc/IpcCommand";
 import { getAsset } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
 import { isDiscordRunning } from "../utils/processHandler";
+import { checkForUpdate, type UpdateInfo } from "../utils/updater";
 
 if (require("electron-squirrel-startup"))
     app.quit();
@@ -171,6 +172,10 @@ ipcMain.handle(IpcCommand.flow.GetActivityLastUpdateTime, (): number => {
 
 ipcMain.handle(IpcCommand.flow.IsDiscordRunning, async (): Promise<boolean> => {
     return await isDiscordRunning();
+});
+
+ipcMain.handle(IpcCommand.flow.CheckForUpdate, async (): Promise<UpdateInfo> => {
+    return await checkForUpdate();
 });
 
 ipcMain.handle(IpcCommand.config.GetConfig, (): Config => {
