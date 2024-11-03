@@ -43,6 +43,7 @@ const createWindow = () => {
         icon: getAsset("app"),
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
+            devTools: !app.isPackaged,
         },
     });
 
