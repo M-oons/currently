@@ -13,7 +13,7 @@ const Home = () => {
     const [searchParams] = useSearchParams();
     const { activity } = useActivity();
     const [edit, setEdit] = useState<boolean>(toBoolean(searchParams.get("edit")));
-    const [discordRunning, setDiscordRunning] = useState<boolean>(false);
+    const [discordRunning, setDiscordRunning] = useState<boolean | null>(null);
 
     useInterval(5000, async () => {
         if (discordRunning)
@@ -34,7 +34,7 @@ const Home = () => {
 
     return (
         <Page name="home">
-            {!discordRunning &&
+            {discordRunning === false &&
                 <div id="discord-running-alert-container">
                     <Alert
                         type="warning"
