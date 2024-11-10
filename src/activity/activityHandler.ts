@@ -5,37 +5,41 @@ import { loadActivity, saveActivity } from "./activityLoader";
 import { buildPresence } from "./presenceBuilder";
 import { activityUpdated } from "../AppFlow";
 
-let client: Client | null = null;
+const ACTIVITY_UPDATE_INTERVAL = 15000;
 
-let currentActivity: Activity = loadActivity() ?? defaultActivity;
+let client: Client | null = null;
+let currentActivity: Activity;
+let currentPresence: Presence;
 let currentClientId: ActivityClientId | null = null;
+let activityInterval: NodeJS.Timeout | null = null;
 let active: boolean = false;
+
+const activityChanged = (activity: Activity): void => {
+    currentActivity = activity;
+    currentPresence = buildPresence(currentActivity);
+};
+
+const activity = loadActivity() ?? defaultActivity;
+activityChanged(activity);
 
 export const getActivity = (): Activity => {
     return currentActivity;
 };
 
 export const setActivity = (activity: Activity): void => {
-    currentActivity = activity;
+    activityChanged(activity);
     saveActivity(currentActivity);
 };
 
 export const getActiveState = (): boolean => {
     return active;
-}
+};
 
 export const startActivity = async (): Promise<boolean> => {
     if (client === null || currentActivity.clientId !== currentClientId)
         await updateClient(currentActivity.clientId);
 
-    const presence = buildPresence(currentActivity);
-
-    try {
-        await client?.setActivity(presence);
-        active = true;
-        activityUpdated();
-    }
-    catch { }
+    await startActivityInterval();
 
     return active;
 };
@@ -44,11 +48,12 @@ export const clearActivity = async (): Promise<boolean> => {
     try {
         await client?.clearActivity();
         active = false;
+        clearActivityInterval();
     }
     catch { }
 
     return active;
-}
+};
 
 const updateClient = async (clientId: ActivityClientId | null): Promise<void> => {
     try {
@@ -63,4 +68,26 @@ const updateClient = async (clientId: ActivityClientId | null): Promise<void> =>
         currentClientId = clientId;
     }
     catch { }
-}
+};
+
+const startActivityInterval = async (): Promise<void> => {
+    const setActivity = async () => {
+        try {
+            await client?.setActivity(currentPresence);
+            active = true;
+            activityUpdated();
+        }
+        catch { }
+    };
+
+    await setActivity();
+    clearActivityInterval();
+    activityInterval = setInterval(async () => await setActivity(), ACTIVITY_UPDATE_INTERVAL);
+};
+
+const clearActivityInterval = (): void => {
+    if (activityInterval === null)
+        return;
+
+    clearInterval(activityInterval);
+};
