@@ -8,26 +8,18 @@ import { activityUpdated } from "../AppFlow";
 const ACTIVITY_UPDATE_INTERVAL = 15000;
 
 let client: Client | null = null;
-let currentActivity: Activity;
-let currentPresence: Presence;
 let currentClientId: ActivityClientId | null = null;
 let activityInterval: NodeJS.Timeout | null = null;
 let active: boolean = false;
 
-const activityChanged = (activity: Activity): void => {
-    currentActivity = activity;
-    currentPresence = buildPresence(currentActivity);
-};
-
-const activity = loadActivity() ?? defaultActivity;
-activityChanged(activity);
+let currentActivity = loadActivity() ?? defaultActivity;
 
 export const getActivity = (): Activity => {
     return currentActivity;
 };
 
 export const setActivity = (activity: Activity): void => {
-    activityChanged(activity);
+    currentActivity = activity;
     saveActivity(currentActivity);
 };
 
@@ -55,6 +47,15 @@ export const clearActivity = async (): Promise<boolean> => {
     return active;
 };
 
+const updateActivity = async (presence: Presence) => {
+    try {
+        await client?.setActivity(presence);
+        active = true;
+        activityUpdated();
+    }
+    catch { }
+};
+
 const updateClient = async (clientId: ActivityClientId | null): Promise<void> => {
     try {
         await client?.destroy();
@@ -71,18 +72,12 @@ const updateClient = async (clientId: ActivityClientId | null): Promise<void> =>
 };
 
 const startActivityInterval = async (): Promise<void> => {
-    const setActivity = async () => {
-        try {
-            await client?.setActivity(currentPresence);
-            active = true;
-            activityUpdated();
-        }
-        catch { }
-    };
+    const presence = buildPresence(currentActivity);
 
-    await setActivity();
     clearActivityInterval();
-    activityInterval = setInterval(async () => await setActivity(), ACTIVITY_UPDATE_INTERVAL);
+    await updateActivity(presence);
+
+    activityInterval = setInterval(async () => await updateActivity(presence), ACTIVITY_UPDATE_INTERVAL);
 };
 
 const clearActivityInterval = (): void => {

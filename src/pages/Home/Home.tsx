@@ -28,9 +28,12 @@ const Home = () => {
             setEdit(true);
     }, [activity]);
 
-    const toggleEdit = useCallback(() => {
-        setEdit($state => !$state);
-    }, []);
+    const toggleEdit = useCallback(async (value: boolean) => {
+        setEdit(value);
+
+        if (!value)
+            await window.activity.startActivity();
+    }, [activity]);
 
     return (
         <Page name="home">
