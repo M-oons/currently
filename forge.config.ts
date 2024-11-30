@@ -3,8 +3,10 @@ import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerDMG } from "@electron-forge/maker-dmg";
 import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
+import { PublisherGithub } from "@electron-forge/publisher-github";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
 import { getAssetPath } from "./src/utils/assetLoader";
+import "dotenv/config";
 
 const config: ForgeConfig = {
     packagerConfig: {
@@ -21,6 +23,16 @@ const config: ForgeConfig = {
             background: getAssetPath("installer", true),
             icon: getAssetPath("app", true),
             format: "ULFO",
+        }),
+    ],
+    publishers: [
+        new PublisherGithub({
+            repository: {
+                owner: "M-oons",
+                name: "currently",
+            },
+            prerelease: false,
+            draft: false,
         }),
     ],
     plugins: [

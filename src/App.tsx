@@ -7,16 +7,15 @@ import Home from "./pages/Home/Home";
 import Settings from "./pages/Settings/Settings";
 import ActivityProvider from "./providers/ActivityProvider";
 import ConfigProvider from "./providers/ConfigProvider";
-import { type UpdateInfo } from "./utils/updater";
 import "./App.css";
 
 const App = () => {
-    const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null);
+    const [update, setUpdate] = useState<boolean>(false);
 
     useEffect(() => {
         const checkUpdate = async () => {
-            const updateInfo = await window.flow.checkForUpdate();
-            setUpdateInfo(updateInfo);
+            const update = await window.flow.checkForUpdate();
+            setUpdate(update);
         };
         checkUpdate();
     }, []);
@@ -28,7 +27,7 @@ const App = () => {
                     <ActivityProvider>
                         <div id="main">
                             <TitleBar />
-                            <UpdatePopup updateInfo={updateInfo} />
+                            <UpdatePopup update={update} />
                             <div id="content">
                                 <Routes>
                                     <Route path="/" element={<Home />} />

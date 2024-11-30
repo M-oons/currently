@@ -3,7 +3,6 @@ import type Activity from "../activity/types/Activity";
 import type Config from "../config/types/Config";
 import IpcCommand from "../ipc/IpcCommand";
 import { handleMouseEvent } from "../utils/inputHandler";
-import { type UpdateInfo } from "../utils/updater";
 
 //==============
 // ipc
@@ -11,13 +10,15 @@ import { type UpdateInfo } from "../utils/updater";
 
 contextBridge.exposeInMainWorld("info", {
     getAppInfo: (): Promise<any> => ipcRenderer.invoke(IpcCommand.info.GetAppInfo),
+    platform: process.platform,
 });
 
 contextBridge.exposeInMainWorld("flow", {
     getStartupTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.flow.GetStartupTime),
     getActivityLastUpdateTime: (): Promise<number> => ipcRenderer.invoke(IpcCommand.flow.GetActivityLastUpdateTime),
     isDiscordRunning: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.flow.IsDiscordRunning),
-    checkForUpdate: (): Promise<UpdateInfo> => ipcRenderer.invoke(IpcCommand.flow.CheckForUpdate),
+    checkForUpdate: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.flow.CheckForUpdate),
+    applyUpdate: (): void => ipcRenderer.send(IpcCommand.flow.ApplyUpdate),
 });
 
 contextBridge.exposeInMainWorld("config", {

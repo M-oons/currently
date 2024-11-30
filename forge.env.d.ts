@@ -30,12 +30,14 @@ declare global {
     interface Window {
         info: {
             getAppInfo: () => Promise<AppInfo>,
+            platform: NodeJS.Platform,
         },
         flow: {
             getStartupTime: () => Promise<number>,
             getActivityLastUpdateTime: () => Promise<number>,
             isDiscordRunning: () => Promise<boolean>,
-            checkForUpdate: () => Promise<UpdateInfo>,
+            checkForUpdate: () => Promise<boolean>,
+            applyUpdate: () => void,
         },
         config: {
             getConfig: () => Promise<Config>,

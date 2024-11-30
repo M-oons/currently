@@ -1,4 +1,4 @@
-import { app, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
+import { app, autoUpdater, BrowserWindow, type Event, ipcMain, Menu, Tray } from "electron";
 import path from "path";
 import { getActivityLastUpdateTime, getStartupTime, startup } from "../AppFlow";
 import { type AppInfo, appInfo } from "../AppInfo";
@@ -10,7 +10,7 @@ import IpcCommand from "../ipc/IpcCommand";
 import { getAsset } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
 import { isDiscordRunning } from "../utils/processHandler";
-import { checkForUpdate, type UpdateInfo } from "../utils/updater";
+import { checkForUpdate } from "../utils/updater";
 
 if (require("electron-squirrel-startup"))
     app.quit();
@@ -175,8 +175,12 @@ ipcMain.handle(IpcCommand.flow.IsDiscordRunning, async (): Promise<boolean> => {
     return await isDiscordRunning();
 });
 
-ipcMain.handle(IpcCommand.flow.CheckForUpdate, async (): Promise<UpdateInfo> => {
+ipcMain.handle(IpcCommand.flow.CheckForUpdate, async (): Promise<boolean> => {
     return await checkForUpdate();
+});
+
+ipcMain.on(IpcCommand.flow.ApplyUpdate, () => {
+    autoUpdater.quitAndInstall();
 });
 
 ipcMain.handle(IpcCommand.config.GetConfig, (): Config => {

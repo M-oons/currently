@@ -2,28 +2,21 @@ import { useEffect, useState } from "react";
 import Alert from "../Alert/Alert";
 import Button from "../Button/Button";
 import Popup from "../Popup/Popup";
-import { type UpdateInfo } from "../../utils/updater";
 import "./UpdatePopup.css";
 
 type UpdatePopupProps = {
-    updateInfo: UpdateInfo | null,
+    update: boolean,
 };
 
 const UpdatePopup = (props: UpdatePopupProps) => {
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        if (props.updateInfo === null)
-            return;
+        setOpen(props.update);
+    }, [props.update]);
 
-        setOpen(props.updateInfo.update);
-    }, [props.updateInfo]);
-
-    const getAlertText = (): string => {
-        let alert = "An update is available.";
-        if (props.updateInfo !== null)
-            alert += `\n[${props.updateInfo.local} -> ${props.updateInfo.remote}]`;
-        return alert;
+    const updateAndRestart = () => {
+        window.flow.applyUpdate();
     };
 
     const openRepository = () => {
@@ -38,16 +31,17 @@ const UpdatePopup = (props: UpdatePopupProps) => {
         <Popup
             open={open}
             content={
-                <>
-                    <Alert
-                        type="info"
-                        text={getAlertText()}
-                    />
-                </>
+                <Alert
+                    type="info"
+                    text="An update is available."
+                />
             }
             footer={
                 <>
-                    <Button id="update-popup-repository" color="blurple" onClick={openRepository}>Show</Button>
+                    {window.info.platform === "win32" 
+                        ? <Button id="update-popup-update" color="blurple" onClick={updateAndRestart}>Update</Button>
+                        : <Button id="update-popup-repository" color="blurple" onClick={openRepository}>Show</Button>
+                    }
                     <Button id="update-popup-close" color="grey" onClick={closePopup}>Close</Button>
                 </>
             }
