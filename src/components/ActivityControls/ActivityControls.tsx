@@ -9,7 +9,7 @@ type ActivityControlsProps = {
 };
 
 const ActivityControls = (props: ActivityControlsProps) => {
-    const { startActivity, stopActivity, active } = useActivity();
+    const { active, startActivity, stopActivity } = useActivity();
 
     const startEdit = () => {
         props.onEditToggle(true);

@@ -11,7 +11,7 @@ import "./Home.css";
 
 const Home = () => {
     const [searchParams] = useSearchParams();
-    const { activity } = useActivity();
+    const { activity, active, startActivity } = useActivity();
     const [edit, setEdit] = useState<boolean>(toBoolean(searchParams.get("edit")));
     const [discordRunning, setDiscordRunning] = useState<boolean | null>(null);
 
@@ -31,8 +31,8 @@ const Home = () => {
     const toggleEdit = useCallback(async (value: boolean) => {
         setEdit(value);
 
-        if (!value)
-            await window.activity.startActivity();
+        if (!value && active)
+            await startActivity();
     }, [activity]);
 
     return (
