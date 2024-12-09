@@ -33,7 +33,7 @@ const Home = () => {
 
         if (!value && active)
             await startActivity();
-    }, [activity]);
+    }, [active]);
 
     return (
         <Page name="home">

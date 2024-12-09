@@ -47,8 +47,6 @@ declare global {
             getActivity: () => Promise<Activity>,
             setActivity: (activity: Activity) => void,
             getActiveState: () => Promise<boolean>,
-            onSetActiveState: (callback: (event: IpcRendererEvent, active: boolean) => void) => IpcRenderer,
-            removeSetActiveStateListeners: () => IpcRenderer,
             startActivity: () => Promise<boolean>,
             stopActivity: () => Promise<boolean>,
         },
