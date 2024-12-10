@@ -14,14 +14,15 @@ const autoLaunch = new AutoLaunch({
 
 const applyConfig = (startup: boolean): void => {
     // auto launch
-    autoLaunch.isEnabled()
-        .then(enabled => {
-            if (enabled && !currentConfig.launchOnSystemStartup)
-                autoLaunch.disable();
-            else if (!enabled && currentConfig.launchOnSystemStartup)
-                autoLaunch.enable();
-        })
-        .catch(() => { });
+    if (app.isPackaged)
+        autoLaunch.isEnabled()
+            .then(enabled => {
+                if (enabled && !currentConfig.launchOnSystemStartup)
+                    autoLaunch.disable();
+                else if (!enabled && currentConfig.launchOnSystemStartup)
+                    autoLaunch.enable();
+            })
+            .catch(() => { });
 
     // set activity on launch
     if (startup && currentConfig.setActivityOnLaunch)
