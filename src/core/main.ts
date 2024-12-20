@@ -179,10 +179,10 @@ ipcMain.handle(IpcCommand.activity.GetActiveState, async (): Promise<boolean> =>
     return getActiveState();
 });
 
-ipcMain.handle(IpcCommand.activity.StartActivity, async (): Promise<boolean> => {
+ipcMain.handle(IpcCommand.activity.StartActivity, async (): Promise<void> => {
     return await startActivity();
 });
 
-ipcMain.handle(IpcCommand.activity.StopActivity, async (): Promise<boolean> => {
+ipcMain.handle(IpcCommand.activity.StopActivity, async (): Promise<void> => {
     return await clearActivity();
 });

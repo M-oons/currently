@@ -17,6 +17,7 @@ export const IpcCommand = {
         GetActivity: "get-activity",
         SetActivity: "set-activity",
         GetActiveState: "get-active-state",
+        SetActiveState: "set-active-state",
         StartActivity: "start-activity",
         StopActivity: "stop-activity",
     },
