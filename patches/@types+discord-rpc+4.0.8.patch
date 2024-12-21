@@ -1,0 +1,12 @@
+diff --git a/node_modules/@types/discord-rpc/index.d.ts b/node_modules/@types/discord-rpc/index.d.ts
+index 90e0de2..6cc588a 100644
+--- a/node_modules/@types/discord-rpc/index.d.ts
++++ b/node_modules/@types/discord-rpc/index.d.ts
+@@ -449,6 +449,7 @@ export interface VoiceSettings {
+ }
+ 
+ export interface Presence {
++    type?: number | undefined;
+     state?: string | undefined;
+     details?: string | undefined;
+     startTimestamp?: number | Date | undefined;
