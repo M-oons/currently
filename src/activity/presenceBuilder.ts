@@ -13,6 +13,7 @@ type PresenceTimestamp = number | Date;
 
 export const buildPresence = (activity: Activity): Presence => {
     return {
+        type: activity.type,
         details: activity.details ?? undefined,
         state: activity.state ?? undefined,
         largeImageKey: activity.imageLarge?.key,

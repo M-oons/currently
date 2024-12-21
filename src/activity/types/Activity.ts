@@ -6,9 +6,11 @@ import type ActivityDetails from "./ActivityDetails";
 import type ActivityImage from "./ActivityImage";
 import type ActivityState from "./ActivityState";
 import { type ActivityTimestamp, ActivityTimestampMode } from "./ActivityTimestamp";
+import ActivityType from "./ActivityType";
 
 export type Activity = {
     name: string,
+    type: ActivityType,
     clientId: ActivityClientId | null,
     clientSecret: ActivityClientSecret | null,
     details: ActivityDetails | null,
@@ -25,6 +27,7 @@ export type Activity = {
 
 export const defaultActivity: Activity = {
     name: "",
+    type: ActivityType.Playing,
     clientId: null,
     clientSecret: null,
     details: null,

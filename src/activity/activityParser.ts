@@ -7,12 +7,14 @@ import type ActivityDetails from "./types/ActivityDetails";
 import type ActivityImage from "./types/ActivityImage";
 import type ActivityState from "./types/ActivityState";
 import { type ActivityTimestamp, ActivityTimestampMode, validateTimestampMode } from "./types/ActivityTimestamp";
+import ActivityType from "./types/ActivityType";
 
 export const parseActivity = (json: string): Activity | null => {
     try {
         const parsedActivity = JSON.parse(json) as Activity;
         return {
             name: parseName(parsedActivity.name),
+            type: parseType(parsedActivity.type),
             clientId: parseClientId(parsedActivity.clientId),
             clientSecret: parseClientSecret(parsedActivity.clientSecret),
             details: parseDetails(parsedActivity.details),
@@ -38,6 +40,12 @@ const parseName = (name?: string): string => {
     return typeof name === "string"
         ? name
         : "";
+};
+
+const parseType = (type?: ActivityType): ActivityType => {
+    return typeof type === "number" && Object.values(ActivityType).includes(type)
+        ? type
+        : ActivityType.Playing;
 };
 
 const parseClientId = (clientId?: ActivityClientId | null): ActivityClientId | null => {

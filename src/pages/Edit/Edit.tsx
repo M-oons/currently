@@ -5,8 +5,9 @@ import type ActivityClientId from "../../activity/types/ActivityClientId";
 import type ActivityClientSecret from "../../activity/types/ActivityClientSecret";
 import type ActivityCount from "../../activity/types/ActivityCount";
 import type ActivityDetails from "../../activity/types/ActivityDetails";
-import type ActivityState from "../../activity/types/ActivityState";
 import type ActivityImage from "../../activity/types/ActivityImage";
+import type ActivityState from "../../activity/types/ActivityState";
+import ActivityType from "../../activity/types/ActivityType";
 import { type ActivityTimestamp, ActivityTimestampMode } from "../../activity/types/ActivityTimestamp";
 import Button from "../../components/Button/Button";
 import useActivity from "../../hooks/useActivity";
@@ -18,6 +19,7 @@ import EditButtons from "./EditButtons/EditButtons";
 import EditDetails from "./EditDetails/EditDetails";
 import EditState from "./EditState/EditState";
 import EditTimestamp from "./EditTimestamp/EditTimestamp";
+import EditType from "./EditType/EditType";
 import "./Edit.css";
 
 type EditParams = {
@@ -26,6 +28,7 @@ type EditParams = {
 
 export type EditPage =
     | "application"
+    | "type"
     | "details"
     | "state"
     | "asset-large"
@@ -39,6 +42,7 @@ export const Edit = () => {
     const { activity, setActivity } = useActivity();
     const [clientId, setClientId] = useState<ActivityClientId | null>(activity?.clientId ?? null);
     const [clientSecret, setClientSecret] = useState<ActivityClientSecret | null>(activity?.clientSecret ?? null);
+    const [type, setType] = useState<ActivityType>(activity?.type ?? ActivityType.Playing);
     const [count, setCount] = useState<ActivityCount | null>(activity?.count ?? null);
     const [details, setDetails] = useState<ActivityDetails | null>(activity?.details ?? null);
     const [state, setState] = useState<ActivityState | null>(activity?.state ?? null);
@@ -59,6 +63,7 @@ export const Edit = () => {
             ...activity,
             clientId,
             clientSecret,
+            type,
             details,
             state,
             count,
@@ -102,6 +107,12 @@ export const Edit = () => {
                     setClientId={setClientId}
                     setClientSecret={setClientSecret}
                     setValid={setValid}
+                />;
+
+            case "type":
+                return <EditType
+                    type={type}
+                    setType={setType}
                 />;
 
             case "details":

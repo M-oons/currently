@@ -4,6 +4,11 @@
     user-select: none;
 }
 
+#activity-type {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
 #activity-main {
     width: 100%;
     display: flex;

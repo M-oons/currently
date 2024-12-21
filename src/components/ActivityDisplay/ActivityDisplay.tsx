@@ -4,6 +4,7 @@ import ActivityDisplayAssets from "./ActivityDisplayAssets/ActivityDisplayAssets
 import ActivityDisplayButtons from "./ActivityDisplayButtons/ActivityDisplayButtons";
 import ActivityDisplayContent from "./ActivityDisplayContent/ActivityDisplayContent";
 import ActivityDisplayProgressBar from "./ActivityDisplayProgressBar/ActivityDisplayProgressBar";
+import ActivityDisplayType from "./ActivityDisplayType/ActivityDisplayType";
 import "./ActivityDisplay.css";
 
 type ActivityDisplayProps = {
@@ -16,6 +17,12 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
     return activity !== null
         ? (
             <div id="activity-display" className={props.edit ? "edit" : undefined}>
+                <div id="activity-type">
+                    <ActivityDisplayType
+                        type={activity.type}
+                        edit={props.edit}
+                    />
+                </div>
                 <div id="activity-main">
                     <div id="activity-assets">
                         <ActivityDisplayAssets
