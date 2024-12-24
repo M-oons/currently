@@ -36,10 +36,12 @@ const EditState = (props: EditStateProps) => {
     const validate = () => {
         let isValid = true;
 
-        if (state === "")
+        const trimmed = state.trim();
+
+        if (trimmed === "")
             setErrorsState([]);
         else {
-            const stateValidation = validateState(state);
+            const stateValidation = validateState(trimmed);
             if (stateValidation.valid)
                 setErrorsState([]);
             else {
@@ -61,8 +63,8 @@ const EditState = (props: EditStateProps) => {
         }
 
         if (isValid) {
-            const validState: ActivityState | null = state.trim() !== ""
-                ? state.trim()
+            const validState: ActivityState | null = trimmed !== ""
+                ? trimmed
                 : null;
             const validCount: ActivityCount | null = useCount
                 ? {

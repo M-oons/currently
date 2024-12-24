@@ -54,7 +54,9 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
         if (!useImageLarge)
             valid(null);
         else {
-            const validation = validateImage({ key: imageLarge, text: imageLargeTooltip === "" ? undefined : imageLargeTooltip }, assetType);
+            const image = imageLarge.trim();
+            const tooltip = imageLargeTooltip.trim();
+            const validation = validateImage({ key: image, text: tooltip !== "" ? tooltip : undefined }, assetType);
             if (validation.valid)
                 setErrors([]);
             else {
@@ -65,8 +67,8 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
             if (isValid) {
                 const validImage: ActivityImage | null = useImageLarge
                     ? {
-                        key: imageLarge.trim(),
-                        text: imageLargeTooltip.trim() === "" ? undefined : imageLargeTooltip.trim(),
+                        key: image,
+                        text: tooltip !== "" ? tooltip : undefined,
                     }
                     : null;
                 valid(validImage);
@@ -164,6 +166,7 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
                                         />
                                     )
                                 }
+
                             </div>
                             {errorsImage.length > 0 &&
                                 <div className="edit-errors">

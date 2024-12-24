@@ -38,10 +38,15 @@ const EditButtons = (props: EditButtonsProps) => {
     const validate = () => {
         let isValid = true;
 
+        const text1 = button1Text.trim();
+        const url1 = button1Url.trim();
+        const text2 = button2Text.trim();
+        const url2 = button2Url.trim();
+        
         if (!useButton1)
             setErrorsButton1([]);
         else {
-            const button1Validation = validateButton({ text: button1Text, url: button1Url });
+            const button1Validation = validateButton({ text: text1, url: url1 });
             if (button1Validation.valid)
                 setErrorsButton1([]);
             else {
@@ -53,7 +58,7 @@ const EditButtons = (props: EditButtonsProps) => {
         if (!useButton2)
             setErrorsButton2([]);
         else {
-            const button2Validation = validateButton({ text: button2Text, url: button2Url });
+            const button2Validation = validateButton({ text: text2, url: url2 });
             if (button2Validation.valid)
                 setErrorsButton2([]);
             else {
@@ -65,14 +70,14 @@ const EditButtons = (props: EditButtonsProps) => {
         if (isValid) {
             const validButton1: ActivityButton | null = useButton1
                 ? {
-                    text: button1Text,
-                    url: button1Url,
+                    text: text1,
+                    url: url1,
                 }
                 : null;
             const validButton2: ActivityButton | null = useButton2
                 ? {
-                    text: button2Text,
-                    url: button2Url,
+                    text: text2,
+                    url: url2,
                 }
                 : null;
             valid(validButton1, validButton2);

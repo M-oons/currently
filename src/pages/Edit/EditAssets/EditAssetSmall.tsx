@@ -54,7 +54,9 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
         if (!useImageSmall)
             valid(null);
         else {
-            const validation = validateImage({ key: imageSmall, text: imageSmallTooltip === "" ? undefined : imageSmallTooltip }, assetType);
+            const image = imageSmall.trim();
+            const tooltip = imageSmallTooltip.trim();
+            const validation = validateImage({ key: image, text: tooltip !== "" ? tooltip : undefined }, assetType);
             if (validation.valid)
                 setErrors([]);
             else {
@@ -65,8 +67,8 @@ const EditAssetSmall = (props: EditAssetSmallProps) => {
             if (isValid) {
                 const validImage: ActivityImage | null = useImageSmall
                     ? {
-                        key: imageSmall.trim(),
-                        text: imageSmallTooltip.trim() === "" ? undefined : imageSmallTooltip.trim(),
+                        key: image,
+                        text: tooltip !== "" ? tooltip : undefined,
                     }
                     : null;
                 valid(validImage);

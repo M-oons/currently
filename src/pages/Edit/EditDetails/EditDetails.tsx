@@ -22,22 +22,23 @@ const EditDetails = (props: EditDetailsProps) => {
     const validate = () => {
         let isValid = true;
 
-        if (details === "")
+        const trimmed = details.trim();
+
+        if (trimmed === "")
             setErrors([]);
         else {
-            const validation = validateDetails(details);
+            const validation = validateDetails(trimmed);
             if (validation.valid)
                 setErrors([]);
             else {
                 isValid = false;
                 setErrors(validation.errors);
             }
-
         }
 
         if (isValid) {
-            const validDetails: ActivityDetails | null = details.trim() !== ""
-                ? details.trim()
+            const validDetails: ActivityDetails | null = trimmed !== ""
+                ? trimmed
                 : null;
             valid(validDetails);
         }
