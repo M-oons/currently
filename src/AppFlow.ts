@@ -12,10 +12,10 @@ export const getStartupTime = (): number => {
     return startupTime ?? 0;
 }
 
-export const activityUpdated = () => {
-    activityLastUpdateTime = Date.now();
-};
-
 export const getActivityLastUpdateTime = (): number => {
     return activityLastUpdateTime ?? getStartupTime();
+};
+
+export const activityUpdated = () => {
+    activityLastUpdateTime = Date.now();
 };

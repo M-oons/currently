@@ -5,7 +5,7 @@ import { type AppInfo, appInfo } from "../AppInfo";
 import type Activity from "../activity/types/Activity";
 import { clearActivity, getActivity, getActiveState, setActivity, startActivity } from "../activity/activityHandler";
 import type Config from "../config/types/Config";
-import { getConfig, setConfig } from "../config/configHandler";
+import { applyConfig, getConfig, setConfig } from "../config/configHandler";
 import IpcCommand from "../ipc/IpcCommand";
 import { getAsset } from "../utils/assetLoader";
 import { openURL } from "../utils/navigation";
@@ -16,6 +16,7 @@ if (require("electron-squirrel-startup"))
     app.quit();
 
 startup();
+applyConfig(true);
 
 let mainWindow: BrowserWindow | null = null;
 

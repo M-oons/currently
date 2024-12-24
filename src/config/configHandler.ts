@@ -12,7 +12,7 @@ const autoLaunch = new AutoLaunch({
     path: app.getPath("exe"),
 });
 
-const applyConfig = (startup: boolean): void => {
+export const applyConfig = (startup: boolean): void => {
     // auto launch
     if (app.isPackaged)
         autoLaunch.isEnabled()
@@ -28,8 +28,6 @@ const applyConfig = (startup: boolean): void => {
     if (startup && currentConfig.setActivityOnLaunch)
         startActivity();
 };
-
-applyConfig(true);
 
 export const getConfig = (): Config => {
     return currentConfig;

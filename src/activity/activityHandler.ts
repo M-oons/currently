@@ -29,6 +29,7 @@ export const getActivity = (): Activity => {
 
 export const setActivity = (activity: Activity): void => {
     currentActivity = activity;
+    activityUpdated();
     saveActivity(currentActivity);
 };
 
@@ -96,7 +97,6 @@ const updateActivity = async (presence: Presence): Promise<void> => {
                 return;
 
         await client?.setActivity(presence);
-        activityUpdated();
         setActiveState(true);
     }
     catch { }
