@@ -25,7 +25,7 @@ export const Select = <T extends SelectValueType>(props: SelectProps<T>) => {
         if (props.options.length === 0)
             setSelected(null);
         else {
-            let selected = props.options.find(option => option.value === props.value) ?? props.options[0];
+            let selected = props.options.find(option => option.value === props.value) ?? props.options[0]!;
             setSelected(selected);
             if (selected.value !== props.value)
                 props.onChange(selected.value);

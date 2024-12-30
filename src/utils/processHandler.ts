@@ -37,8 +37,8 @@ const isDiscordRunningWindows = (): Promise<boolean> => {
                 .map(line => line.split(/\s{2,}/));
 
             const discordProcesses = processes.filter(process => {
-                const name = process[0].toLowerCase();
-                const path = process[1].toLowerCase();
+                const name = process[0]!.toLowerCase();
+                const path = process[1]!.toLowerCase();
                 return DISCORD_PROCESSES_WINDOWS.includes(name) && DISCORD_PATHS_WINDOWS.some(p => path.includes(p));
             })
 
@@ -61,7 +61,7 @@ const isDiscordRunningOther = (): Promise<boolean> => {
                 .map(line => line.split(/\s+/));
 
             const discordProcesses = processes.filter(process => {
-                const command = process[process.length - 1].toLowerCase();
+                const command = process[process.length - 1]!.toLowerCase();
                 return DISCORD_PATHS_OTHER.some(p => command.includes(p));
             });
 
