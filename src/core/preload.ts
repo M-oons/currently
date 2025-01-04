@@ -1,5 +1,10 @@
 import { contextBridge, ipcRenderer, type IpcRenderer, type IpcRendererEvent } from "electron";
+import { type AppInfo } from "../AppInfo";
 import type Activity from "../activity/types/Activity";
+import type ActivityClientId from "../activity/types/ActivityClientId";
+import type ActivityClientSecret from "../activity/types/ActivityClientSecret";
+import type Application from "../api/types/Application";
+import type ApplicationAsset from "../api/types/ApplicationAsset";
 import type Config from "../config/types/Config";
 import IpcCommand from "../ipc/IpcCommand";
 import { handleMouseEvent } from "../utils/inputHandler";
@@ -9,7 +14,7 @@ import { handleMouseEvent } from "../utils/inputHandler";
 //==============
 
 contextBridge.exposeInMainWorld("info", {
-    getAppInfo: (): Promise<any> => ipcRenderer.invoke(IpcCommand.info.GetAppInfo),
+    getAppInfo: (): Promise<AppInfo> => ipcRenderer.invoke(IpcCommand.info.GetAppInfo),
     platform: process.platform,
 });
 
@@ -23,17 +28,23 @@ contextBridge.exposeInMainWorld("flow", {
 
 contextBridge.exposeInMainWorld("config", {
     getConfig: (): Promise<Config> => ipcRenderer.invoke(IpcCommand.config.GetConfig),
-    setConfig: (config: Config): Promise<any> => ipcRenderer.invoke(IpcCommand.config.SetConfig, config),
+    setConfig: (config: Config): Promise<void> => ipcRenderer.invoke(IpcCommand.config.SetConfig, config),
 });
 
 contextBridge.exposeInMainWorld("activity", {
     getActivity: (): Promise<Activity> => ipcRenderer.invoke(IpcCommand.activity.GetActivity),
-    setActivity: (activity: Activity): Promise<any> => ipcRenderer.invoke(IpcCommand.activity.SetActivity, activity),
+    setActivity: (activity: Activity): Promise<void> => ipcRenderer.invoke(IpcCommand.activity.SetActivity, activity),
     getActiveState: (): Promise<boolean> => ipcRenderer.invoke(IpcCommand.activity.GetActiveState),
     onSetActiveState: (callback: (event: IpcRendererEvent, active: boolean) => void): IpcRenderer => ipcRenderer.on(IpcCommand.activity.SetActiveState, callback),
     removeSetActiveStateListeners: (): IpcRenderer => ipcRenderer.removeAllListeners(IpcCommand.activity.SetActiveState),
     startActivity: (): Promise<void> => ipcRenderer.invoke(IpcCommand.activity.StartActivity),
     stopActivity: (): Promise<void> => ipcRenderer.invoke(IpcCommand.activity.StopActivity),
+});
+
+contextBridge.exposeInMainWorld("api", {
+    getApplication: (clientId: ActivityClientId, clientSecret: ActivityClientSecret, useCache: boolean): Promise<Application | null> => ipcRenderer.invoke(IpcCommand.api.GetApplication, clientId, clientSecret, useCache),
+    getApplicationAssets: (clientId: ActivityClientId, useCache: boolean): Promise<ApplicationAsset[] | null> => ipcRenderer.invoke(IpcCommand.api.GetApplicationAssets, clientId, useCache),
+    getApplicationAssetUrl: (applicationId: ActivityClientId, assetId: string): Promise<string> => ipcRenderer.invoke(IpcCommand.api.GetApplicationAssetUrl, applicationId, assetId),
 });
 
 contextBridge.exposeInMainWorld("functions", {

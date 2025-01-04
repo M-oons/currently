@@ -3,7 +3,12 @@ import path from "path";
 import { getActivityLastUpdateTime, getStartupTime, startup } from "../AppFlow";
 import { type AppInfo, appInfo } from "../AppInfo";
 import type Activity from "../activity/types/Activity";
+import type ActivityClientId from "../activity/types/ActivityClientId";
+import type ActivityClientSecret from "../activity/types/ActivityClientSecret";
 import { clearActivity, getActivity, getActiveState, setActivity, startActivity } from "../activity/activityHandler";
+import type Application from "../api/types/Application";
+import type ApplicationAsset from "../api/types/ApplicationAsset";
+import { getApplication, getApplicationAssets, getApplicationAssetUrl } from "../api/applicationFetcher";
 import type Config from "../config/types/Config";
 import { applyConfig, getConfig, setConfig } from "../config/configHandler";
 import IpcCommand from "../ipc/IpcCommand";
@@ -186,4 +191,16 @@ ipcMain.handle(IpcCommand.activity.StartActivity, async (): Promise<void> => {
 
 ipcMain.handle(IpcCommand.activity.StopActivity, async (): Promise<void> => {
     return await clearActivity();
+});
+
+ipcMain.handle(IpcCommand.api.GetApplication, async (_, clientId: ActivityClientId, clientSecret: ActivityClientSecret, useCache: boolean): Promise<Application | null> => {
+    return await getApplication(clientId, clientSecret, useCache);
+});
+
+ipcMain.handle(IpcCommand.api.GetApplicationAssets, async (_, clientId: ActivityClientId, useCache: boolean): Promise<ApplicationAsset[] | null> => {
+    return await getApplicationAssets(clientId, useCache);
+});
+
+ipcMain.handle(IpcCommand.api.GetApplicationAssetUrl, (_, applicationId: ActivityClientId, assetId: string): string => {
+    return getApplicationAssetUrl(applicationId, assetId);
 });

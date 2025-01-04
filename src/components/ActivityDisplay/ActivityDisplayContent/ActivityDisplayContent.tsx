@@ -6,7 +6,6 @@ import type ActivityCount from "../../../activity/types/ActivityCount";
 import type ActivityDetails from "../../../activity/types/ActivityDetails";
 import type ActivityState from "../../../activity/types/ActivityState";
 import { type ActivityTimestamp, ActivityTimestampMode } from "../../../activity/types/ActivityTimestamp";
-import { getApplication } from "../../../api/applicationFetcher";
 import useInterval from "../../../hooks/useInterval";
 import { type EditPage } from "../../../pages/Edit/Edit";
 import { formatTimestamp } from "../../../utils/time";
@@ -52,7 +51,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
             if (!props.clientId || !props.clientSecret)
                 return;
 
-            const application = await getApplication(props.clientId, props.clientSecret);
+            const application = await window.api.getApplication(props.clientId, props.clientSecret, true);
             const name = application?.name ?? props.clientId;
             setState($state => ({
                 ...$state,

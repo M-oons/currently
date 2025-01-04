@@ -52,6 +52,11 @@ declare global {
             startActivity: () => Promise<void>,
             stopActivity: () => Promise<void>,
         },
+        api: {
+            getApplication: (clientId: ActivityClientId, clientSecret: ActivityClientSecret, useCache: boolean) => Promise<Application | null>,
+            getApplicationAssets: (clientId: ActivityClientId, useCache: boolean) => Promise<ApplicationAsset[] | null>,
+            getApplicationAssetUrl: (applicationId: ActivityClientId, assetId: string) => string,
+        },
         functions: {
             close: () => void,
             minimize: () => void,

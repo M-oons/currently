@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type ActivityClientId from "../../../activity/types/ActivityClientId";
 import { type ActivityImage, ActivityAssetType, getAssetType } from "../../../activity/types/ActivityImage";
-import { getApplicationAssetUrl, getApplicationAssets } from "../../../api/applicationFetcher";
 import Tooltip from "../../../components/Tooltip/Tooltip";
 import { type EditPage } from "../../../pages/Edit/Edit";
 import type ActivityDisplayComponentProps from "../types/ActivityDisplayComponentProps";
@@ -172,7 +171,7 @@ const getImageSource = async (applicationId: ActivityClientId | null, image: str
     if (getAssetType(image) === ActivityAssetType.URL)
         return image;
 
-    const assets = await getApplicationAssets(applicationId);
+    const assets = await window.api.getApplicationAssets(applicationId, true);
     if (assets === null)
         return "";
 
@@ -180,7 +179,7 @@ const getImageSource = async (applicationId: ActivityClientId | null, image: str
     if (asset === undefined)
         return "";
 
-    return getApplicationAssetUrl(applicationId, asset.id);
+    return window.api.getApplicationAssetUrl(applicationId, asset.id);
 };
 
 export default ActivityDisplayAssets;

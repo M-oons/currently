@@ -2,7 +2,6 @@ import { type Dispatch, type SetStateAction, useCallback, useEffect, useState } 
 import { type ActivityClientId, validateClientId, CLIENT_ID_LENGTH_MAX } from "../../../activity/types/ActivityClientId";
 import { type ActivityClientSecret, validateClientSecret, CLIENT_SECRET_LENGTH } from "../../../activity/types/ActivityClientSecret";
 import type ActivityValidationError from "../../../activity/types/validation/ActivityValidationError";
-import { getApplication, getApplicationAssets } from "../../../api/applicationFetcher";
 import ActivityErrors from "../../../components/ActivityErrors/ActivityErrors";
 import Button from "../../../components/Button/Button";
 import InputText from "../../../components/InputText/InputText";
@@ -94,11 +93,11 @@ const EditApplication = (props: EditApplicationProps) => {
         let isValid = false;
 
         if (clientSecret !== "") {
-            const application = await getApplication(clientId, clientSecret, false);
+            const application = await window.api.getApplication(clientId, clientSecret, false);
             isValid = application !== null;
         }
         else if (clientId !== "") {
-            const assets = await getApplicationAssets(clientId, false);
+            const assets = await window.api.getApplicationAssets(clientId, false);
             isValid = assets !== null;
         }
 

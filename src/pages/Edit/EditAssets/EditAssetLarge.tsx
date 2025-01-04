@@ -3,7 +3,6 @@ import type ActivityClientId from "../../../activity/types/ActivityClientId";
 import { type ActivityImage, ActivityAssetType, getAssetType, validateImage, IMAGE_KEY_LENGTH_MAX, IMAGE_TEXT_LENGTH_MAX } from "../../../activity/types/ActivityImage";
 import type ActivityValidationError from "../../../activity/types/validation/ActivityValidationError";
 import type ApplicationAsset from "../../../api/types/ApplicationAsset";
-import { getApplicationAssets, getApplicationAssetUrl } from "../../../api/applicationFetcher";
 import ActivityErrors from "../../../components/ActivityErrors/ActivityErrors";
 import InputText from "../../../components/InputText/InputText";
 import { Select, type Option } from "../../../components/Select/Select";
@@ -40,7 +39,7 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
                 return;
 
             setAssets(null);
-            const assets = await getApplicationAssets(props.clientId);
+            const assets = await window.api.getApplicationAssets(props.clientId, true);
             setAssets(assets);
         };
 
@@ -148,7 +147,7 @@ const EditAssetLarge = (props: EditAssetLargeProps) => {
                                             options={assets?.map((asset): Option<string> => ({
                                                 label: asset.name,
                                                 value: asset.name,
-                                                image: props.clientId ? getApplicationAssetUrl(props.clientId, asset.id) : undefined,
+                                                image: props.clientId ? window.api.getApplicationAssetUrl(props.clientId, asset.id) : undefined,
                                             })) ?? []}
                                             value={imageLarge}
                                             label="- Select Asset -"

@@ -21,6 +21,11 @@ export const IpcCommand = {
         StartActivity: "start-activity",
         StopActivity: "stop-activity",
     },
+    api: {
+        GetApplication: "get-application",
+        GetApplicationAssets: "get-application-assets",
+        GetApplicationAssetUrl: "get-application-asset-url",
+    },
     functions: {
         Close: "close",
         Minimize: "minimize",
