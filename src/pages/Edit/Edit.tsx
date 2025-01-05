@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type ActivityButton from "../../activity/types/ActivityButton";
 import type ActivityClientId from "../../activity/types/ActivityClientId";
-import type ActivityClientSecret from "../../activity/types/ActivityClientSecret";
 import type ActivityCount from "../../activity/types/ActivityCount";
 import type ActivityDetails from "../../activity/types/ActivityDetails";
 import type ActivityImage from "../../activity/types/ActivityImage";
@@ -41,7 +40,6 @@ export const Edit = () => {
     const navigate = useNavigate();
     const { activity, setActivity } = useActivity();
     const [clientId, setClientId] = useState<ActivityClientId | null>(activity?.clientId ?? null);
-    const [clientSecret, setClientSecret] = useState<ActivityClientSecret | null>(activity?.clientSecret ?? null);
     const [type, setType] = useState<ActivityType>(activity?.type ?? ActivityType.Playing);
     const [count, setCount] = useState<ActivityCount | null>(activity?.count ?? null);
     const [details, setDetails] = useState<ActivityDetails | null>(activity?.details ?? null);
@@ -62,7 +60,6 @@ export const Edit = () => {
         setActivity({
             ...activity,
             clientId,
-            clientSecret,
             type,
             details,
             state,
@@ -85,7 +82,6 @@ export const Edit = () => {
         setActivity({
             ...activity,
             clientId: null,
-            clientSecret: null,
         });
         goBack();
     };
@@ -102,10 +98,8 @@ export const Edit = () => {
             case "application":
                 return <EditApplication
                     clientId={clientId}
-                    clientSecret={clientSecret}
                     resetClient={resetClient}
                     setClientId={setClientId}
-                    setClientSecret={setClientSecret}
                     setValid={setValid}
                 />;
 

@@ -1,6 +1,5 @@
 import type ActivityButton from "./ActivityButton";
 import type ActivityClientId from "./ActivityClientId";
-import type ActivityClientSecret from "./ActivityClientSecret";
 import type ActivityCount from "./ActivityCount";
 import type ActivityDetails from "./ActivityDetails";
 import type ActivityImage from "./ActivityImage";
@@ -12,7 +11,6 @@ export type Activity = {
     name: string,
     type: ActivityType,
     clientId: ActivityClientId | null,
-    clientSecret: ActivityClientSecret | null,
     details: ActivityDetails | null,
     state: ActivityState | null,
     count: ActivityCount | null,
@@ -29,7 +27,6 @@ export const defaultActivity: Activity = {
     name: "",
     type: ActivityType.Playing,
     clientId: null,
-    clientSecret: null,
     details: null,
     state: null,
     count: null,

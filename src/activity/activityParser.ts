@@ -1,7 +1,6 @@
 import type Activity from "./types/Activity";
 import type ActivityButton from "./types/ActivityButton";
 import type ActivityClientId from "./types/ActivityClientId";
-import type ActivityClientSecret from "./types/ActivityClientSecret";
 import type ActivityCount from "./types/ActivityCount";
 import type ActivityDetails from "./types/ActivityDetails";
 import type ActivityImage from "./types/ActivityImage";
@@ -16,7 +15,6 @@ export const parseActivity = (json: string): Activity | null => {
             name: parseName(parsedActivity.name),
             type: parseType(parsedActivity.type),
             clientId: parseClientId(parsedActivity.clientId),
-            clientSecret: parseClientSecret(parsedActivity.clientSecret),
             details: parseDetails(parsedActivity.details),
             state: parseState(parsedActivity.state),
             count: parseCount(parsedActivity.count),
@@ -51,12 +49,6 @@ const parseType = (type?: ActivityType): ActivityType => {
 const parseClientId = (clientId?: ActivityClientId | null): ActivityClientId | null => {
     return typeof clientId === "string"
         ? clientId
-        : null;
-};
-
-const parseClientSecret = (clientSecret?: ActivityClientSecret | null): ActivityClientSecret | null => {
-    return typeof clientSecret === "string"
-        ? clientSecret
         : null;
 };
 

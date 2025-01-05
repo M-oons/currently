@@ -2,7 +2,6 @@ import { contextBridge, ipcRenderer, type IpcRenderer, type IpcRendererEvent } f
 import { type AppInfo } from "../AppInfo";
 import type Activity from "../activity/types/Activity";
 import type ActivityClientId from "../activity/types/ActivityClientId";
-import type ActivityClientSecret from "../activity/types/ActivityClientSecret";
 import type Application from "../api/types/Application";
 import type ApplicationAsset from "../api/types/ApplicationAsset";
 import type Config from "../config/types/Config";
@@ -42,8 +41,8 @@ contextBridge.exposeInMainWorld("activity", {
 });
 
 contextBridge.exposeInMainWorld("api", {
-    getApplication: (clientId: ActivityClientId, clientSecret: ActivityClientSecret, useCache: boolean): Promise<Application | null> => ipcRenderer.invoke(IpcCommand.api.GetApplication, clientId, clientSecret, useCache),
-    getApplicationAssets: (clientId: ActivityClientId, useCache: boolean): Promise<ApplicationAsset[] | null> => ipcRenderer.invoke(IpcCommand.api.GetApplicationAssets, clientId, useCache),
+    getApplication: (applicationId: ActivityClientId, useCache: boolean): Promise<Application | null> => ipcRenderer.invoke(IpcCommand.api.GetApplication, applicationId, useCache),
+    getApplicationAssets: (applicationId: ActivityClientId, useCache: boolean): Promise<ApplicationAsset[] | null> => ipcRenderer.invoke(IpcCommand.api.GetApplicationAssets, applicationId, useCache),
     getApplicationAssetUrl: (applicationId: ActivityClientId, assetId: string): Promise<string> => ipcRenderer.invoke(IpcCommand.api.GetApplicationAssetUrl, applicationId, assetId),
 });
 

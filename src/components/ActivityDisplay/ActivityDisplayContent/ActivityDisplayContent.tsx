@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type ActivityClientId from "../../../activity/types/ActivityClientId";
-import type ActivityClientSecret from "../../../activity/types/ActivityClientSecret";
 import type ActivityCount from "../../../activity/types/ActivityCount";
 import type ActivityDetails from "../../../activity/types/ActivityDetails";
 import type ActivityState from "../../../activity/types/ActivityState";
@@ -14,7 +13,6 @@ import "./ActivityDisplayContent.css";
 
 type ActivityDisplayContentProps = {
     clientId: ActivityClientId | null,
-    clientSecret: ActivityClientSecret | null,
     details: ActivityDetails | null,
     state: ActivityState | null,
     count: ActivityCount | null,
@@ -48,10 +46,10 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
 
     useEffect(() => {
         const fetchApplication = async () => {
-            if (!props.clientId || !props.clientSecret)
+            if (!props.clientId)
                 return;
 
-            const application = await window.api.getApplication(props.clientId, props.clientSecret, true);
+            const application = await window.api.getApplication(props.clientId, true);
             const name = application?.name ?? props.clientId;
             setState($state => ({
                 ...$state,
@@ -59,10 +57,7 @@ const ActivityDisplayContent = (props: ActivityDisplayContentProps) => {
             }));
         };
         fetchApplication();
-    }, [
-        props.clientId,
-        props.clientSecret,
-    ]);
+    }, [props.clientId]);
 
     useEffect(() => {
         const changeTimestampStart = async () => {

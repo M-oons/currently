@@ -35,7 +35,6 @@ const ActivityDisplay = (props: ActivityDisplayProps) => {
                     <div id="activity-content">
                         <ActivityDisplayContent
                             clientId={activity.clientId}
-                            clientSecret={activity.clientSecret}
                             details={activity.details}
                             state={activity.state}
                             count={activity.count}

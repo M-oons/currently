@@ -1,6 +1,10 @@
 import { type IpcRenderer, type IpcRendererEvent } from "electron";
 import { type AppInfo } from "./src/AppInfo";
-import Activity from "./src/activity/types/Activity";
+import type Activity from "./src/activity/types/Activity";
+import type ActivityClientId from "./src/activity/types/ActivityClientId";
+import type Application from "./src/api/types/Application";
+import type ApplicationAsset from "./src/api/types/ApplicationAsset";
+import type Config from "./src/config/types/Config";
 import { type UpdateInfo } from "./src/utils/updater";
 
 export { };
@@ -53,8 +57,8 @@ declare global {
             stopActivity: () => Promise<void>,
         },
         api: {
-            getApplication: (clientId: ActivityClientId, clientSecret: ActivityClientSecret, useCache: boolean) => Promise<Application | null>,
-            getApplicationAssets: (clientId: ActivityClientId, useCache: boolean) => Promise<ApplicationAsset[] | null>,
+            getApplication: (applicationId: ActivityClientId, useCache: boolean) => Promise<Application | null>,
+            getApplicationAssets: (applicationId: ActivityClientId, useCache: boolean) => Promise<ApplicationAsset[] | null>,
             getApplicationAssetUrl: (applicationId: ActivityClientId, assetId: string) => string,
         },
         functions: {

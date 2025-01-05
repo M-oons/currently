@@ -1,28 +1,26 @@
 import type Application from "./types/Application";
 import type ApplicationAsset from "./types/ApplicationAsset";
 import type ApplicationAssetsResponse from "./types/ApplicationAssetsResponse";
-import { getAuthToken, isMeSuccess, me, OAUTH_URL } from "./authorizationHandler";
+import type ApplicationResponse from "./types/ApplicationResponse";
 import type ActivityClientId from "../activity/types/ActivityClientId";
-import type ActivityClientSecret from "../activity/types/ActivityClientSecret";
 import { ExpiryCache } from "../utils/caching";
 
 const ASSETS_URL = "https://cdn.discordapp.com/app-assets";
+const OAUTH_URL = "https://discord.com/api/oauth2";
 const CACHE_LIFETIME = 60000; // 1 minute
 
 const cachedApplications = new ExpiryCache<ActivityClientId, Application>(CACHE_LIFETIME);
 const cachedAssets = new ExpiryCache<ActivityClientId, ApplicationAsset[]>(CACHE_LIFETIME);
 
-export const getApplication = async (clientId: ActivityClientId, clientSecret: ActivityClientSecret, useCache: boolean = true): Promise<Application | null> => {
+export const getApplication = async (applicationId: ActivityClientId, useCache: boolean = true): Promise<Application | null> => {
     return cachedApplications.getAsync(
-        clientId,
-        async (clientId) => {
-            const authToken = await getAuthToken(clientId, clientSecret);
-            if (!authToken)
+        applicationId,
+        async (applicationId) => {
+            const response = await fetch(`${OAUTH_URL}/applications/${applicationId}/rpc`);
+            const applicationResponse = await response.json() as ApplicationResponse;
+            if (!isApplicationSuccess(applicationResponse))
                 return null;
-            const meResponse = await me(authToken);
-            if (!isMeSuccess(meResponse))
-                return null;
-            return meResponse.application;
+            return applicationResponse;
         },
         useCache);
 };
@@ -48,6 +46,10 @@ export const getApplicationAssets = async (applicationId: ActivityClientId, useC
 
 export const getApplicationAssetUrl = (applicationId: ActivityClientId, assetId: string): string => {
     return `${ASSETS_URL}/${applicationId}/${assetId}.png?size=160`;
+};
+
+const isApplicationSuccess = (response: ApplicationResponse): response is Application => {
+    return (response as Application).id !== undefined;
 };
 
 const isApplicationAssetsSuccess = (response: ApplicationAssetsResponse): response is ApplicationAsset[] => {
